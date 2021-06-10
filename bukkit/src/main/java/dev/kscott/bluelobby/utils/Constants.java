@@ -4,6 +4,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
@@ -86,6 +88,28 @@ public class Constants {
                 Component.empty(),
                 barMedium.append(miniMessage.parse(" <#f5a5a5><bold>mc.ksc.sh</bold></#f5a5a5> ")).append(barMedium)
         );
+
+    }
+
+    /**
+     * Stores constant sound values.
+     */
+    public static class Sounds {
+
+        /**
+         * The default chime.
+         */
+        public static final @NonNull Sound DEFAULT_CHIME = Sound.BLOCK_NOTE_BLOCK_CHIME;
+
+        /**
+         * Plays a Bukkit {@code Sound} to a player.
+         *
+         * @param player the player
+         * @param sound the sound
+         */
+        public static void playSoundForPlayer(final @NonNull Player player, final @NonNull Sound sound) {
+            player.playSound(player.getLocation(), sound, 1f, 1f);
+        }
 
     }
 
