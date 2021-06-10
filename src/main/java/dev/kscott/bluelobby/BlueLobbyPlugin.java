@@ -1,5 +1,6 @@
 package dev.kscott.bluelobby;
 
+import dev.kscott.bluelobby.listeners.PlayerCrouchListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -7,12 +8,17 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class BlueLobbyPlugin extends JavaPlugin {
 
+    /**
+     * Enables the plugin.
+     */
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        this.getServer().getPluginManager().registerEvents(new PlayerCrouchListener(), this);
     }
 
+    /**
+     * Disables the plugin.
+     */
     @Override
     public void onDisable() {
         // Plugin shutdown logic
