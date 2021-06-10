@@ -1,5 +1,5 @@
 name: BlueLobby
-version: @version@
+version: ${version}
 main: dev.kscott.bluelobby.BlueLobbyPlugin
 api-version: 1.16
 prefix: BlueLobby
