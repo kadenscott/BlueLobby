@@ -8,6 +8,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="openjdk-16" />
     <method v="2">
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="bluelobby build" run_configuration_type="GradleRunConfiguration" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="copyPlugin.sh" run_configuration_type="ShConfigurationType" />
     </method>
   </configuration>
 </component>
