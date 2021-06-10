@@ -5,7 +5,6 @@ import net.kyori.indra.IndraPublishingPlugin
 plugins {
     id("net.kyori.indra") version "1.3.1"
     id("net.kyori.indra.publishing") version "1.3.1"
-    id("net.kyori.indra.checkstyle") version "1.3.1"
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -15,7 +14,6 @@ version = "1.0.0"
 apply {
     plugin<ShadowPlugin>()
     plugin<IndraPlugin>()
-//        plugin<IndraCheckstylePlugin>()
     plugin<IndraPublishingPlugin>()
 }
 
