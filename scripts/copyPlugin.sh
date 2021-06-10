@@ -1,0 +1,1 @@
+cp -R ./build/libs/bluelobby.jar ../../Desktop/testserver1/plugins
