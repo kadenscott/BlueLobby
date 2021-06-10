@@ -1,6 +1,6 @@
 name: BlueLobby
 version: ${version}
-main: dev.kscott.bluelobby.BlueLobbyPlugin
+main: dev.kscott.bluelobby.LobbyPlugin
 api-version: 1.16
 prefix: BlueLobby
 authors: [ "bluely <kscottdev@gmail.com>" ]
