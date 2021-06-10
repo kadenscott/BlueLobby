@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.ShadowPlugin
-import net.kyori.indra.IndraCheckstylePlugin
 import net.kyori.indra.IndraPlugin
 import net.kyori.indra.IndraPublishingPlugin
 
@@ -13,35 +12,74 @@ plugins {
 group = "dev.kscott.bluelobby"
 version = "1.0.0"
 
-subprojects {
-    apply {
-        plugin<ShadowPlugin>()
-        plugin<IndraPlugin>()
+apply {
+    plugin<ShadowPlugin>()
+    plugin<IndraPlugin>()
 //        plugin<IndraCheckstylePlugin>()
-        plugin<IndraPublishingPlugin>()
+    plugin<IndraPublishingPlugin>()
+}
+
+repositories {
+    mavenCentral()
+
+    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.broccol.ai")
+}
+
+tasks {
+
+    indra {
+        gpl3OnlyLicense()
+
+        javaVersions {
+            target.set(16)
+        }
     }
 
-    repositories {
-        mavenCentral()
-
-        maven("https://papermc.io/repo/repository/maven-public/")
-        maven("https://repo.broccol.ai")
+    processResources {
+        expand("version" to rootProject.version)
     }
 
-    tasks {
+}
 
-        indra {
-            gpl3OnlyLicense()
+dependencies {
+    compileOnly(libs.paper)
 
-            javaVersions {
-                target.set(16)
+    api(libs.minimessage)
+    api(libs.cloud.paper)
+    api(libs.bundles.guice)
+    api(libs.bundles.corn)
+}
+
+tasks {
+
+    build {
+        dependsOn(named("shadowJar"))
+    }
+
+    shadowJar {
+        fun relocates(vararg dependencies: String) {
+            dependencies.forEach {
+                val split = it.split(".")
+                val name = split.last()
+                relocate(it, "${rootProject.group}.dependencies.$name")
             }
         }
 
-        processResources {
-            expand("version" to rootProject.version)
+        dependencies {
+            exclude(dependency("com.google.guava:"))
+            exclude(dependency("com.google.errorprone:"))
+            exclude(dependency("org.checkerframework:"))
         }
 
+        relocates(
+                "cloud.commandframework",
+                "com.google.inject",
+                "broccolai.corn"
+        )
+
+        archiveClassifier.set(null as String?)
+        archiveFileName.set(project.name + ".jar")
+        destinationDirectory.set(rootProject.tasks.shadowJar.get().destinationDirectory.get())
     }
 }
-
