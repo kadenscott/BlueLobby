@@ -2,6 +2,7 @@ package dev.kscott.bluelobby;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.PlayerCrouchListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
@@ -22,7 +23,7 @@ public final class LobbyPlugin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        this.injector = Guice.createInjector();
+        this.injector = Guice.createInjector(new PluginModule(this));
 
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerCrouchListener.class), this);
     }
