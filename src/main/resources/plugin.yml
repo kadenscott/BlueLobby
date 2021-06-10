@@ -1,0 +1,8 @@
+name: BlueLobby
+version: @version@
+main: dev.kscott.bluelobby.BlueLobbyPlugin
+api-version: 1.16
+prefix: BlueLobby
+authors: [ "bluely <kscottdev@gmail.com>" ]
+description: The lobby plugin for mc.ksc.sh.
+website: kaden.sh
