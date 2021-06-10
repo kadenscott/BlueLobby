@@ -61,7 +61,7 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component SERVER_NAME = Component.text("<#f5a5a5><bold>mc.ksc.sh</bold></#f5a5a5>");
+        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<#f5a5a5><bold>mc.ksc.sh</bold></#f5a5a5>");
 
         /**
          * The motd.
