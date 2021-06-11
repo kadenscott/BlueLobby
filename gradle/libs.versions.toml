@@ -23,6 +23,9 @@ paper = "1.16.5-R0.1-SNAPSHOT"
 # Corn
 corn = "2.1.0"
 
+# IF
+if = "0.9.8"
+
 [libraries]
 # Tooling
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checker-qual" }
@@ -50,6 +53,9 @@ paper = { group = "com.destroystokyo.paper", name = "paper-api", version.ref = "
 corn-core = { group = "broccolai.corn", name = "corn-core", version.ref = "corn" }
 corn-paper = { group = "broccolai.corn", name = "corn-paper", version.ref = "corn" }
 corn-adventure = { group = "broccolai.corn", name = "corn-adventure", version.ref = "corn" }
+
+# IF
+ifgui = { group = "com.github.stefvanschie.inventoryframework", name = "IF", version.ref = "if" }
 
 [bundles]
 guice = ["guice-core", "guice-assisted"]

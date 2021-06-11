@@ -5,6 +5,7 @@ dependencies {
     api(libs.cloud.paper)
     api(libs.bundles.guice)
     api(libs.bundles.corn)
+    api(libs.ifgui)
 }
 
 tasks {
