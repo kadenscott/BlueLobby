@@ -40,20 +40,16 @@ public class PlayerJoinListener implements Listener {
      */
     @EventHandler
     public void handlePlayerJoin(final @NonNull PlayerJoinEvent event) {
+        final @NonNull Player player = event.getPlayer();
+
+        Constants.Books.showIntroBook(player);
+
+        // Send the default pling 10 ticks after the player joins.
         new BukkitRunnable() {
             @Override
             public void run() {
-                final @NonNull Player player = event.getPlayer();
-
-                final @NonNull List<Component> motd = Constants.Chat.MOTD;
-
-                for (final @NonNull Component component : motd) {
-                    player.sendMessage(component);
-                }
-
                 Constants.Sounds.playSoundForPlayer(player, Constants.Sounds.DEFAULT_CHIME);
             }
-        }.runTaskLater(this.plugin, 20 * 2);
+        }.runTaskLater(this.plugin, 10);
     }
-
 }

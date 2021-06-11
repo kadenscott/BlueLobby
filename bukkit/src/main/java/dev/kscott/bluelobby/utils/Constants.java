@@ -1,20 +1,17 @@
 package dev.kscott.bluelobby.utils;
 
+import net.kyori.adventure.inventory.Book;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import java.util.List;
 
 /**
  * Stores constant values.
@@ -29,7 +26,7 @@ public class Constants {
         /**
          * The default text colour.
          */
-        public static final @NonNull TextColor COLOUR_DEFAULT = TextColor.color(185, 185, 185);
+        public static final @NonNull TextColor COLOUR_LIGHT_GRAY = TextColor.color(185, 185, 185);
 
         /**
          * The default text colour.
@@ -49,23 +46,43 @@ public class Constants {
         /**
          * The pink text colour.
          */
-        public static final @NonNull TextColor COLOUR_PINK = TextColor.color(237, 159, 232);
+        public static final @NonNull TextColor COLOUR_PURPLE = TextColor.color(150, 70, 174);
+
+        /**
+         * The pink text colour.
+         */
+        public static final @NonNull TextColor COLOUR_ORANGE = TextColor.color(213, 124, 45);
+
+        /**
+         * The pink text colour.
+         */
+        public static final @NonNull TextColor COLOUR_RED = TextColor.color(229, 66, 62);
 
         /**
          * The default text style.
          */
-        public static final @NonNull Style STYLE_DEFAULT = Style.style(COLOUR_DEFAULT);
+        public static final @NonNull Style STYLE_DEFAULT = Style.style(COLOUR_LIGHT_GRAY);
+
+        /**
+         * The default text style.
+         */
+        public static final @NonNull Style STYLE_DARK = Style.style(COLOUR_DARK_GRAY);
 
         /**
          * The text style for links.
          */
-        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_LIGHT_BLUE);
+        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_PURPLE).decorate(TextDecoration.BOLD);
+
+        public static final @NonNull Style STYLE_HOVER = Style.style(COLOUR_LIGHT_GRAY).decorate(TextDecoration.ITALIC);
 
         /**
          * The text style for commands.
          */
-        public static final @NonNull Style STYLE_COMMAND = Style.style(COLOUR_PINK);
-
+        public static final @NonNull Style STYLE_COMMAND = Style.style(COLOUR_DARK_BLUE);
+        /**
+         * The name of the server.
+         */
+        public static final @NonNull Component SERVER_NAME = Component.text("mc.ksc.sh").color(COLOUR_RED);
         /**
          * MiniMessage instance.
          */
@@ -73,34 +90,54 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<#f5a5a5><bold>mc.ksc.sh</bold></#f5a5a5>");
+        public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#5c9ae6:#4845d3><bold>kadenscott</bold></gradient>");
+
         /**
          * A bar with 15 characters.
          */
-        private static final @NonNull Component barMedium = miniMessage.parse(" <gradient:#03c2fc:#244379:#03c2fc><strikethrough>               </strikethrough></gradient> ");
+        private static final @NonNull Component barMedium = miniMessage.parse(" <gradient:#03c2fc:#244379:#03c2fc><strikethrough>                           </strikethrough></gradient> ");
         /**
          * The motd.
          */
-        public static final @NonNull List<Component> MOTD = List.of(
-                barMedium.append(SERVER_NAME).append(barMedium),
-                Component.text("Welcome to ").style(STYLE_DEFAULT)
+        public static final @NonNull Component MOTD_BOOK = Component.text()
+                .append(barMedium)
+                .append(Component.newline())
+                .append(Component.text()
+                        .append(Component.text("         "))
                         .append(SERVER_NAME)
-                        .append(Component.text("! This server hosts a variety of my projects.").style(STYLE_DEFAULT)),
-                Component.text("Use ").style(STYLE_DEFAULT)
-                        .append(Component.text("/play").style(STYLE_COMMAND))
-                        .append(Component.text(" to see the available projects.").style(STYLE_DEFAULT)),
-                Component.empty(),
-                Component.text("Currently hosted projects: ").style(STYLE_DEFAULT),
-                Component.text("-").color(COLOUR_DARK_BLUE).append(Component.text(" Bonk").style(STYLE_LINK)),
-                Component.empty(),
-                Component.text("Website: ").style(STYLE_DEFAULT)
+                        .append(Component.newline())
+                        .append(Component.text("    by "))
+                        .append(OWNER_NAME)
+                        .style(STYLE_DARK)
+                )
+                .append(Component.newline())
+                .append(Component.newline())
+                .append(Component.newline())
+                .append(Component.text()
+                        .append(Component.text("  Run "))
+                        .append(Component.text("/play").color(COLOUR_LIGHT_BLUE))
+                        .append(Component.text(" (or click)"))
+                        .append(Component.newline())
+                        .append(Component.text("   to open the game"))
+                        .append(Component.newline())
+                        .append(Component.text("           menu."))
+                        .style(STYLE_COMMAND)
+                        .clickEvent(ClickEvent.runCommand("/play"))
+                        .hoverEvent(HoverEvent.showText(Component.text("Click to open the server menu").style(STYLE_HOVER)))
+                )
+                .append(Component.newline())
+                .append(Component.newline())
+                .append(Component.text()
+                        .append(Component.text("  Website: "))
                         .append(Component.text("kaden.sh").style(STYLE_LINK))
-                        .append(Component.text(" | ").color(COLOUR_DARK_GRAY))
-                        .append(Component.text(" Discord: ").style(STYLE_DEFAULT))
-                        .append(Component.text("chat.ksc.sh").style(STYLE_LINK)),
-                barMedium.append(miniMessage.parse(" <#f5a5a5><bold>mc.ksc.sh</bold></#f5a5a5> ")).append(barMedium)
-        );
-
+                        .append(Component.newline())
+                        .append(Component.text("Discord: "))
+                        .append(Component.text("chat.ksc.sh").style(STYLE_LINK))
+                )
+                .append(Component.newline())
+                .append(Component.newline())
+                .append(barMedium)
+                .build();
     }
 
     /**
@@ -111,7 +148,7 @@ public class Constants {
         /**
          * The default chime.
          */
-        public static final @NonNull Sound DEFAULT_CHIME = Sound.BLOCK_NOTE_BLOCK_CHIME;
+        public static final @NonNull Sound DEFAULT_CHIME = Sound.sound(org.bukkit.Sound.BLOCK_NOTE_BLOCK_PLING, Sound.Source.AMBIENT, 1f, 1f);
 
         /**
          * Plays a Bukkit {@code Sound} to a player.
@@ -120,7 +157,7 @@ public class Constants {
          * @param sound  the sound
          */
         public static void playSoundForPlayer(final @NonNull Player player, final @NonNull Sound sound) {
-            player.playSound(player.getLocation(), sound, 1f, 1f);
+            player.playSound(sound);
         }
 
     }
@@ -136,24 +173,15 @@ public class Constants {
          *
          * @return the intro book
          */
-        public static @NonNull ItemStack introBook() {
-            final @NonNull ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+        public static @NonNull Book introBook() {
+            final @NonNull Book book = Book.book(Component.empty(), Component.empty(), Chat.MOTD_BOOK);
 
-            final @Nullable ItemMeta itemMeta = Bukkit.getItemFactory().getItemMeta(Material.BOOK);
-
-            final BookMeta.BookMetaBuilder bookMetaBuilder = ((BookMeta) itemMeta).toBuilder();
-
-            bookMetaBuilder.addPage(Component.join(Component.newline(), Chat.MOTD));
-
-            final @NonNull BookMeta bookMeta = bookMetaBuilder.build();
-
-            itemStack.setItemMeta(bookMeta);
-
-            return itemStack;
+            return book;
         }
 
         /**
          * Shows the intro book to a player.
+         *
          * @param player the player
          */
         public static void showIntroBook(final @NonNull Player player) {
