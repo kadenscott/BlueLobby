@@ -7,6 +7,7 @@ import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.PlayerCrouchListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
+import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -56,6 +57,7 @@ public final class LobbyPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerCrouchListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
 
         this.registerGamesGuiRecipes();
     }
