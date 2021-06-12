@@ -1,7 +1,6 @@
 package dev.kscott.bluelobby;
 
 import broccolai.corn.adventure.AdventureItemBuilder;
-import broccolai.corn.paper.PaperItemBuilder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import dev.kscott.bluelobby.inject.PluginModule;
@@ -30,9 +29,21 @@ import java.util.List;
 public final class LobbyPlugin extends JavaPlugin {
 
     /**
+     * The game name key.
+     */
+    private final @NonNull NamespacedKey gameKey;
+
+    /**
      * The plugin's injector.
      */
     private @MonotonicNonNull Injector injector;
+
+    /**
+     * Constructs {@code LobbyPlugin}.
+     */
+    public LobbyPlugin() {
+        this.gameKey = new NamespacedKey(this, "game");
+    }
 
     /**
      * Enables the plugin.
@@ -51,7 +62,6 @@ public final class LobbyPlugin extends JavaPlugin {
      * Registers the stonecutter recipes for the /games gui.
      */
     private void registerGamesGuiRecipes() {
-        final @NonNull NamespacedKey gameNameKey = new NamespacedKey(this, "game_name");
 
         //////* Bonk game recipe *//////
         final @NonNull NamespacedKey bonkItemKey = new NamespacedKey(this, "bonk");
@@ -70,12 +80,22 @@ public final class LobbyPlugin extends JavaPlugin {
                                 .append(Component.text(" players bonkin'").style(Constants.Chat.STYLE_DEFAULT))
                                 .asComponent()
                 ))
+                .data(this.gameKey, PersistentDataType.STRING, "bonk")
                 .build();
 
         final @NonNull StonecuttingRecipe bonkGameRecipe = new StonecuttingRecipe(bonkItemKey, bonkGameItem, Material.DARK_OAK_SIGN);
 
         /////* Recipe registration */////
         Bukkit.addRecipe(bonkGameRecipe);
+    }
+
+    /**
+     * Returns the game name key.
+     *
+     * @return the game name key
+     */
+    private @NonNull NamespacedKey gameKey() {
+        return this.gameKey;
     }
 
 }
