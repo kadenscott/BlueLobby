@@ -7,7 +7,6 @@ import dev.kscott.bluelobby.listeners.PlayerCrouchListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * The main entrypoint for the BlueLobby.
