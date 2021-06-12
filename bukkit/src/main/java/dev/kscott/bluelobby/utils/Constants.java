@@ -1,7 +1,6 @@
 package dev.kscott.bluelobby.utils;
 
 import net.kyori.adventure.inventory.Book;
-import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -84,6 +83,18 @@ public class Constants {
          */
         public static final @NonNull Component SERVER_NAME = Component.text("mc.ksc.sh").color(COLOUR_RED);
         /**
+         * The first line of the ping motd.
+         */
+        public static final @NonNull Component PING_MOTD_LINE_1 = Component.text()
+                .append(Chat.SERVER_NAME)
+                .append(Component.text("                   "))
+                .append(Component.text("1.16.5 - 1.17.x").style(Chat.STYLE_COMMAND))
+                .asComponent();
+        /**
+         * The second line of the ping motd.
+         */
+        public static final @NonNull Component PING_MOTD_LINE_2 = Component.empty();
+        /**
          * MiniMessage instance.
          */
         private static final @NonNull MiniMessage miniMessage = MiniMessage.get();
@@ -91,7 +102,6 @@ public class Constants {
          * The name of the server.
          */
         public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#5c9ae6:#4845d3><bold>kadenscott</bold></gradient>");
-
         /**
          * A bar with 15 characters.
          */
