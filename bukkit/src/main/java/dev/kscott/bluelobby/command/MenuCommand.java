@@ -41,7 +41,7 @@ public class MenuCommand implements BaseCommand {
      */
     @Override
     public void register(final @NonNull CommandManager<@NonNull CommandSender> manager) {
-        final Command.Builder<CommandSender> builder = manager.commandBuilder("menu");
+        final Command.Builder<CommandSender> builder = manager.commandBuilder("menu", "play");
 
         manager.command(builder.handler(this::handleMenuCommand));
     }
