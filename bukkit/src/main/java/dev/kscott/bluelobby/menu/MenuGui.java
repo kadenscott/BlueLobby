@@ -8,6 +8,7 @@ import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -32,9 +33,7 @@ public class MenuGui {
         final @NonNull GuiItem exitItem = new GuiItem(
                 AdventureItemBuilder.adventure(Material.BARRIER)
                         .name(Constants.Chat.SERVER_NAME)
-                        .loreComponents(List.of(
-                                Component.text("")
-                        ))
+                        .loreComponents(Component.text("Click to go back").color(NamedTextColor.RED).decoration(TextDecoration.ITALIC, false))
                         .build(),
                 event -> event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN)
         );
