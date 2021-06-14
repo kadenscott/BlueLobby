@@ -3,6 +3,7 @@ package dev.kscott.bluelobby;
 import broccolai.corn.adventure.AdventureItemBuilder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import dev.kscott.bluelobby.inject.CommandModule;
 import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.PlayerCrouchListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
@@ -53,7 +54,10 @@ public final class LobbyPlugin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        this.injector = Guice.createInjector(new PluginModule(this));
+        this.injector = Guice.createInjector(
+                new PluginModule(this),
+                new CommandModule(this)
+        );
 
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerCrouchListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
