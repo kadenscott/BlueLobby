@@ -11,6 +11,7 @@ import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -73,14 +74,17 @@ public final class LobbyPlugin extends JavaPlugin {
         final @NonNull ItemStack bonkGameItem = AdventureItemBuilder.adventure(Material.BLAZE_ROD)
                 .enchant(Enchantment.DAMAGE_ALL, 1)
                 .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_POTION_EFFECTS)
-                .name(Component.text("BONK").color(TextColor.color(247, 168, 168)))
+                .name(Component.text("BONK").color(TextColor.color(255, 231, 166))
+                        .decoration(TextDecoration.ITALIC, false)
+                        .decoration(TextDecoration.BOLD, true)
+                )
                 .loreComponents(List.of(
                         Component.text("The classic game").style(Constants.Chat.STYLE_DEFAULT),
                         Component.empty(),
                         Component.text()
-                                .append(Component.text("0").color(TextColor.color(245, 240, 240)))
-                                .append(Component.text("/").color(TextColor.color(130, 130, 130)))
-                                .append(Component.text("40").color(TextColor.color(245, 240, 240)))
+                                .append(Component.text("0").color(TextColor.color(245, 240, 240)).decoration(TextDecoration.ITALIC, false))
+                                .append(Component.text("/").color(TextColor.color(130, 130, 130)).decoration(TextDecoration.ITALIC, false))
+                                .append(Component.text("40").color(TextColor.color(245, 240, 240)).decoration(TextDecoration.ITALIC, false))
                                 .append(Component.text(" players bonkin'").style(Constants.Chat.STYLE_DEFAULT))
                                 .asComponent()
                 ))
