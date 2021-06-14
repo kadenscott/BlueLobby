@@ -21,7 +21,7 @@ minimessage = "4.1.0-SNAPSHOT"
 paper = "1.16.5-R0.1-SNAPSHOT"
 
 # Corn
-corn = "2.1.0"
+corn = "2.3.0-SNAPSHOT"
 
 # IF
 if = "0.9.8"
