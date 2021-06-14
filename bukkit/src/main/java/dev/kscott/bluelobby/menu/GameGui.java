@@ -9,7 +9,6 @@ import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -29,7 +28,6 @@ public class GameGui {
                 AdventureItemBuilder.adventure(Material.DARK_OAK_SIGN)
                         .name(Component.text()
                                 .append(Constants.Chat.SERVER_NAME)
-                                .append(Component.text(" games").color(Constants.Chat.COLOUR_LIGHT_BLUE))
                                 .decoration(TextDecoration.ITALIC, false)
                                 .asComponent()
                         )
