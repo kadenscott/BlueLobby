@@ -59,7 +59,7 @@ public class MenuGui {
         final @NonNull StaticPane pane = new StaticPane(0, 0, 9, 1);
 
         pane.addItem(exitItem, 0, 0);
-        pane.addItem(gamesItem, 0, 4);
+        pane.addItem(gamesItem, 4, 0);
 
         gui.addPane(pane);
 
