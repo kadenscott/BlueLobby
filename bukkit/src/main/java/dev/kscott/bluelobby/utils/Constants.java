@@ -60,24 +60,24 @@ public class Constants {
         /**
          * The default text style.
          */
-        public static final @NonNull Style STYLE_DEFAULT = Style.style(COLOUR_LIGHT_GRAY);
+        public static final @NonNull Style STYLE_DEFAULT = Style.style(COLOUR_LIGHT_GRAY).decoration(TextDecoration.ITALIC, false);
 
         /**
          * The default text style.
          */
-        public static final @NonNull Style STYLE_DARK = Style.style(COLOUR_DARK_GRAY);
+        public static final @NonNull Style STYLE_DARK = Style.style(COLOUR_DARK_GRAY).decoration(TextDecoration.ITALIC, false);
 
         /**
          * The text style for links.
          */
-        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_PURPLE).decorate(TextDecoration.BOLD);
+        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_PURPLE).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false);
 
         public static final @NonNull Style STYLE_HOVER = Style.style(COLOUR_LIGHT_GRAY).decorate(TextDecoration.ITALIC);
 
         /**
          * The text style for commands.
          */
-        public static final @NonNull Style STYLE_COMMAND = Style.style(COLOUR_DARK_BLUE);
+        public static final @NonNull Style STYLE_COMMAND = Style.style(COLOUR_DARK_BLUE).decoration(TextDecoration.ITALIC, false);
         /**
          * The name of the server.
          */
