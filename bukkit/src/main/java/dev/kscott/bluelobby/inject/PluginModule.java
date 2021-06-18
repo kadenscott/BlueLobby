@@ -1,13 +1,8 @@
 package dev.kscott.bluelobby.inject;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Scope;
-import com.google.inject.Scopes;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import dev.kscott.bluelobby.LobbyPlugin;
-import dev.kscott.bluelobby.location.LocationRegistry;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -36,8 +31,5 @@ public final class PluginModule extends AbstractModule {
         this.bind(LobbyPlugin.class).toInstance(this.plugin);
         this.bind(JavaPlugin.class).toInstance(this.plugin);
         this.bind(World.class).annotatedWith(Names.named("lobbyWorld")).toInstance(this.plugin.getServer().getWorld("world"));
-
-        this.bind(LocationRegistry.class).to(LocationRegistry.class).in(Singleton.class);
     }
-
 }
