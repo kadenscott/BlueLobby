@@ -7,6 +7,7 @@ dependencies {
     api(libs.bundles.corn)
     api(libs.ifgui)
     api(libs.holodisplays)
+    api(libs.placeholderapi)
 }
 
 tasks {

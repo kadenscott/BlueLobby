@@ -19,8 +19,16 @@ subprojects {
         mavenLocal()
         mavenCentral()
 
+        // Paper repo
         maven("https://papermc.io/repo/repository/maven-public/")
+
+        // Corn
         maven("https://repo.broccol.ai")
+
+        // PLaceholderAPI
+        maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+
+        // TAB
         maven("https://repo.codemc.io/repository/maven-public/")
     }
 

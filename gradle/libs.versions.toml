@@ -28,6 +28,8 @@ if = "0.9.8"
 
 holodisplays = "2.4.0"
 
+placeholderapi = "2.10.9"
+
 [libraries]
 # Tooling
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checker-qual" }
@@ -60,9 +62,10 @@ corn-adventure = { group = "broccolai.corn", name = "corn-adventure", version.re
 ifgui = { group = "com.github.stefvanschie.inventoryframework", name = "IF", version.ref = "if" }
 
 # HolographicDisplays
-
 holodisplays = { group = "com.gmail.filoghost.holographicdisplays", name = "holographicdisplays-api", version.ref = "holodisplays" }
 
+# PlaceholderAPI
+placeholderapi = { group = "me.clip", name = "placeholderapi", version.ref = "placeholderapi"}
 [bundles]
 guice = ["guice-core", "guice-assisted"]
 corn = ["corn-core", "corn-paper", "corn-adventure"]
