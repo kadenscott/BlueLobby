@@ -86,7 +86,7 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<#414ea6:#65bfe6:#414ea6><bold>mc.ksc.sh</bold></#414ea6:#65bfe6:#414ea6>");
+        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<gradient:#db6060:#e37474:#db6060><bold>mc.ksc.sh</bold></gradient>");
 
         /**
          * The name of the server.
@@ -125,7 +125,7 @@ public class Constants {
                 .append(barMedium)
                 .append(Component.newline())
                 .append(Component.text()
-                        .append(Component.text("         "))
+                        .append(Component.text("       "))
                         .append(SERVER_NAME)
                         .append(Component.newline())
                         .append(Component.text("    by "))
