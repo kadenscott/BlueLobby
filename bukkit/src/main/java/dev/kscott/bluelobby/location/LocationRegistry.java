@@ -6,16 +6,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Holds locations for various parts of the plugin.
  */
+@Singleton
 public class LocationRegistry {
-
-    /**
-     * The lobby world.
-     */
-    private final @NonNull World lobbyWorld;
 
     /**
      * The spawn location.
@@ -31,8 +28,6 @@ public class LocationRegistry {
     public LocationRegistry(
             final @NonNull @Named("lobbyWorld") World lobbyWorld
     ) {
-        this.lobbyWorld = lobbyWorld;
-
         this.spawn = new Location(lobbyWorld, 0.5, 66, 0.5, 180, 0);
     }
 
@@ -44,4 +39,5 @@ public class LocationRegistry {
     public @NonNull Location spawn() {
         return spawn;
     }
+
 }
