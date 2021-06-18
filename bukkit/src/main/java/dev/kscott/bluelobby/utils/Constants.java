@@ -86,7 +86,7 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component SERVER_NAME = Component.text("mc.ksc.sh").color(COLOUR_RED);
+        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<#414ea6:#65bfe6:#414ea6><bold>mc.ksc.sh</bold></#414ea6:#65bfe6:#414ea6>");
 
         /**
          * The name of the server.
@@ -99,7 +99,7 @@ public class Constants {
         public static final @NonNull Component PING_MOTD_LINE_1 = Component.text()
                 .append(Component.text("                       "))
                 .append(Component.text("☄ ").color(TextColor.color(137, 219, 240)))
-                .append(miniMessage.parse("<#414ea6:#65bfe6:#414ea6><bold>mc.ksc.sh</bold></#414ea6:#65bfe6:#414ea6>"))
+                .append(SERVER_NAME)
                 .append(Component.text(" ☄").color(TextColor.color(137, 219, 240)))
                 .asComponent();
 
