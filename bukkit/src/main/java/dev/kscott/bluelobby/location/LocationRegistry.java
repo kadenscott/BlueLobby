@@ -33,7 +33,7 @@ public class LocationRegistry {
     ) {
         this.lobbyWorld = lobbyWorld;
 
-        this.spawn = new Location(lobbyWorld, 0, 66, 0, 180, 0);
+        this.spawn = new Location(lobbyWorld, 0.5, 66, 0.5, 180, 0);
     }
 
     /**
@@ -41,7 +41,7 @@ public class LocationRegistry {
      *
      * @return the spawn location
      */
-    public @NonNull Location getSpawn() {
+    public @NonNull Location spawn() {
         return spawn;
     }
 }
