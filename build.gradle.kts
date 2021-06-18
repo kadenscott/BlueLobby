@@ -21,6 +21,7 @@ subprojects {
 
         maven("https://papermc.io/repo/repository/maven-public/")
         maven("https://repo.broccol.ai")
+        maven("https://repo.codemc.io/repository/maven-public/")
     }
 
     tasks {
