@@ -1,16 +1,10 @@
 package dev.kscott.bluelobby.games.tic.tac.toe;
 
-import dev.kscott.bluelobby.games.Game;
+import org.bukkit.Location;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class TicTacToeGame extends Game {
+public class TicTacToeGame {
 
-    @Override
-    public void enable() {
+//    private final @NonNull Location boardLocation;
 
-    }
-
-    @Override
-    public void disable() {
-
-    }
 }
