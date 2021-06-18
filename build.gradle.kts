@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
-group = "dev.kscott.bonk"
+group = "dev.kscott.bluelobby"
 version = "1.0.0"
 
 subprojects {
