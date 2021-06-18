@@ -6,6 +6,7 @@ dependencies {
     api(libs.bundles.guice)
     api(libs.bundles.corn)
     api(libs.ifgui)
+    api(libs.holodisplays)
 }
 
 tasks {
