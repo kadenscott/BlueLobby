@@ -42,7 +42,10 @@ public class GameGui {
 
         gui.getInputComponent().addPane(pane);
 
-        gui.setOnGlobalClick(event -> event.setCancelled(true));
+        gui.setOnGlobalClick(event -> {
+//            event.setCancelled(true);
+            System.out.println(event.getRawSlot());
+        });
 
         return gui;
     }

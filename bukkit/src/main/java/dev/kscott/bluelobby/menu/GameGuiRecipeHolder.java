@@ -61,8 +61,46 @@ public interface GameGuiRecipeHolder {
 
         final @NonNull StonecuttingRecipe bonkGameRecipe = new StonecuttingRecipe(bonkItemKey, bonkGameItem, Material.DARK_OAK_SIGN);
 
+        //////* Minemen recipe *//////
+        final @NonNull NamespacedKey minemenItemKey = new NamespacedKey(plugin, "minemen");
+
+        final @NonNull ItemStack minemenItem = AdventureItemBuilder.adventure(Material.NETHERITE_PICKAXE)
+                .enchant(Enchantment.DAMAGE_ALL, 1)
+                .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_POTION_EFFECTS)
+                .name(Component.text("UNTITLED_1").color(TextColor.color(255, 231, 166))
+                        .decoration(TextDecoration.ITALIC, false)
+                        .decoration(TextDecoration.BOLD, true)
+                )
+                .loreComponents(List.of(
+                        Component.text("What could it be?").style(Constants.Chat.STYLE_DEFAULT)
+                ))
+                .data(gameKey, PersistentDataType.STRING, "minemen")
+                .build();
+
+        final @NonNull StonecuttingRecipe minemenRecipe = new StonecuttingRecipe(minemenItemKey, minemenItem, Material.DARK_OAK_SIGN);
+
+        //////* Fight Club recipe *//////
+        final @NonNull NamespacedKey fcItemKey = new NamespacedKey(plugin, "fc");
+
+        final @NonNull ItemStack fcItem = AdventureItemBuilder.adventure(Material.NETHERITE_SWORD)
+                .enchant(Enchantment.DAMAGE_ALL, 1)
+                .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_POTION_EFFECTS)
+                .name(Component.text("UNTITLED_2").color(TextColor.color(255, 231, 166))
+                        .decoration(TextDecoration.ITALIC, false)
+                        .decoration(TextDecoration.BOLD, true)
+                )
+                .loreComponents(List.of(
+                        Component.text("What could it be?").style(Constants.Chat.STYLE_DEFAULT)
+                ))
+                .data(gameKey, PersistentDataType.STRING, "fc")
+                .build();
+
+        final @NonNull StonecuttingRecipe fcRecipe = new StonecuttingRecipe(fcItemKey, fcItem, Material.DARK_OAK_SIGN);
+
         // Add recipes to list
         recipes.add(bonkGameRecipe);
+        recipes.add(minemenRecipe);
+        recipes.add(fcRecipe);
 
         recipes.forEach(Bukkit::addRecipe);
     }
