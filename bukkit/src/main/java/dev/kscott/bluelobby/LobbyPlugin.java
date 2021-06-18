@@ -39,7 +39,7 @@ public final class LobbyPlugin extends JavaPlugin {
 
         this.injector.getInstance(CommandService.class);
 
-        this.injector.getInstance(HologramManager.class).loadHolograms();
+//        this.injector.getInstance(HologramManager.class).loadHolograms();
 
         GameGuiRecipeHolder.registerRecipes(this);
     }
