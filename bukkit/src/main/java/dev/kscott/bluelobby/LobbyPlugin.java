@@ -8,6 +8,7 @@ import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
+import dev.kscott.bluelobby.lobby.HologramManager;
 import dev.kscott.bluelobby.menu.GameGuiRecipeHolder;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
@@ -37,6 +38,8 @@ public final class LobbyPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
 
         this.injector.getInstance(CommandService.class);
+
+        this.injector.getInstance(HologramManager.class).loadHolograms();
 
         GameGuiRecipeHolder.registerRecipes(this);
     }
