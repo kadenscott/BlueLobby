@@ -1,4 +1,4 @@
-package dev.kscott.bluelobby.menu;
+package dev.kscott.bluelobby.menu.core;
 
 import broccolai.corn.adventure.AdventureItemBuilder;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;

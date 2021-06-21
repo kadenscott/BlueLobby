@@ -1,6 +1,6 @@
 package dev.kscott.bluelobby.listeners;
 
-import dev.kscott.bluelobby.menu.GameGui;
+import dev.kscott.bluelobby.menu.core.GameGui;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;

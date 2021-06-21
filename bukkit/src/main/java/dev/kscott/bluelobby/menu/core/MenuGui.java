@@ -1,4 +1,4 @@
-package dev.kscott.bluelobby.menu;
+package dev.kscott.bluelobby.menu.core;
 
 import broccolai.corn.paper.PaperItemBuilder;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
@@ -11,7 +11,6 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;

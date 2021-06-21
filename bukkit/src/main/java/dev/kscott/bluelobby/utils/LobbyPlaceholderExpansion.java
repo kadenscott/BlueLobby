@@ -67,15 +67,9 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
     @Override
     public @Nullable String onPlaceholderRequest(final @NonNull Player player, final @NonNull String identifier) {
         return switch (identifier) {
-            case "server_name" -> {
-                yield LegacyComponentSerializer.legacySection().serialize(Constants.Chat.SERVER_NAME);
-            }
-            case "owner_name" -> {
-                yield LegacyComponentSerializer.legacySection().serialize(Constants.Chat.OWNER_NAME);
-            }
-            default -> {
-                yield null;
-            }
+            case "server_name" -> LegacyComponentSerializer.legacySection().serialize(Constants.Chat.SERVER_NAME);
+            case "owner_name" -> LegacyComponentSerializer.legacySection().serialize(Constants.Chat.OWNER_NAME);
+            default -> null;
         };
     }
 }

@@ -4,6 +4,7 @@ import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
+import dev.kscott.bluelobby.games.rps.RPSManager;
 import dev.kscott.bluelobby.menu.core.MenuGui;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,15 +14,16 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.inject.Inject;
 
-/**
- * The /menu command class.
- */
-public class MenuCommand implements BaseCommand {
-
+public class RPSCommand implements BaseCommand {
     /**
      * JavaPlugin reference.
      */
     private final @NonNull JavaPlugin plugin;
+
+    /**
+     * The RPSManager.
+     */
+    private final @NonNull RPSManager rpsManager;
 
     /**
      * Constructs {@code MenuCommand}.
@@ -29,8 +31,12 @@ public class MenuCommand implements BaseCommand {
      * @param plugin the plugin reference
      */
     @Inject
-    public MenuCommand(final @NonNull JavaPlugin plugin) {
+    public RPSCommand(
+            final @NonNull JavaPlugin plugin,
+            final @NonNull RPSManager rpsManager
+    ) {
         this.plugin = plugin;
+        this.rpsManager = rpsManager;
     }
 
     /**
@@ -40,9 +46,9 @@ public class MenuCommand implements BaseCommand {
      */
     @Override
     public void register(final @NonNull CommandManager<@NonNull CommandSender> manager) {
-        final Command.Builder<CommandSender> builder = manager.commandBuilder("menu", "play");
+        final Command.Builder<CommandSender> builder = manager.commandBuilder("rps");
 
-        manager.command(builder.handler(this::handleMenuCommand));
+        manager.command(builder.handler(this::handleMainCommand));
     }
 
     /**
@@ -50,7 +56,7 @@ public class MenuCommand implements BaseCommand {
      *
      * @param context command context
      */
-    private void handleMenuCommand(final @NonNull CommandContext<CommandSender> context) {
+    private void handleMainCommand(final @NonNull CommandContext<CommandSender> context) {
         new BukkitRunnable() {
             @Override
             public void run() {
