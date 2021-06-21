@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -29,10 +30,6 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
     @Inject
     public LobbyPlaceholderExpansion(final @NonNull LobbyPlugin plugin) {
         this.plugin = plugin;
-
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            this.register();
-        }
     }
 
     @Override
@@ -50,6 +47,16 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
         return "1.0.0";
     }
 
+    @Override
+    public boolean canRegister() {
+        return true;
+    }
+
+    @Override
+    public boolean persist() {
+        return true;
+    }
+
     /**
      * Parses the placeholder and returns the requested value.
      *
@@ -58,7 +65,7 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
      * @return the value
      */
     @Override
-    public @NonNull String onPlaceholderRequest(final @NonNull Player player, final @NonNull String identifier) {
+    public @Nullable String onPlaceholderRequest(final @NonNull Player player, final @NonNull String identifier) {
         return switch (identifier) {
             case "server_name" -> {
                 yield LegacyComponentSerializer.legacySection().serialize(Constants.Chat.SERVER_NAME);
@@ -67,7 +74,7 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
                 yield LegacyComponentSerializer.legacySection().serialize(Constants.Chat.OWNER_NAME);
             }
             default -> {
-                yield "";
+                yield null;
             }
         };
     }

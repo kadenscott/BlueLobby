@@ -11,6 +11,7 @@ import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.lobby.HologramManager;
 import dev.kscott.bluelobby.menu.GameGuiRecipeHolder;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 
@@ -40,8 +41,9 @@ public final class LobbyPlugin extends JavaPlugin {
 
         this.injector.getInstance(CommandService.class);
 
-        this.injector.getInstance(LobbyPlaceholderExpansion.class);
-
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new LobbyPlaceholderExpansion(this).register();
+        }
 //        this.injector.getInstance(HologramManager.class).loadHolograms();
 
         GameGuiRecipeHolder.registerRecipes(this);

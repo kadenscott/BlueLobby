@@ -6,5 +6,6 @@ prefix: BlueLobby
 authors: [ "bluely <kscottdev@gmail.com>" ]
 description: The lobby plugin for mc.ksc.sh.
 website: kaden.sh
-softdepend:
+depend:
+  - PlaceholderAPI
   - HolographicDisplays
