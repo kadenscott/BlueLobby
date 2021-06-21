@@ -1,3 +1,7 @@
+plugins {
+    id("xyz.jpenilla.run-paper") version "1.0.2"
+}
+
 dependencies {
     compileOnly(libs.paper)
 
@@ -6,8 +10,8 @@ dependencies {
     api(libs.bundles.guice)
     api(libs.bundles.corn)
     api(libs.ifgui)
-    api(libs.holodisplays)
-    api(libs.placeholderapi)
+    compileOnly(libs.holodisplays)
+    compileOnly(libs.placeholderapi)
 }
 
 tasks {
@@ -40,5 +44,9 @@ tasks {
         archiveClassifier.set(null as String?)
         archiveFileName.set(project.name + ".jar")
         destinationDirectory.set(rootProject.tasks.shadowJar.get().destinationDirectory.get())
+    }
+
+    runServer {
+        minecraftVersion("1.16.5")
     }
 }

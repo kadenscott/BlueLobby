@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.ShadowPlugin
 import net.kyori.indra.IndraPlugin
 
 plugins {
-    id("net.kyori.indra") version "1.3.1"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("net.kyori.indra") version "2.0.5"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "dev.kscott.bluelobby"
@@ -23,7 +23,7 @@ subprojects {
         maven("https://papermc.io/repo/repository/maven-public/")
 
         // Corn
-        maven("https://repo.broccol.ai")
+        maven("https://repo.broccol.ai/snapshots")
 
         // PLaceholderAPI
         maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
@@ -38,7 +38,7 @@ subprojects {
             gpl3OnlyLicense()
 
             javaVersions {
-                target.set(16)
+                target(16)
             }
         }
 
