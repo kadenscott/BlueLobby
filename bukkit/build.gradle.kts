@@ -10,8 +10,8 @@ dependencies {
     api(libs.bundles.guice)
     api(libs.bundles.corn)
     api(libs.ifgui)
-    api(libs.holodisplays)
-    api(libs.placeholderapi)
+    compileOnly(libs.holodisplays)
+    compileOnly(libs.placeholderapi)
 }
 
 tasks {
