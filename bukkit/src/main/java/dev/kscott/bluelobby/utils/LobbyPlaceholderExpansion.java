@@ -2,6 +2,7 @@ package dev.kscott.bluelobby.utils;
 
 import dev.kscott.bluelobby.LobbyPlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.kyori.adventure.text.serializer.ComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,6 +19,11 @@ import javax.inject.Inject;
 public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
 
     /**
+     * The component serializer.
+     */
+    private final @NonNull LegacyComponentSerializer serializer;
+
+    /**
      * The plugin.
      */
     private final @NonNull LobbyPlugin plugin;
@@ -30,6 +36,10 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
     @Inject
     public LobbyPlaceholderExpansion(final @NonNull LobbyPlugin plugin) {
         this.plugin = plugin;
+        this.serializer = LegacyComponentSerializer.builder()
+                .useUnusualXRepeatedCharacterHexFormat()
+                .character('&')
+                .build();
     }
 
     @Override
@@ -67,8 +77,11 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
     @Override
     public @Nullable String onPlaceholderRequest(final @NonNull Player player, final @NonNull String identifier) {
         return switch (identifier) {
-            case "server_name" -> LegacyComponentSerializer.legacySection().serialize(Constants.Chat.SERVER_NAME);
-            case "owner_name" -> LegacyComponentSerializer.legacySection().serialize(Constants.Chat.OWNER_NAME);
+            case "server_name" -> {
+                final @NonNull String str =  this.serializer.serialize(Constants.Chat.SERVER_NAME);
+                yield str;
+            }
+            case "owner_name" -> this.serializer.serialize(Constants.Chat.OWNER_NAME);
             default -> null;
         };
     }

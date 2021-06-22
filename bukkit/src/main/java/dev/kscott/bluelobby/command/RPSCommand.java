@@ -5,7 +5,6 @@ import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
 import dev.kscott.bluelobby.games.rps.RPSManager;
-import dev.kscott.bluelobby.menu.core.MenuGui;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -63,11 +62,6 @@ public class RPSCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    final @NonNull Gui gui = MenuGui.create();
-
-                    // TODO send opening message
-
-                    gui.show(player);
                 }
             }
         }.runTask(this.plugin);

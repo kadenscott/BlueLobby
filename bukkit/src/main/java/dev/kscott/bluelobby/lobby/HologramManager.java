@@ -3,6 +3,7 @@ package dev.kscott.bluelobby.lobby;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import dev.kscott.bluelobby.LobbyPlugin;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -48,9 +49,6 @@ public class HologramManager {
             plugin.getLogger().severe("Failed to load holograms - HolographicDisplays is not installed.");
             return;
         }
-
-        Hologram hologram = HologramsAPI.createHologram(plugin, new Location(lobbyWorld, 0.5, 68, -4.5));
-        hologram.appendTextLine("test");
     }
 
 }

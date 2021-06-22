@@ -1,6 +1,14 @@
 package dev.kscott.bluelobby;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import dev.kscott.bluelobby.command.CommandService;
+import dev.kscott.bluelobby.inject.CommandModule;
+import dev.kscott.bluelobby.inject.PluginModule;
+import dev.kscott.bluelobby.listeners.PlayerJoinListener;
+import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
+import dev.kscott.bluelobby.listeners.ServerListPingListener;
+import dev.kscott.bluelobby.lobby.HologramManager;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -24,13 +32,16 @@ public final class LobbyPlugin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        System.out.println(Bukkit.getServer());
-//
-//        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
-//        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
-//        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
-//
-//        this.injector.getInstance(CommandService.class);
+        this.injector = Guice.createInjector(
+                new PluginModule(this),
+                new CommandModule(this)
+        );
+
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
+
+        this.injector.getInstance(CommandService.class);
 
         final @NonNull LobbyPlaceholderExpansion placeholderExpansion = new LobbyPlaceholderExpansion(this);
         final @Nullable Plugin placeholderApiPlugin = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
@@ -38,9 +49,8 @@ public final class LobbyPlugin extends JavaPlugin {
         if (placeholderApiPlugin != null && placeholderApiPlugin.isEnabled()) {
             placeholderExpansion.register();
         }
-//        this.injector.getInstance(HologramManager.class).loadHolograms();
 
-//        GameGuiRecipeHolder.registerRecipes(this);
+        this.injector.getInstance(HologramManager.class).loadHolograms();
     }
 
 }
