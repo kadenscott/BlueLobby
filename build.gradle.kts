@@ -16,7 +16,6 @@ subprojects {
     }
 
     repositories {
-        mavenLocal()
         mavenCentral()
 
         // Paper repo

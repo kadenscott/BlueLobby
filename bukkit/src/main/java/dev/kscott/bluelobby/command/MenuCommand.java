@@ -3,7 +3,10 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
+import dev.kscott.bluelobby.ui.UI;
+import dev.kscott.bluelobby.ui.paper.ChestUI;
+import dev.kscott.bluelobby.ui.transformation.Transformation;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,12 +53,25 @@ public class MenuCommand implements BaseCommand {
      * @param context command context
      */
     private void handleMenuCommand(final @NonNull CommandContext<CommandSender> context) {
+        System.out.println("/menu called");
+
         new BukkitRunnable() {
             @Override
             public void run() {
+                System.out.println("/menu called");
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
+                    System.out.println("player");
+                    ChestUI ui = UI.chest(4)
+                            .transform(Transformation.grid(pane -> {
+                                return pane;
+                            }))
+                            .title(Component.text(""));
+
+                    System.out.println(ui);
+
+                    ui.open(player);
                 }
             }
         }.runTask(this.plugin);
