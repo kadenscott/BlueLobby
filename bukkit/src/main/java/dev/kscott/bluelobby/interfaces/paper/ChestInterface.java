@@ -1,6 +1,7 @@
 package dev.kscott.bluelobby.interfaces.paper;
 
 import dev.kscott.bluelobby.interfaces.Interface;
+import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
 import dev.kscott.bluelobby.interfaces.pane.GridPane;
 import dev.kscott.bluelobby.interfaces.transformation.Transformation;
 import dev.kscott.bluelobby.interfaces.view.ChestView;
@@ -87,8 +88,22 @@ public class ChestInterface implements Interface<GridPane> {
      * @param player the player
      * @return the view
      */
-    public @NonNull View open(@NonNull Player player) {
-        final @NonNull ChestView view = new ChestView(this);
+    public @NonNull View open(final @NonNull Player player, final @NonNull InterfaceArguments arguments) {
+        final @NonNull ChestView view = new ChestView(this, player, arguments);
+
+        view.open(player);
+
+        return view;
+    }
+
+    /**
+     * Opens this interface for a player and returns the {@link View}.
+     *
+     * @param player the player
+     * @return the view
+     */
+    public @NonNull View open(final @NonNull Player player) {
+        final @NonNull ChestView view = new ChestView(this, player, InterfaceArguments.empty());
 
         view.open(player);
 
@@ -106,6 +121,7 @@ public class ChestInterface implements Interface<GridPane> {
 
     /**
      * Returns the interface's height
+     *
      * @return the height
      */
     public int height() {

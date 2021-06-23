@@ -1,5 +1,6 @@
 package dev.kscott.bluelobby.interfaces.view;
 
+import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
 import dev.kscott.bluelobby.interfaces.element.Element;
 import dev.kscott.bluelobby.interfaces.element.ItemStackElement;
 import dev.kscott.bluelobby.interfaces.pane.GridPane;
@@ -17,27 +18,51 @@ import org.jetbrains.annotations.NotNull;
 
 public class ChestView implements View, InventoryHolder {
 
-    private final @NonNull ChestInterface ui;
+    /**
+     * The parent interface this view originated from.
+     */
+    private final @NonNull ChestInterface parentInterface;
 
+    /**
+     * The inventory of this view.
+     */
     private final @NonNull Inventory inventory;
+
+    /**
+     * The interface's arguments.
+     */
+    private final @NonNull InterfaceArguments arguments;
+
+    /**
+     * The viewer.
+     */
+    private final @NonNull Player viewer;
 
     /**
      * Constructs {@code ChestUIView}.
      *
-     * @param ui the ui
+     * @param parentInterface the interface
+     * @param viewer          the viewer
+     * @param arguments       the interface arguments
      */
-    public ChestView(final @NonNull ChestInterface ui) {
+    public ChestView(
+            final @NonNull ChestInterface parentInterface,
+            final @NonNull Player viewer,
+            final @NonNull InterfaceArguments arguments
+    ) {
         // Assing variables
-        this.ui = ui;
+        this.parentInterface = parentInterface;
+        this.viewer = viewer;
+        this.arguments = arguments;
 
-        @NonNull ChestPane pane = new ChestPane(ui.length(), ui.height());
+        @NonNull ChestPane pane = new ChestPane(parentInterface.length(), parentInterface.height());
 
-        for (final @NonNull Transformation<GridPane> transformation : ui.transformations()) {
-            pane = (ChestPane) transformation.transform(pane);
+        for (final @NonNull Transformation<GridPane> transformation : parentInterface.transformations()) {
+            transformation.accept(pane, this);
         }
 
         // Create the inventory
-        this.inventory = Bukkit.createInventory(this, ui.height() * 9, ui.title());
+        this.inventory = Bukkit.createInventory(this, parentInterface.height() * 9, parentInterface.title());
 
         // Place the inventory elements
         for (int x = 0; x < pane.length(); x++) {
@@ -54,13 +79,40 @@ public class ChestView implements View, InventoryHolder {
         }
     }
 
+    /**
+     * Opens the inventory for a player.
+     *
+     * @param player the player
+     */
     public void open(final @NonNull Player player) {
-        System.out.println("Opening " + this.inventory.toString());
         player.openInventory(this.inventory);
     }
 
+    /**
+     * Returns the inventory.
+     *
+     * @return the inventory
+     */
     @Override
     public @NotNull Inventory getInventory() {
         return this.inventory;
+    }
+
+    /**
+     * Returns the arguments.
+     *
+     * @return the arguments
+     */
+    public @NonNull InterfaceArguments arguments() {
+        return arguments;
+    }
+
+    /**
+     * Returns the viewer.
+     *
+     * @return the viewer
+     */
+    public @NonNull Player viewer() {
+        return viewer;
     }
 }

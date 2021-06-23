@@ -5,8 +5,13 @@ import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
 import dev.kscott.bluelobby.interfaces.Interface;
+import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
 import dev.kscott.bluelobby.interfaces.element.Element;
+import dev.kscott.bluelobby.interfaces.pane.GridPane;
+import dev.kscott.bluelobby.interfaces.paper.ChestInterface;
 import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.view.ChestView;
+import dev.kscott.bluelobby.interfaces.view.View;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -56,24 +61,32 @@ public class MenuCommand implements BaseCommand {
      * @param context command context
      */
     private void handleMenuCommand(final @NonNull CommandContext<CommandSender> context) {
-        System.out.println("/menu called");
-
         new BukkitRunnable() {
             @Override
             public void run() {
-                System.out.println("/menu called");
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
                     final @NonNull ItemStack bgItem = PaperItemBuilder.paper(Material.BLACK_STAINED_GLASS_PANE).build();
                     final @NonNull ItemStack diamondItem = PaperItemBuilder.paper(Material.DIAMOND).build();
 
-                    System.out.println("player");
-                    Interface.chest(4)
+                    boolean isOperator = player.isOp();
+
+                    ChestInterface menuInterface = Interface.chest(4)
                             .transform(Transformation.gridFill(Element.item(bgItem)))
                             .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1))
-                            .title(Component.text("/menu"))
-                            .open(player);
+                            .transform(Transformation.grid((grid, view) -> {
+                                final @NonNull ChestView chestView = (ChestView) view;
+                                final @NonNull Long time = chestView.arguments().get("time");
+                                grid.element(Element.item(
+                                        PaperItemBuilder.paper(Material.CLOCK)
+                                                .name(Component.text("Time: "+time))
+                                                .build()
+                                ), 1, 2);
+                            }))
+                            .title(Component.text("/menu"));
+
+                    menuInterface.open(player, InterfaceArguments.with("time", System.currentTimeMillis()));
                 }
             }
         }.runTask(this.plugin);
