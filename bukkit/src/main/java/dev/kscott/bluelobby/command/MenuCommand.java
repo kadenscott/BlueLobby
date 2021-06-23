@@ -7,11 +7,9 @@ import cloud.commandframework.context.CommandContext;
 import dev.kscott.bluelobby.interfaces.Interface;
 import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
 import dev.kscott.bluelobby.interfaces.element.Element;
-import dev.kscott.bluelobby.interfaces.pane.GridPane;
 import dev.kscott.bluelobby.interfaces.paper.ChestInterface;
-import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.transformation.Transform;
 import dev.kscott.bluelobby.interfaces.view.ChestView;
-import dev.kscott.bluelobby.interfaces.view.View;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -74,13 +72,13 @@ public class MenuCommand implements BaseCommand {
                             .updating(true) // Sets this interface to updating
                             .updateTicks(2) // This interface will now update every 2 ticks
                             // Fill the background with bgItem
-                            .transform(Transformation.gridFill(Element.item(
+                            .transform(Transform.gridFill(Element.item(
                                     bgItem,
                                     (event, view) -> event.setCancelled(true)))
                             )
-                            .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1)) // Add an item and x=1 y=1
+                            .transform(Transform.gridItem(Element.item(diamondItem), 1, 1)) // Add an item and x=1 y=1
                             // Adds a clock timer (which will update every 2 ticks)
-                            .transform(Transformation.grid((grid, view) -> {
+                            .transform(Transform.grid((grid, view) -> {
                                 // Get arguments
                                 final @NonNull ChestView chestView = (ChestView) view;
                                 final @NonNull Long time = chestView.arguments().get("time");

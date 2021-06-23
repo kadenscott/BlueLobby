@@ -6,7 +6,7 @@ import dev.kscott.bluelobby.interfaces.element.ItemStackElement;
 import dev.kscott.bluelobby.interfaces.pane.GridPane;
 import dev.kscott.bluelobby.interfaces.paper.ChestInterface;
 import dev.kscott.bluelobby.interfaces.paper.ChestPane;
-import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.transformation.Transform;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -62,7 +62,7 @@ public class ChestView implements View, InventoryHolder {
 
         this.pane = new ChestPane(parentInterface.length(), parentInterface.height());
 
-        for (final @NonNull Transformation<GridPane> transformation : parentInterface.transformations()) {
+        for (final @NonNull Transform<GridPane> transformation : parentInterface.transformations()) {
             transformation.accept(pane, this);
         }
 

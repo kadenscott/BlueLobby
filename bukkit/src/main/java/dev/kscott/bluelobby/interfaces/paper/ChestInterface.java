@@ -3,7 +3,7 @@ package dev.kscott.bluelobby.interfaces.paper;
 import dev.kscott.bluelobby.interfaces.Interface;
 import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
 import dev.kscott.bluelobby.interfaces.pane.GridPane;
-import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.transformation.Transform;
 import dev.kscott.bluelobby.interfaces.view.ChestView;
 import dev.kscott.bluelobby.interfaces.view.View;
 import net.kyori.adventure.text.Component;
@@ -19,7 +19,7 @@ public class ChestInterface implements Interface<GridPane> {
     /**
      * Transformations list.
      */
-    private final @NonNull List<Transformation<GridPane>> transformations;
+    private final @NonNull List<Transform<GridPane>> transformations;
 
     /**
      * The length of the UI.
@@ -90,7 +90,7 @@ public class ChestInterface implements Interface<GridPane> {
      * @return the UI
      */
     @Override
-    public @NonNull ChestInterface transform(@NonNull Transformation<GridPane> transformation) {
+    public @NonNull ChestInterface transform(@NonNull Transform<GridPane> transformation) {
         this.transformations.add(transformation);
         return this;
     }
@@ -146,7 +146,7 @@ public class ChestInterface implements Interface<GridPane> {
      *
      * @return the list of transformations
      */
-    public @NonNull List<Transformation<GridPane>> transformations() {
+    public @NonNull List<Transform<GridPane>> transformations() {
         return List.copyOf(this.transformations);
     }
 

@@ -13,7 +13,7 @@ import java.util.function.BiConsumer;
  *
  * @param <T> the pane type
  */
-public class Transformation<T extends Pane> implements BiConsumer<T, View> {
+public class Transform<T extends Pane> implements BiConsumer<T, View> {
 
     /**
      * The transformation function.
@@ -25,7 +25,7 @@ public class Transformation<T extends Pane> implements BiConsumer<T, View> {
      *
      * @param transformer the transformation function.
      */
-    private Transformation(final @NonNull BiConsumer<T, View> transformer) {
+    private Transform(final @NonNull BiConsumer<T, View> transformer) {
         this.function = transformer;
     }
 
@@ -35,8 +35,8 @@ public class Transformation<T extends Pane> implements BiConsumer<T, View> {
      * @param transformer the transformer
      * @return the transformation
      */
-    public static Transformation<GridPane> grid(final @NonNull BiConsumer<GridPane, View> transformer) {
-        return new Transformation<>(transformer);
+    public static Transform<GridPane> grid(final @NonNull BiConsumer<GridPane, View> transformer) {
+        return new Transform<>(transformer);
     }
 
     /**
@@ -47,8 +47,8 @@ public class Transformation<T extends Pane> implements BiConsumer<T, View> {
      * @param y       y coordinate
      * @return the transformation
      */
-    public static Transformation<GridPane> gridItem(final @NonNull ItemStackElement element, final int x, final int y) {
-        return new Transformation<>((pane, view) -> {
+    public static Transform<GridPane> gridItem(final @NonNull ItemStackElement element, final int x, final int y) {
+        return new Transform<>((pane, view) -> {
             pane.element(element, x, y);
         });
     }
@@ -59,8 +59,8 @@ public class Transformation<T extends Pane> implements BiConsumer<T, View> {
      * @param element the element
      * @return the transformation
      */
-    public static Transformation<GridPane> gridFill(final @NonNull ItemStackElement element) {
-        return new Transformation<>((pane, view) -> {
+    public static Transform<GridPane> gridFill(final @NonNull ItemStackElement element) {
+        return new Transform<>((pane, view) -> {
             for (int i = 0; i < pane.length(); i++) {
                 for (int j = 0; j < pane.height(); j++) {
                     pane.element(element, i, j);
