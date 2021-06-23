@@ -76,7 +76,6 @@ public class MenuCommand implements BaseCommand {
                             .transform(Transformation.gridFill(Element.item(bgItem)))
                             .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1))
                             .transform(Transformation.grid((grid, view) -> {
-
                                 // Get arguments
                                 final @NonNull ChestView chestView = (ChestView) view;
                                 final @NonNull Long time = chestView.arguments().get("time");
@@ -87,7 +86,6 @@ public class MenuCommand implements BaseCommand {
                                                 .name(Component.text("Time: "+time))
                                                 .build()
                                 ), 1, 2);
-
                             }))
                             .title(Component.text("/menu"));
 
