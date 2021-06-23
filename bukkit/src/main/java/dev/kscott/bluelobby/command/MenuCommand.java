@@ -71,10 +71,11 @@ public class MenuCommand implements BaseCommand {
                     final @NonNull ItemStack diamondItem = PaperItemBuilder.paper(Material.DIAMOND).build();
 
                     ChestInterface menuInterface = Interface.chest(4)
-                            .updating(true)
-                            .updateTicks(2)
-                            .transform(Transformation.gridFill(Element.item(bgItem)))
-                            .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1))
+                            .updating(true) // Sets this interface to updating
+                            .updateTicks(2) // This interface will now update every 2 ticks
+                            .transform(Transformation.gridFill(Element.item(bgItem))) // Fill the background with bgItem
+                            .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1)) // Add an item and x=1 y=1
+                            // Adds a clock timer (which will update every 2 ticks)
                             .transform(Transformation.grid((grid, view) -> {
                                 // Get arguments
                                 final @NonNull ChestView chestView = (ChestView) view;
@@ -89,6 +90,9 @@ public class MenuCommand implements BaseCommand {
                             }))
                             .title(Component.text("/menu"));
 
+                    // Opens the menu with the time argument given.
+                    // Since InterfaceArguments accept a supplier, passing in System::currentTimeMillis will
+                    // provide the latest time every interface update.
                     menuInterface.open(player, InterfaceArguments.with("time", System::currentTimeMillis));
                 }
             }
