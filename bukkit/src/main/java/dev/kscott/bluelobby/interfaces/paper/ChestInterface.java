@@ -37,6 +37,17 @@ public class ChestInterface implements Interface<GridPane> {
     private @NonNull Component title;
 
     /**
+     * If true, this interface will be marked as updating, and will refresh every {@code updatingTimer} ticks.
+     * If false, none of that will happen.
+     */
+    private boolean updating;
+
+    /**
+     * Controls how many Minecraft ticks between interface update.
+     */
+    private int updateTicks;
+
+    /**
      * Constructs {@code ChestUI}.
      *
      * @param rows the amount of rows for the ui
@@ -44,7 +55,9 @@ public class ChestInterface implements Interface<GridPane> {
     public ChestInterface(
             final int rows
     ) {
-        this.length = 9;
+        this.length = ChestPane.MINECRAFT_CHEST_WIDTH;
+        this.updating = false;
+        this.updateTicks = 0;
         this.height = rows;
         this.title = Component.empty();
         this.transformations = new ArrayList<>();
@@ -135,5 +148,23 @@ public class ChestInterface implements Interface<GridPane> {
      */
     public @NonNull List<Transformation<GridPane>> transformations() {
         return List.copyOf(this.transformations);
+    }
+
+    public boolean updating() {
+        return updating;
+    }
+
+    public int updateTicks() {
+        return updateTicks;
+    }
+
+    public @NonNull ChestInterface updating(final boolean updating) {
+        this.updating = updating;
+        return this;
+    }
+
+    public @NonNull ChestInterface updateTicks(final int updateTicks) {
+        this.updateTicks = updateTicks;
+        return this;
     }
 }

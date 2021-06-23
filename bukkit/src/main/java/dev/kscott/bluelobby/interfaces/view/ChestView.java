@@ -50,7 +50,7 @@ public class ChestView implements View, InventoryHolder {
             final @NonNull Player viewer,
             final @NonNull InterfaceArguments arguments
     ) {
-        // Assing variables
+        // Assign variables
         this.parentInterface = parentInterface;
         this.viewer = viewer;
         this.arguments = arguments;
@@ -114,5 +114,18 @@ public class ChestView implements View, InventoryHolder {
      */
     public @NonNull Player viewer() {
         return viewer;
+    }
+
+    /**
+     * Returns the parent interface.
+     *
+     * @return the interface
+     */
+    public @NonNull ChestInterface parentInterface() {
+        return this.parentInterface;
+    }
+
+    public boolean isViewing() {
+        return this.inventory.getViewers().contains(this.viewer);
     }
 }

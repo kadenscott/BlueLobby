@@ -70,23 +70,28 @@ public class MenuCommand implements BaseCommand {
                     final @NonNull ItemStack bgItem = PaperItemBuilder.paper(Material.BLACK_STAINED_GLASS_PANE).build();
                     final @NonNull ItemStack diamondItem = PaperItemBuilder.paper(Material.DIAMOND).build();
 
-                    boolean isOperator = player.isOp();
-
                     ChestInterface menuInterface = Interface.chest(4)
+                            .updating(true)
+                            .updateTicks(2)
                             .transform(Transformation.gridFill(Element.item(bgItem)))
                             .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1))
                             .transform(Transformation.grid((grid, view) -> {
+
+                                // Get arguments
                                 final @NonNull ChestView chestView = (ChestView) view;
                                 final @NonNull Long time = chestView.arguments().get("time");
+
+                                // Add clock element
                                 grid.element(Element.item(
                                         PaperItemBuilder.paper(Material.CLOCK)
                                                 .name(Component.text("Time: "+time))
                                                 .build()
                                 ), 1, 2);
+
                             }))
                             .title(Component.text("/menu"));
 
-                    menuInterface.open(player, InterfaceArguments.with("time", System.currentTimeMillis()));
+                    menuInterface.open(player, InterfaceArguments.with("time", System::currentTimeMillis));
                 }
             }
         }.runTask(this.plugin);
