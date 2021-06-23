@@ -1,9 +1,13 @@
 package dev.kscott.bluelobby.interfaces.paper;
 
+import dev.kscott.bluelobby.interfaces.Interface;
+import dev.kscott.bluelobby.interfaces.element.Element;
+import dev.kscott.bluelobby.interfaces.element.ItemStackElement;
 import dev.kscott.bluelobby.interfaces.view.ChestView;
 import dev.kscott.bluelobby.interfaces.view.View;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
@@ -41,6 +45,29 @@ public class PaperInterfaceListeners implements Listener {
     public PaperInterfaceListeners(final @NonNull JavaPlugin plugin) {
         this.openViews = new HashSet<>();
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onInventoryClick(final @NonNull InventoryClickEvent event) {
+        final @NonNull Inventory inventory = event.getInventory();
+
+        final @Nullable InventoryHolder holder = inventory.getHolder();
+
+        if (holder == null) {
+            return;
+        }
+
+        if (holder instanceof ChestView chestView) {
+            int slot = event.getRawSlot();
+            int x = slot % 9;
+            int y = slot / 9;
+
+            final @NonNull Element element = chestView.chestPane().element(x, y);
+
+            if (element instanceof ItemStackElement itemStackElement) {
+                itemStackElement.handleClick(event, chestView);
+            }
+        }
     }
 
     /**

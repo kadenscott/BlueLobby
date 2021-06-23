@@ -39,6 +39,11 @@ public class ChestView implements View, InventoryHolder {
     private final @NonNull Player viewer;
 
     /**
+     * The chest pane.
+     */
+    private final @NonNull ChestPane pane;
+
+    /**
      * Constructs {@code ChestUIView}.
      *
      * @param parentInterface the interface
@@ -55,7 +60,7 @@ public class ChestView implements View, InventoryHolder {
         this.viewer = viewer;
         this.arguments = arguments;
 
-        @NonNull ChestPane pane = new ChestPane(parentInterface.length(), parentInterface.height());
+        this.pane = new ChestPane(parentInterface.length(), parentInterface.height());
 
         for (final @NonNull Transformation<GridPane> transformation : parentInterface.transformations()) {
             transformation.accept(pane, this);
@@ -127,5 +132,9 @@ public class ChestView implements View, InventoryHolder {
 
     public boolean isViewing() {
         return this.inventory.getViewers().contains(this.viewer);
+    }
+
+    public @NonNull ChestPane chestPane() {
+        return this.pane;
     }
 }
