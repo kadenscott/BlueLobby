@@ -73,7 +73,11 @@ public class MenuCommand implements BaseCommand {
                     ChestInterface menuInterface = Interface.chest(4)
                             .updating(true) // Sets this interface to updating
                             .updateTicks(2) // This interface will now update every 2 ticks
-                            .transform(Transformation.gridFill(Element.item(bgItem, (event, view) -> event.setCancelled(true)))) // Fill the background with bgItem
+                            // Fill the background with bgItem
+                            .transform(Transformation.gridFill(Element.item(
+                                    bgItem,
+                                    (event, view) -> event.setCancelled(true)))
+                            )
                             .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1)) // Add an item and x=1 y=1
                             // Adds a clock timer (which will update every 2 ticks)
                             .transform(Transformation.grid((grid, view) -> {
