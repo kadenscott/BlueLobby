@@ -1,23 +1,19 @@
 package dev.kscott.bluelobby.ui.paper;
 
-import dev.kscott.bluelobby.ui.UI;
+import dev.kscott.bluelobby.ui.Interface;
 import dev.kscott.bluelobby.ui.pane.GridPane;
 import dev.kscott.bluelobby.ui.transformation.Transformation;
-import dev.kscott.bluelobby.ui.view.ChestUIView;
-import dev.kscott.bluelobby.ui.view.UIView;
-import net.kyori.adventure.audience.Audience;
+import dev.kscott.bluelobby.ui.view.ChestView;
+import dev.kscott.bluelobby.ui.view.View;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChestUI implements UI<GridPane> {
+public class ChestInterface implements Interface<GridPane> {
 
     /**
      * Transformations list.
@@ -44,7 +40,7 @@ public class ChestUI implements UI<GridPane> {
      *
      * @param rows the amount of rows for the ui
      */
-    public ChestUI(
+    public ChestInterface(
             final int rows
     ) {
         this.length = 9;
@@ -59,7 +55,7 @@ public class ChestUI implements UI<GridPane> {
      * @param title the title
      * @return the UI
      */
-    public @NonNull ChestUI title(@NonNull ComponentLike title) {
+    public @NonNull ChestInterface title(@NonNull ComponentLike title) {
         this.title = title.asComponent();
         return this;
     }
@@ -80,13 +76,13 @@ public class ChestUI implements UI<GridPane> {
      * @return the UI
      */
     @Override
-    public @NonNull ChestUI transform(@NonNull Transformation<GridPane> transformation) {
+    public @NonNull ChestInterface transform(@NonNull Transformation<GridPane> transformation) {
         this.transformations.add(transformation);
         return this;
     }
 
-    public @NonNull UIView open(@NonNull Player player) {
-        final @NonNull ChestUIView view = new ChestUIView(this);
+    public @NonNull View open(@NonNull Player player) {
+        final @NonNull ChestView view = new ChestView(this);
 
         view.open(player);
 

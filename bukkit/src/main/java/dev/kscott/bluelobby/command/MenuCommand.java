@@ -3,8 +3,8 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.ui.UI;
-import dev.kscott.bluelobby.ui.paper.ChestUI;
+import dev.kscott.bluelobby.ui.Interface;
+import dev.kscott.bluelobby.ui.paper.ChestInterface;
 import dev.kscott.bluelobby.ui.transformation.Transformation;
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
@@ -63,7 +63,7 @@ public class MenuCommand implements BaseCommand {
 
                 if (sender instanceof Player player) {
                     System.out.println("player");
-                    ChestUI ui = UI.chest(4)
+                    ChestInterface ui = Interface.chest(4)
                             .transform(Transformation.grid(pane -> {
                                 return pane;
                             }))

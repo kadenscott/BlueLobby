@@ -1,17 +1,16 @@
 package dev.kscott.bluelobby.ui;
 
 import dev.kscott.bluelobby.ui.pane.Pane;
-import dev.kscott.bluelobby.ui.paper.ChestUI;
+import dev.kscott.bluelobby.ui.paper.ChestInterface;
 import dev.kscott.bluelobby.ui.transformation.Transformation;
-import dev.kscott.bluelobby.ui.view.UIView;
-import net.kyori.adventure.audience.Audience;
+import dev.kscott.bluelobby.ui.view.View;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Represents a user interface.
  */
-public interface UI<T extends Pane> {
+public interface Interface<T extends Pane> {
 
     /**
      * Returns a ChestUI.
@@ -19,8 +18,8 @@ public interface UI<T extends Pane> {
      * @param rows the ui's rows
      * @return the ChestUI
      */
-    static @NonNull ChestUI chest(final int rows) {
-        return new ChestUI(rows);
+    static @NonNull ChestInterface chest(final int rows) {
+        return new ChestInterface(rows);
     }
 
     /**
@@ -29,7 +28,7 @@ public interface UI<T extends Pane> {
      * @param transformation the transformation
      * @return this UI
      */
-    @NonNull UI<T> transform(final @NonNull Transformation<T> transformation);
+    @NonNull Interface<T> transform(final @NonNull Transformation<T> transformation);
 
     /**
      * Opens the UI for the player.
@@ -37,6 +36,6 @@ public interface UI<T extends Pane> {
      * @param player the player
      * @return the ui view
      */
-    @NonNull UIView open(final @NonNull Player player);
+    @NonNull View open(final @NonNull Player player);
 
 }
