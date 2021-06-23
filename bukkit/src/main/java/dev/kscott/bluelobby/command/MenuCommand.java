@@ -1,14 +1,17 @@
 package dev.kscott.bluelobby.command;
 
+import broccolai.corn.paper.PaperItemBuilder;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.ui.Interface;
-import dev.kscott.bluelobby.ui.paper.ChestInterface;
-import dev.kscott.bluelobby.ui.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.Interface;
+import dev.kscott.bluelobby.interfaces.element.Element;
+import dev.kscott.bluelobby.interfaces.transformation.Transformation;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -62,16 +65,15 @@ public class MenuCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
+                    final @NonNull ItemStack bgItem = PaperItemBuilder.paper(Material.BLACK_STAINED_GLASS_PANE).build();
+                    final @NonNull ItemStack diamondItem = PaperItemBuilder.paper(Material.DIAMOND).build();
+
                     System.out.println("player");
-                    ChestInterface ui = Interface.chest(4)
-                            .transform(Transformation.grid(pane -> {
-                                return pane;
-                            }))
-                            .title(Component.text(""));
-
-                    System.out.println(ui);
-
-                    ui.open(player);
+                    Interface.chest(4)
+                            .transform(Transformation.gridFill(Element.item(bgItem)))
+                            .transform(Transformation.gridItem(Element.item(diamondItem), 1, 1))
+                            .title(Component.text("/menu"))
+                            .open(player);
                 }
             }
         }.runTask(this.plugin);

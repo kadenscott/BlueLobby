@@ -1,10 +1,10 @@
-package dev.kscott.bluelobby.ui.paper;
+package dev.kscott.bluelobby.interfaces.paper;
 
-import dev.kscott.bluelobby.ui.Interface;
-import dev.kscott.bluelobby.ui.pane.GridPane;
-import dev.kscott.bluelobby.ui.transformation.Transformation;
-import dev.kscott.bluelobby.ui.view.ChestView;
-import dev.kscott.bluelobby.ui.view.View;
+import dev.kscott.bluelobby.interfaces.Interface;
+import dev.kscott.bluelobby.interfaces.pane.GridPane;
+import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.view.ChestView;
+import dev.kscott.bluelobby.interfaces.view.View;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import org.bukkit.entity.Player;
@@ -81,6 +81,12 @@ public class ChestInterface implements Interface<GridPane> {
         return this;
     }
 
+    /**
+     * Opens this interface for a player and returns the {@link View}.
+     *
+     * @param player the player
+     * @return the view
+     */
     public @NonNull View open(@NonNull Player player) {
         final @NonNull ChestView view = new ChestView(this);
 
@@ -89,15 +95,29 @@ public class ChestInterface implements Interface<GridPane> {
         return view;
     }
 
+    /**
+     * Returns the interface's length.
+     *
+     * @return the length
+     */
     public int length() {
         return this.length;
     }
 
+    /**
+     * Returns the interface's height
+     * @return the height
+     */
     public int height() {
         return this.height;
     }
 
+    /**
+     * Returns an immutable list of transformations on this interface.
+     *
+     * @return the list of transformations
+     */
     public @NonNull List<Transformation<GridPane>> transformations() {
-        return this.transformations;
+        return List.copyOf(this.transformations);
     }
 }

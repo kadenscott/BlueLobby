@@ -1,15 +1,18 @@
-package dev.kscott.bluelobby.ui.paper;
+package dev.kscott.bluelobby.interfaces.paper;
 
-import dev.kscott.bluelobby.ui.element.Element;
-import dev.kscott.bluelobby.ui.pane.GridPane;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
+import dev.kscott.bluelobby.interfaces.element.Element;
+import dev.kscott.bluelobby.interfaces.pane.GridPane;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * A pane that holds a 2d grid of elements.
  */
 public class ChestPane implements GridPane {
+
+    /**
+     * Minecraft's chest width.
+     */
+    public static final int MINECRAFT_CHEST_WIDTH = 9;
 
     /**
      * The length of the pane.
@@ -54,7 +57,7 @@ public class ChestPane implements GridPane {
      */
     @Override
     public int length() {
-        return 0;
+        return this.length;
     }
 
     /**
@@ -64,7 +67,7 @@ public class ChestPane implements GridPane {
      */
     @Override
     public int height() {
-        return 0;
+        return this.height;
     }
 
     /**
@@ -89,5 +92,10 @@ public class ChestPane implements GridPane {
     @Override
     public @NonNull Element element(final int x, final int y) {
         return this.elements[x][y];
+    }
+
+    @Override
+    public @NonNull Element[][] elements() {
+        return this.elements;
     }
 }

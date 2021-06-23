@@ -1,9 +1,9 @@
-package dev.kscott.bluelobby.ui;
+package dev.kscott.bluelobby.interfaces;
 
-import dev.kscott.bluelobby.ui.pane.Pane;
-import dev.kscott.bluelobby.ui.paper.ChestInterface;
-import dev.kscott.bluelobby.ui.transformation.Transformation;
-import dev.kscott.bluelobby.ui.view.View;
+import dev.kscott.bluelobby.interfaces.pane.Pane;
+import dev.kscott.bluelobby.interfaces.paper.ChestInterface;
+import dev.kscott.bluelobby.interfaces.transformation.Transformation;
+import dev.kscott.bluelobby.interfaces.view.View;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 

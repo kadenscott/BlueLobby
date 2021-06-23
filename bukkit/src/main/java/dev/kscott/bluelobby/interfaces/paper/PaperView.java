@@ -1,6 +1,6 @@
-package dev.kscott.bluelobby.ui.paper;
+package dev.kscott.bluelobby.interfaces.paper;
 
-import dev.kscott.bluelobby.ui.view.View;
+import dev.kscott.bluelobby.interfaces.view.View;
 import org.bukkit.inventory.InventoryHolder;
 
 public interface PaperView extends View, InventoryHolder {

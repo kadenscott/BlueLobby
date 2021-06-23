@@ -1,6 +1,6 @@
-package dev.kscott.bluelobby.ui.pane;
+package dev.kscott.bluelobby.interfaces.pane;
 
-import dev.kscott.bluelobby.ui.element.Element;
+import dev.kscott.bluelobby.interfaces.element.Element;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
@@ -40,4 +40,11 @@ public interface GridPane extends Pane {
      * @return the element
      */
     @NonNull Element element(final int x, final int y);
+
+    /**
+     * Returns the 2d element array. An "empty" element in the array is the value of {@link Element#empty()}.
+     *
+     * @return the 2d element array
+     */
+    @NonNull Element[][] elements();
 }
