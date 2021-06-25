@@ -7,6 +7,7 @@ dependencies {
 
     api(libs.minimessage)
     api(libs.cloud.paper)
+    api(libs.interfaces.paper)
     api(libs.bundles.guice)
     api(libs.bundles.corn)
     api(libs.adventurebungee)

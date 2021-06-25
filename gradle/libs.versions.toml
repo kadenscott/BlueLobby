@@ -30,6 +30,8 @@ holodisplays = "2.4.0"
 
 placeholderapi = "2.10.9"
 
+interfaces = "1.0.0-SNAPSHOT"
+
 [libraries]
 # Tooling
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checker-qual" }
@@ -43,6 +45,10 @@ guice-assisted = { group = "com.google.inject.extensions", name = "guice-assiste
 cloud-core = { group = "cloud.commandframework", name = "cloud-core", version.ref = "cloud" }
 cloud-paper = { group = "cloud.commandframework", name = "cloud-paper", version.ref = "cloud" }
 cloud-extras = { group = "cloud.commandframework", name = "cloud-minecraft-extras", version.ref = "cloud" }
+
+# interfaces
+interfaces-core = { group = "dev.kscott.interfaces", name = "interfaces-core", version.ref = "interfaces" }
+interfaces-paper = { group = "dev.kscott.interfaces", name = "interfaces-paper", version.ref = "interfaces" }
 
 # Kyori
 adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure-core" }

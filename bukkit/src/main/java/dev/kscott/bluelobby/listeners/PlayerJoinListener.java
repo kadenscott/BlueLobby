@@ -2,6 +2,10 @@ package dev.kscott.bluelobby.listeners;
 
 import dev.kscott.bluelobby.location.LocationRegistry;
 import dev.kscott.bluelobby.utils.Constants;
+import dev.kscott.interfaces.paper.PaperInterface;
+import dev.kscott.interfaces.paper.PlayerViewer;
+import dev.kscott.interfaces.paper.transform.PaperTransform;
+import dev.kscott.interfaces.paper.type.BookInterface;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +20,11 @@ import javax.inject.Inject;
  * Listens on the player join event.
  */
 public class PlayerJoinListener implements Listener {
+
+    /**
+     * The interface to show the player when they first log in.
+     */
+    private final @NonNull BookInterface welcomeInterface;
 
     /**
      * The plugin's reference.
@@ -37,6 +46,8 @@ public class PlayerJoinListener implements Listener {
                               final @NonNull LocationRegistry locationRegistry) {
         this.plugin = plugin;
         this.locationRegistry = locationRegistry;
+        this.welcomeInterface = PaperInterface.book()
+                .transform(PaperTransform.bookText(Constants.Chat.MOTD_BOOK));
     }
 
     /**
@@ -50,7 +61,7 @@ public class PlayerJoinListener implements Listener {
 
         player.teleportAsync(this.locationRegistry.spawn());
 
-        Constants.Books.showIntroBook(player);
+        this.welcomeInterface.open(PlayerViewer.of(player));
 
         // Send the default pling 10 ticks after the player joins.
         new BukkitRunnable() {

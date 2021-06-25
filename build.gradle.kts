@@ -29,6 +29,8 @@ subprojects {
 
         // TAB
         maven("https://repo.codemc.io/repository/maven-public/")
+        mavenLocal()
+
     }
 
     tasks {

@@ -4,12 +4,13 @@ import broccolai.corn.paper.PaperItemBuilder;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.interfaces.Interface;
-import dev.kscott.bluelobby.interfaces.arguments.InterfaceArguments;
-import dev.kscott.bluelobby.interfaces.element.Element;
-import dev.kscott.bluelobby.interfaces.paper.ChestInterface;
-import dev.kscott.bluelobby.interfaces.transformation.Transform;
-import dev.kscott.bluelobby.interfaces.view.ChestView;
+import dev.kscott.bluelobby.utils.Constants;
+import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
+import dev.kscott.interfaces.paper.PlayerViewer;
+import dev.kscott.interfaces.paper.element.ItemStackElement;
+import dev.kscott.interfaces.paper.transform.PaperTransform;
+import dev.kscott.interfaces.paper.type.ChestInterface;
+import dev.kscott.interfaces.paper.view.ChestView;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -65,37 +66,38 @@ public class MenuCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    final @NonNull ItemStack bgItem = PaperItemBuilder.paper(Material.BLACK_STAINED_GLASS_PANE).build();
-                    final @NonNull ItemStack diamondItem = PaperItemBuilder.paper(Material.DIAMOND).build();
-
-                    ChestInterface menuInterface = Interface.chest(4)
-                            .updating(true) // Sets this interface to updating
-                            .updateTicks(2) // This interface will now update every 2 ticks
+                    ChestInterface menuInterface = ChestInterface.builder()
+                            .rows(4)
+                            .topClickHandler((event, view) -> {
+                                event.setCancelled(true);
+                            })
                             // Fill the background with bgItem
-                            .transform(Transform.gridFill(Element.item(
-                                    bgItem,
+                            .addTransform(PaperTransform.chestFill(ItemStackElement.of(
+                                    Constants.Items.MENU_BACKGROUND.build(),
                                     (event, view) -> event.setCancelled(true)))
                             )
-                            .transform(Transform.gridItem(Element.item(diamondItem), 1, 1)) // Add an item and x=1 y=1
                             // Adds a clock timer (which will update every 2 ticks)
-                            .transform(Transform.grid((grid, view) -> {
+                            .addTransform((pane, view) -> {
                                 // Get arguments
                                 final @NonNull ChestView chestView = (ChestView) view;
-                                final @NonNull Long time = chestView.arguments().get("time");
+                                final @NonNull Long time = chestView.argument().get("time");
 
                                 // Add clock element
-                                grid.element(Element.item(
+                                pane = pane.element(ItemStackElement.of(
                                         PaperItemBuilder.paper(Material.CLOCK)
-                                                .name(Component.text("Time: "+time))
+                                                .name(Component.text("Time: " + time))
                                                 .build()
                                 ), 1, 2);
-                            }))
-                            .title(Component.text("/menu"));
+
+                                return pane;
+                            })
+                            .title(Component.text("/menu"))
+                            .build();
 
                     // Opens the menu with the time argument given.
                     // Since InterfaceArguments accept a supplier, passing in System::currentTimeMillis will
                     // provide the latest time every interface update.
-                    menuInterface.open(player, InterfaceArguments.with("time", System::currentTimeMillis));
+                    menuInterface.open(PlayerViewer.of(player), HashMapInterfaceArgument.with("time", System::currentTimeMillis).build());
                 }
             }
         }.runTask(this.plugin);

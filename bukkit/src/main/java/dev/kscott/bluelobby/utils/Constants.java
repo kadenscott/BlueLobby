@@ -1,5 +1,6 @@
 package dev.kscott.bluelobby.utils;
 
+import broccolai.corn.paper.PaperItemBuilder;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
@@ -9,7 +10,10 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
@@ -212,4 +216,18 @@ public class Constants {
 
     }
 
+    /**
+     * Stores constant item stuff.
+     */
+    public static class Items {
+
+        /**
+         * The menu background item builder.
+         */
+        public static final @NonNull PaperItemBuilder MENU_BACKGROUND = PaperItemBuilder
+                .paper(Material.GRAY_STAINED_GLASS_PANE)
+                .name(Component.empty());
+
+
+    }
 }
