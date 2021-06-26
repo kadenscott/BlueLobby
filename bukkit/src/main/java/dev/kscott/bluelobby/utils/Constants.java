@@ -32,12 +32,12 @@ public class Constants {
         private static final @NonNull MiniMessage miniMessage = MiniMessage.get();
 
         /**
-         * The default text colour.
+         * The light gray text colour.
          */
         public static final @NonNull TextColor COLOUR_LIGHT_GRAY = TextColor.color(185, 185, 185);
 
         /**
-         * The default text colour.
+         * The dark gray text colour.
          */
         public static final @NonNull TextColor COLOUR_DARK_GRAY = TextColor.color(52, 52, 52);
 
@@ -47,24 +47,29 @@ public class Constants {
         public static final @NonNull TextColor COLOUR_LIGHT_BLUE = TextColor.color(31, 197, 242);
 
         /**
-         * The light blue text colour.
+         * The dark blue text colour.
          */
         public static final @NonNull TextColor COLOUR_DARK_BLUE = TextColor.color(36, 67, 121);
 
         /**
-         * The pink text colour.
+         * The purple text colour.
          */
         public static final @NonNull TextColor COLOUR_PURPLE = TextColor.color(150, 70, 174);
 
         /**
-         * The pink text colour.
+         * The orange text colour.
          */
         public static final @NonNull TextColor COLOUR_ORANGE = TextColor.color(213, 124, 45);
 
         /**
-         * The pink text colour.
+         * The red text colour.
          */
         public static final @NonNull TextColor COLOUR_RED = TextColor.color(229, 66, 62);
+
+        /**
+         * The yellow text colour.
+         */
+        public static final @NonNull TextColor COLOUR_YELLOW = TextColor.color(237, 213, 107);
 
         /**
          * The default text style.
