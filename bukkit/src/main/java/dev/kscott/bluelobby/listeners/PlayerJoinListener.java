@@ -2,7 +2,6 @@ package dev.kscott.bluelobby.listeners;
 
 import dev.kscott.bluelobby.location.LocationRegistry;
 import dev.kscott.bluelobby.utils.Constants;
-import dev.kscott.interfaces.paper.PaperInterface;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.transform.PaperTransform;
 import dev.kscott.interfaces.paper.type.BookInterface;
@@ -46,8 +45,9 @@ public class PlayerJoinListener implements Listener {
                               final @NonNull LocationRegistry locationRegistry) {
         this.plugin = plugin;
         this.locationRegistry = locationRegistry;
-        this.welcomeInterface = PaperInterface.book()
-                .transform(PaperTransform.bookText(Constants.Chat.MOTD_BOOK));
+        this.welcomeInterface = BookInterface.builder()
+                .addTransform(PaperTransform.bookText(Constants.Chat.MOTD_BOOK))
+                .build();
     }
 
     /**

@@ -5,6 +5,7 @@ import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
 import dev.kscott.bluelobby.utils.Constants;
+import dev.kscott.interfaces.core.Interface;
 import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.element.ItemStackElement;
@@ -33,6 +34,11 @@ public class MenuCommand implements BaseCommand {
     private final @NonNull JavaPlugin plugin;
 
     /**
+     * The menu interface.
+     */
+    private final @NonNull ChestInterface menuInterface;
+
+    /**
      * Constructs {@code MenuCommand}.
      *
      * @param plugin the plugin reference
@@ -40,6 +46,15 @@ public class MenuCommand implements BaseCommand {
     @Inject
     public MenuCommand(final @NonNull JavaPlugin plugin) {
         this.plugin = plugin;
+        this.menuInterface = ChestInterface.builder()
+                .rows(3)
+                .topClickHandler((event, view) -> {
+                    event.setCancelled(true);
+                })
+                .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
+                .title(Constants.Chat.SERVER_NAME)
+                .build();
+
     }
 
     /**
@@ -66,38 +81,7 @@ public class MenuCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    ChestInterface menuInterface = ChestInterface.builder()
-                            .rows(4)
-                            .topClickHandler((event, view) -> {
-                                event.setCancelled(true);
-                            })
-                            // Fill the background with bgItem
-                            .addTransform(PaperTransform.chestFill(ItemStackElement.of(
-                                    Constants.Items.MENU_BACKGROUND.build(),
-                                    (event, view) -> event.setCancelled(true)))
-                            )
-                            // Adds a clock timer (which will update every 2 ticks)
-                            .addTransform((pane, view) -> {
-                                // Get arguments
-                                final @NonNull ChestView chestView = (ChestView) view;
-                                final @NonNull Long time = chestView.argument().get("time");
-
-                                // Add clock element
-                                pane = pane.element(ItemStackElement.of(
-                                        PaperItemBuilder.paper(Material.CLOCK)
-                                                .name(Component.text("Time: " + time))
-                                                .build()
-                                ), 1, 2);
-
-                                return pane;
-                            })
-                            .title(Component.text("/menu"))
-                            .build();
-
-                    // Opens the menu with the time argument given.
-                    // Since InterfaceArguments accept a supplier, passing in System::currentTimeMillis will
-                    // provide the latest time every interface update.
-                    menuInterface.open(PlayerViewer.of(player), HashMapInterfaceArgument.with("time", System::currentTimeMillis).build());
+                    menuInterface.open(PlayerViewer.of(player));
                 }
             }
         }.runTask(this.plugin);

@@ -8,7 +8,7 @@ import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
-import dev.kscott.bluelobby.lobby.HologramManager;
+import dev.kscott.bluelobby.holograms.HologramManager;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
 import dev.kscott.interfaces.paper.PaperInterfaceListeners;
 import org.bukkit.Bukkit;

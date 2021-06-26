@@ -25,7 +25,7 @@ public class RPSCommand implements BaseCommand {
     private final @NonNull RPSManager rpsManager;
 
     /**
-     * Constructs {@code MenuCommand}.
+     * Constructs {@code RPSCommand}.
      *
      * @param plugin the plugin reference
      */
@@ -39,7 +39,7 @@ public class RPSCommand implements BaseCommand {
     }
 
     /**
-     * Registers the /menu command.
+     * Registers the /rps command.
      *
      * @param manager CommandManager to register with
      */
@@ -51,7 +51,7 @@ public class RPSCommand implements BaseCommand {
     }
 
     /**
-     * Handles the /menu command.
+     * Handles the /rps command.
      *
      * @param context command context
      */
