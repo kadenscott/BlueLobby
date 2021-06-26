@@ -40,9 +40,11 @@ public class MenuInterface extends ChestInterface {
                 1,
                 Constants.Chat.SERVER_NAME,
                 List.of(
+                        // Fill bg
                         PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())),
+                        // Add items
                         (pane, view) -> {
-                            final @NonNull ItemStack bonkItem = PaperItemBuilder.paper(Material.PAPER)
+                            final @NonNull ItemStack readmeItem = PaperItemBuilder.paper(Material.PAPER)
                                     .name(Component.text()
                                             .append(
                                                     Component.text("⚡ ")
@@ -58,43 +60,37 @@ public class MenuInterface extends ChestInterface {
                                     )
                                     .build();
 
-                            @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(bonkItem, (clickEvent, clickView) -> {
-                                gameManager.bonk((Player) clickEvent.getWhoClicked());
-                            }), 0, 0);
-
-                            return paneTemp;
-                        },
-                        (pane, view) -> {
                             final @NonNull ItemStack bonkItem = PaperItemBuilder.paper(Material.BLAZE_ROD)
                                     .name(Component.text("BONK").style(Constants.Chat.STYLE_NO_ITALICS).color(Constants.Chat.COLOUR_YELLOW).decoration(TextDecoration.BOLD, true))
                                     .build();
 
-                            @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(bonkItem, (clickEvent, clickView) -> {
-                                gameManager.bonk((Player) clickEvent.getWhoClicked());
-                            }), 3, 0);
-
-                            return paneTemp;
-                        },
-                        (pane, view) -> {
-                            final @NonNull ItemStack bonkItem = PaperItemBuilder.paper(Material.NETHERITE_BLOCK)
+                            final @NonNull ItemStack unkItem1 = PaperItemBuilder.paper(Material.NETHERITE_BLOCK)
                                     .name(Component.text("???????").style(Constants.Chat.STYLE_NO_ITALICS).color(Constants.Chat.COLOUR_LIGHT_BLUE).decoration(TextDecoration.BOLD, true))
                                     .build();
 
-                            @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(bonkItem, (clickEvent, clickView) -> {
-                                gameManager.bonk((Player) clickEvent.getWhoClicked());
-                            }), 4, 0);
-
-                            return paneTemp;
-                        },
-                        (pane, view) -> {
-                            final @NonNull ItemStack bonkItem = PaperItemBuilder.paper(Material.NETHERITE_SWORD)
+                            final @NonNull ItemStack unkItem2 = PaperItemBuilder.paper(Material.NETHERITE_SWORD)
                                     .name(Component.text("????? ????").style(Constants.Chat.STYLE_NO_ITALICS).color(Constants.Chat.COLOUR_RED).decoration(TextDecoration.BOLD, true))
                                     .flags(ItemFlag.HIDE_ATTRIBUTES)
                                     .build();
 
-                            @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(bonkItem, (clickEvent, clickView) -> {
+
+                            @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(readmeItem, (clickEvent, clickView) -> {
+                                gameManager.bonk((Player) clickEvent.getWhoClicked());
+                            }), 0, 0);
+
+                            paneTemp = paneTemp.element(ItemStackElement.of(bonkItem, (clickEvent, clickView) -> {
+                                gameManager.bonk((Player) clickEvent.getWhoClicked());
+                            }), 3, 0);
+
+                            paneTemp = paneTemp.element(ItemStackElement.of(unkItem1, (clickEvent, clickView) -> {
+                                gameManager.bonk((Player) clickEvent.getWhoClicked());
+                            }), 4, 0);
+
+                            paneTemp = paneTemp.element(ItemStackElement.of(unkItem2, (clickEvent, clickView) -> {
                                 gameManager.bonk((Player) clickEvent.getWhoClicked());
                             }), 5, 0);
+
+
 
                             return paneTemp;
                         }
