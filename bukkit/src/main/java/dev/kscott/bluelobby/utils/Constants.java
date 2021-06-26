@@ -72,9 +72,19 @@ public class Constants {
         public static final @NonNull TextColor COLOUR_YELLOW = TextColor.color(237, 213, 107);
 
         /**
+         * The light yellow text colour.
+         */
+        public static final @NonNull TextColor COLOUR_YELLOW_LIGHT = TextColor.color(255, 215, 41);
+
+        /**
          * The default text style.
          */
         public static final @NonNull Style STYLE_DEFAULT = Style.style(COLOUR_LIGHT_GRAY).decoration(TextDecoration.ITALIC, false);
+
+        /**
+         * A style with no italics.
+         */
+        public static final @NonNull Style STYLE_NO_ITALICS = Style.empty().toBuilder().decoration(TextDecoration.ITALIC, false).build();
 
         /**
          * The default text style.

@@ -4,18 +4,21 @@ import broccolai.corn.paper.PaperItemBuilder;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
+import dev.kscott.bluelobby.games.GameManager;
+import dev.kscott.bluelobby.menu.MenuInterface;
 import dev.kscott.bluelobby.utils.Constants;
-import dev.kscott.interfaces.core.Interface;
-import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.element.ItemStackElement;
+import dev.kscott.interfaces.paper.pane.ChestPane;
 import dev.kscott.interfaces.paper.transform.PaperTransform;
 import dev.kscott.interfaces.paper.type.ChestInterface;
-import dev.kscott.interfaces.paper.view.ChestView;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,17 +47,10 @@ public class MenuCommand implements BaseCommand {
      * @param plugin the plugin reference
      */
     @Inject
-    public MenuCommand(final @NonNull JavaPlugin plugin) {
+    public MenuCommand(final @NonNull JavaPlugin plugin,
+                       final @NonNull MenuInterface menuInterface) {
         this.plugin = plugin;
-        this.menuInterface = ChestInterface.builder()
-                .rows(3)
-                .topClickHandler((event, view) -> {
-                    event.setCancelled(true);
-                })
-                .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
-                .title(Constants.Chat.SERVER_NAME)
-                .build();
-
+        this.menuInterface = menuInterface;
     }
 
     /**
