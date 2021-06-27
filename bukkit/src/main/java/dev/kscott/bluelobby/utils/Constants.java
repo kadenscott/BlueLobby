@@ -12,8 +12,6 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
@@ -136,12 +134,12 @@ public class Constants {
         /**
          * A bar with 15 characters.
          */
-        private static final @NonNull Component barMedium = miniMessage.parse(" <gradient:#03c2fc:#244379:#03c2fc><strikethrough>                           </strikethrough></gradient> ");
+        public static final @NonNull Component BAR_MEDIUM = miniMessage.parse(" <gradient:#03c2fc:#244379:#03c2fc><strikethrough>                           </strikethrough></gradient> ");
         /**
          * The motd.
          */
         public static final @NonNull Component MOTD_BOOK = Component.text()
-                .append(barMedium)
+                .append(BAR_MEDIUM)
                 .append(Component.newline())
                 .append(Component.text()
                         .append(Component.text("       "))
@@ -177,7 +175,7 @@ public class Constants {
                 )
                 .append(Component.newline())
                 .append(Component.newline())
-                .append(barMedium)
+                .append(BAR_MEDIUM)
                 .build();
     }
 
