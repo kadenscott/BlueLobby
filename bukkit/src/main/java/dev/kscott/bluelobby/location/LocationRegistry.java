@@ -28,7 +28,7 @@ public class LocationRegistry {
     public LocationRegistry(
             final @NonNull @Named("lobbyWorld") World lobbyWorld
     ) {
-        this.spawn = new Location(lobbyWorld, 0.5, 66, 0.5, 180, 0);
+        this.spawn = new Location(lobbyWorld, -22.5, 199, 16.5, 0, 0);
     }
 
     /**
