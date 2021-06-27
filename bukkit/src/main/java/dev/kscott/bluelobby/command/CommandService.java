@@ -17,7 +17,8 @@ public final class CommandService {
      * A list of {@link BaseCommand}s to register.
      */
     private static final @NonNull List<Class<? extends BaseCommand>> COMMANDS = List.of(
-            MenuCommand.class
+            MenuCommand.class,
+            ItemCommand.class
     );
 
     /**
