@@ -44,6 +44,10 @@ public class Constants {
          */
         public static final @NonNull TextColor COLOUR_LIGHT_BLUE = TextColor.color(31, 197, 242);
 
+        public static final @NonNull TextColor COLOUR_LIGHT_GREEN = TextColor.color(126, 242, 126);
+
+        public static final @NonNull TextColor COLOUR_DARK_GREEN = TextColor.color(26, 143, 26);
+
         /**
          * The dark blue text colour.
          */
@@ -63,6 +67,8 @@ public class Constants {
          * The red text colour.
          */
         public static final @NonNull TextColor COLOUR_RED = TextColor.color(229, 66, 62);
+
+        public static final @NonNull TextColor COLOUR_DARK_RED = TextColor.color(133, 0, 0);
 
         /**
          * The yellow text colour.

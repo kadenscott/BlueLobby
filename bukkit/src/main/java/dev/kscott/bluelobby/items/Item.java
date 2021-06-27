@@ -39,15 +39,19 @@ public interface Item {
     default @NonNull ItemStack itemStack() {
         final @NonNull List<Component> lore = new ArrayList<>();
 
-        lore.add(Component.text("Effects")
-                .style(Constants.Chat.STYLE_DEFAULT)
-                .decorate(TextDecoration.BOLD));
-
         final @NonNull List<Effect> effects = this.effects();
 
         if (effects.size() != 0) {
+            lore.add(Component.text("Effects:")
+                    .style(Constants.Chat.STYLE_DEFAULT));
+
+            // TODO sort effects by type (in order: positive, negative, special)
+
             for (final @NonNull Effect effect : effects) {
-                lore.add(effect.text());
+                lore.add(Component.text()
+                        .append(effect.text())
+                        .decoration(TextDecoration.ITALIC, false)
+                        .asComponent());
             }
         }
 
@@ -60,6 +64,7 @@ public interface Item {
                 lore.add(Component.text()
                         .append(text)
                         .color(Constants.Chat.COLOUR_ORANGE)
+                        .decoration(TextDecoration.ITALIC, true)
                         .asComponent());
             }
         }
