@@ -1,4 +1,4 @@
-package dev.kscott.bluelobby.items;
+package dev.kscott.bluelobby.items.type;
 
 import broccolai.corn.paper.PaperItemBuilder;
 import dev.kscott.bluelobby.items.effect.Effect;
@@ -6,7 +6,9 @@ import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
@@ -42,8 +44,7 @@ public interface Item {
         final @NonNull List<Effect> effects = this.effects();
 
         if (effects.size() != 0) {
-            lore.add(Component.text("Effects:")
-                    .style(Constants.Chat.STYLE_DEFAULT));
+            lore.add(Component.empty());
 
             // TODO sort effects by type (in order: positive, negative, special)
 
@@ -69,10 +70,19 @@ public interface Item {
             }
         }
 
-        return PaperItemBuilder.paper(Material.TRIDENT)
+        final @NonNull ItemStack itemStack = PaperItemBuilder.paper(this.material())
                 .name(this.title())
                 .loreComponents(lore)
+                .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                 .build();
+
+        if (itemStack.hasItemMeta()) {
+            final @NonNull ItemMeta meta = itemStack.getItemMeta();
+            meta.setUnbreakable(true);
+            itemStack.setItemMeta(meta);
+        }
+
+        return itemStack;
     }
 
     /**
@@ -81,5 +91,12 @@ public interface Item {
      * @return the effect
      */
     @NonNull List<Effect> effects();
+
+    /**
+     * Returns the material of this item.
+     *
+     * @return the material
+     */
+    @NonNull Material material();
 
 }

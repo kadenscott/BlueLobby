@@ -3,8 +3,8 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.items.SpearItem;
-import dev.kscott.interfaces.paper.PlayerViewer;
+import dev.kscott.bluelobby.items.type.FishingRodItem;
+import dev.kscott.bluelobby.items.type.Item;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,8 +55,8 @@ public class ItemCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    final @NonNull SpearItem spearItem = new SpearItem();
-                    player.getInventory().addItem(spearItem.itemStack());
+                    final @NonNull Item item = new FishingRodItem();
+                    player.getInventory().addItem(item.itemStack());
                 }
             }
         }.runTask(this.plugin);

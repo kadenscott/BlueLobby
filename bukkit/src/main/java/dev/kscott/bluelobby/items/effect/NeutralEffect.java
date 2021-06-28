@@ -8,24 +8,24 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 /**
  * Represents a positive effect.
  */
-public class NegativeEffect implements Effect {
+public class NeutralEffect implements Effect {
 
     private final @NonNull Component effectText;
 
-    public NegativeEffect(final @NonNull Component effectText) {
+    public NeutralEffect(final @NonNull Component effectText) {
         this.effectText = effectText;
     }
 
     @Override
     public @NonNull Component text() {
         return Component.text()
-                .append(Component.text("⏷")
-                        .color(Constants.Chat.COLOUR_DARK_RED)
+                .append(Component.text("♦")
+                        .color(Constants.Chat.COLOUR_DARK_GRAY)
                         .decoration(TextDecoration.BOLD, true))
                 .append(Component.text(" ")
                         .color(Constants.Chat.COLOUR_DARK_GRAY))
                 .append(this.effectText
-                        .color(Constants.Chat.COLOUR_RED))
+                        .color(Constants.Chat.COLOUR_LIGHT_GRAY))
                 .asComponent();
     }
 }
