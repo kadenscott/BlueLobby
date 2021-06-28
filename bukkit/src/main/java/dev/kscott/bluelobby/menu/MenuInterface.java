@@ -34,11 +34,14 @@ public class MenuInterface extends ChestInterface {
 
     private final @NonNull Injector injector;
 
+    private final @NonNull WarpInterfaceProvider warpInterfaceProvider;
+
     /**
      * Constructs {@code MenuInterface}.
      */
     @Inject
     public MenuInterface(final @NonNull GameManager gameManager,
+                         final @NonNull WarpInterfaceProvider warpInterfaceProvider,
                          final @NonNull Injector injector) {
         super(
                 1,
@@ -50,6 +53,7 @@ public class MenuInterface extends ChestInterface {
 
         this.gameManager = gameManager;
         this.injector = injector;
+        this.warpInterfaceProvider = warpInterfaceProvider;
     }
 
     @Override
@@ -100,6 +104,16 @@ public class MenuInterface extends ChestInterface {
                             .flags(ItemFlag.HIDE_ATTRIBUTES)
                             .build();
 
+                    final @NonNull ItemStack warpItem = PaperItemBuilder.paper(Material.ENDER_EYE)
+                            .name(Component.text("Warps")
+                                    .color(Constants.Chat.COLOUR_PURPLE)
+                                    .decoration(TextDecoration.ITALIC, false))
+                            .loreComponents(
+                                    Component.text("Click to view the warps.")
+                                            .style(Constants.Chat.STYLE_DEFAULT)
+                            )
+                            .build();
+
 
                     @NonNull ChestPane paneTemp = pane.element(ItemStackElement.of(readmeItem, (clickEvent, clickView) -> {
                         this.injector.getInstance(ReadmeInterface.class).open((PlayerViewer) clickView.viewer());
@@ -112,6 +126,10 @@ public class MenuInterface extends ChestInterface {
                     paneTemp = paneTemp.element(ItemStackElement.of(unkItem1), 4, 0);
 
                     paneTemp = paneTemp.element(ItemStackElement.of(unkItem2), 5, 0);
+
+                    paneTemp = paneTemp.element(ItemStackElement.of(warpItem, (clickEvent, clickView) -> {
+                        warpInterfaceProvider.get().open(PlayerViewer.of((Player) clickEvent.getWhoClicked()));
+                    }), 8, 0);
 
                     return paneTemp;
                 }

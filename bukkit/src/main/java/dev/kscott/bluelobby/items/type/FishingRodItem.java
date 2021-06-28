@@ -1,8 +1,8 @@
 package dev.kscott.bluelobby.items.type;
 
+import dev.kscott.bluelobby.items.Item;
 import dev.kscott.bluelobby.items.effect.Effect;
 import dev.kscott.bluelobby.items.effect.NeutralEffect;
-import dev.kscott.bluelobby.items.effect.PositiveEffect;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;

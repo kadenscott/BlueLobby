@@ -18,7 +18,9 @@ public final class CommandService {
      */
     private static final @NonNull List<Class<? extends BaseCommand>> COMMANDS = List.of(
             MenuCommand.class,
-            ItemCommand.class
+            ItemCommand.class,
+            WarpCommand.class,
+            RPSCommand.class
     );
 
     /**

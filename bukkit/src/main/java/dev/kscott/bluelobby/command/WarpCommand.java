@@ -3,8 +3,8 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.items.type.FishingRodItem;
-import dev.kscott.bluelobby.items.Item;
+import dev.kscott.bluelobby.menu.WarpInterfaceProvider;
+import dev.kscott.interfaces.paper.PlayerViewer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +13,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.inject.Inject;
 
-public class ItemCommand implements BaseCommand {
+/**
+ * The /warp command class.
+ */
+public class WarpCommand implements BaseCommand {
 
     /**
      * JavaPlugin reference.
@@ -21,45 +24,50 @@ public class ItemCommand implements BaseCommand {
     private final @NonNull JavaPlugin plugin;
 
     /**
-     * Constructs {@code MenuCommand}.
+     * The warp interface provider.
+     */
+    private final @NonNull WarpInterfaceProvider warpInterfaceProvider;
+
+    /**
+     * Constructs {@code WarpCommand}.
      *
      * @param plugin the plugin reference
      */
     @Inject
-    public ItemCommand(final @NonNull JavaPlugin plugin) {
+    public WarpCommand(final @NonNull JavaPlugin plugin,
+                       final @NonNull WarpInterfaceProvider warpInterfaceProvider) {
         this.plugin = plugin;
+        this.warpInterfaceProvider = warpInterfaceProvider;
 
     }
 
     /**
-     * Registers the /item command.
+     * Registers the /warp command.
      *
      * @param manager CommandManager to register with
      */
     @Override
     public void register(final @NonNull CommandManager<@NonNull CommandSender> manager) {
-        final Command.Builder<CommandSender> builder = manager.commandBuilder("item");
+        final Command.Builder<CommandSender> builder = manager.commandBuilder("warp", "warps");
 
-        manager.command(builder.handler(this::handleItemCommand));
+        manager.command(builder.handler(this::handleWarpCommand));
     }
 
     /**
-     * Handles the /item command.
+     * Handles the /warp command.
      *
      * @param context command context
      */
-    private void handleItemCommand(final @NonNull CommandContext<CommandSender> context) {
+    private void handleWarpCommand(final @NonNull CommandContext<CommandSender> context) {
         new BukkitRunnable() {
             @Override
             public void run() {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    final @NonNull Item item = new FishingRodItem();
-                    player.getInventory().addItem(item.itemStack());
+                    warpInterfaceProvider.get().open(PlayerViewer.of(player));
                 }
             }
         }.runTask(this.plugin);
     }
-
 }

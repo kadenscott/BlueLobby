@@ -1,4 +1,4 @@
-package dev.kscott.bluelobby.items.type;
+package dev.kscott.bluelobby.items;
 
 import broccolai.corn.paper.PaperItemBuilder;
 import dev.kscott.bluelobby.items.effect.Effect;

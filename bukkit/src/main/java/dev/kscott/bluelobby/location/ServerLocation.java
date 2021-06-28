@@ -2,6 +2,7 @@ package dev.kscott.bluelobby.location;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -11,6 +12,16 @@ import java.util.Objects;
  * Represents a location on the server.
  */
 public class ServerLocation {
+
+    /**
+     * The name (identifier) of this location.
+     */
+    private final @NonNull String name;
+
+    /**
+     * The icon of this location.
+     */
+    private final @NonNull Material icon;
 
     /**
      * The world name.
@@ -45,6 +56,8 @@ public class ServerLocation {
     /**
      * Constructs {@code ServerLocation}.
      *
+     * @param name      the name
+     * @param icon      the icon
      * @param x         the x coordinate
      * @param y         the y coordinate
      * @param z         the z coordinate
@@ -53,6 +66,8 @@ public class ServerLocation {
      * @param worldName the name of the world this location is in
      */
     public ServerLocation(
+            final @NonNull String name,
+            final @NonNull Material icon,
             final double x,
             final double y,
             final double z,
@@ -60,6 +75,8 @@ public class ServerLocation {
             final double pitch,
             final @NonNull String worldName
     ) {
+        this.icon = icon;
+        this.name = name;
         this.x = x;
         this.y = y;
         this.z = z;
@@ -71,6 +88,8 @@ public class ServerLocation {
     /**
      * Constructs {@code ServerLocation}.
      *
+     * @param name  the name
+     * @param icon  the icon
      * @param x     the x coordinate
      * @param y     the y coordinate
      * @param z     the z coordinate
@@ -78,45 +97,55 @@ public class ServerLocation {
      * @param pitch the pitch
      */
     public ServerLocation(
+            final @NonNull String name,
+            final @NonNull Material icon,
             final double x,
             final double y,
             final double z,
             final double yaw,
             final double pitch
     ) {
-        this(x, y, z, yaw, pitch, "world");
+        this(name, icon, x, y, z, yaw, pitch, "world");
     }
 
     /**
      * Constructs {@code ServerLocation}.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param name the name
+     * @param icon the icon
+     * @param x    the x coordinate
+     * @param y    the y coordinate
+     * @param z    the z coordinate
      */
     public ServerLocation(
+            final @NonNull String name,
+            final @NonNull Material icon,
             final double x,
             final double y,
             final double z
     ) {
-        this(x, y, z, 0, 0, "world");
+        this(name, icon, x, y, z, 0, 0, "world");
     }
 
     /**
      * Constructs {@code ServerLocation}.
      *
+     * @param name      the name
+     * @param icon      the icon
      * @param x         the x coordinate
      * @param y         the y coordinate
      * @param z         the z coordinate
      * @param worldName the world name
      */
     public ServerLocation(
+            final @NonNull String name,
+            final @NonNull Material icon,
             final double x,
             final double y,
             final double z,
             final @NonNull String worldName
     ) {
-        this(x, y, z, 0, 0, worldName);
+        this(name, icon, x, y, z, 0, 0, worldName);
     }
 
     /**
@@ -171,6 +200,25 @@ public class ServerLocation {
      */
     public @NonNull String worldName() {
         return this.worldName;
+    }
+
+    /**
+     * Returns the location name.
+     *
+     * @return the location name
+     */
+    public @NonNull String name() {
+        return this.name;
+    }
+
+
+    /**
+     * Returns the icon material.
+     *
+     * @return the icon material
+     */
+    public @NonNull Material material() {
+        return this.icon;
     }
 
     /**
