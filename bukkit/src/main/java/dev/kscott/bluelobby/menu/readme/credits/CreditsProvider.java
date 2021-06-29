@@ -2,8 +2,10 @@ package dev.kscott.bluelobby.menu.readme.credits;
 
 import broccolai.corn.paper.PaperItemBuilder;
 import com.google.inject.Injector;
+import dev.kscott.bluelobby.menu.MenuInterface;
 import dev.kscott.bluelobby.menu.readme.ReadmeInterface;
 import dev.kscott.bluelobby.utils.Constants;
+import dev.kscott.bluelobby.utils.MenuUtils;
 import dev.kscott.interfaces.core.view.InterfaceView;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.element.ItemStackElement;
@@ -48,7 +50,7 @@ public class CreditsProvider {
                 .updates(false, 0)
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(this::addPluginsIcon)
-                .addTransform(this::addBackIcon)
+                .addTransform(MenuUtils.backButton(0, 3, this.injector.getInstance(ReadmeInterface.class)))
                 .build();
 
     }
@@ -89,29 +91,6 @@ public class CreditsProvider {
 
     public @NonNull ChestInterface get() {
         return this.chestInterface;
-    }
-
-    /**
-     * Adds the back icon to the pane.
-     *
-     * @param pane the pane
-     * @param view the view
-     * @return the pane
-     */
-    private @NonNull ChestPane addBackIcon(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
-        // Coords of back icon
-        final int x = 0;
-        final int y = 0;
-
-        final @NonNull Component backIconTitle = Component.text("Click to go back").color(Constants.Chat.COLOUR_RED)
-                .decoration(TextDecoration.ITALIC, false);
-
-        return pane.element(ItemStackElement.of(PaperItemBuilder.paper(Material.RED_STAINED_GLASS_PANE)
-                        .name(backIconTitle)
-                        .build(),
-                (clickEvent, clickView) -> {
-                    this.injector.getInstance(ReadmeInterface.class).open((PlayerViewer) clickView.viewer());
-                }), x, y);
     }
 
 

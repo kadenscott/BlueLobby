@@ -5,7 +5,7 @@ import com.google.inject.Injector;
 import dev.kscott.bluelobby.command.CommandService;
 import dev.kscott.bluelobby.inject.CommandModule;
 import dev.kscott.bluelobby.inject.PluginModule;
-import dev.kscott.bluelobby.listeners.FishingListener;
+import dev.kscott.bluelobby.fishing.FishingListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
@@ -34,27 +34,31 @@ public final class LobbyPlugin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        this.injector = Guice.createInjector(
-                new PluginModule(this),
-                new CommandModule(this)
-        );
+        try {
+            this.injector = Guice.createInjector(
+                    new PluginModule(this),
+                    new CommandModule(this)
+            );
 
-        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
-        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
-        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
-        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingListener.class), this);
-        this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
+            this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
+            this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
+            this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
+            this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingListener.class), this);
+            this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
 
-        this.injector.getInstance(CommandService.class);
+            this.injector.getInstance(CommandService.class);
 
-        final @NonNull LobbyPlaceholderExpansion placeholderExpansion = new LobbyPlaceholderExpansion(this);
-        final @Nullable Plugin placeholderApiPlugin = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
+            final @NonNull LobbyPlaceholderExpansion placeholderExpansion = new LobbyPlaceholderExpansion(this);
+            final @Nullable Plugin placeholderApiPlugin = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
 
-        if (placeholderApiPlugin != null && placeholderApiPlugin.isEnabled()) {
-            placeholderExpansion.register();
+            if (placeholderApiPlugin != null && placeholderApiPlugin.isEnabled()) {
+                placeholderExpansion.register();
+            }
+
+            this.injector.getInstance(HologramManager.class).loadHolograms();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        this.injector.getInstance(HologramManager.class).loadHolograms();
     }
 
 }

@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import dev.kscott.bluelobby.menu.MenuInterface;
 import dev.kscott.bluelobby.menu.readme.credits.CreditsProvider;
 import dev.kscott.bluelobby.utils.Constants;
+import dev.kscott.bluelobby.utils.MenuUtils;
 import dev.kscott.interfaces.core.transform.Transform;
 import dev.kscott.interfaces.core.view.InterfaceView;
 import dev.kscott.interfaces.paper.PlayerViewer;
@@ -46,7 +47,7 @@ public class ReadmeInterface extends ChestInterface {
     public @NonNull List<Transform<ChestPane>> transformations() {
         return List.of(
                 PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())),
-                this::addBackIcon,
+                MenuUtils.backButton(0, 3, this.injector.getInstance(MenuInterface.class)),
                 this::addCommandsIcon,
                 this::addAboutIcon,
                 this::addCreditsIcon
