@@ -23,11 +23,11 @@ public class MenuService {
      * Returns an interface.
      *
      * @param clazz the interface's class
-     * @param <T> the
-     * @return
+     * @param <T> the type of interface
+     * @return the interface
      */
     public <T extends Interface> T get(Class<T> clazz) {
-
+        return null;
     }
 
 }

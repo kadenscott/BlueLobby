@@ -21,7 +21,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.inject.Inject;
 
 /**
- * The warp menu.
+ * The credits menu.
  */
 public class CreditsProvider {
 
@@ -36,12 +36,13 @@ public class CreditsProvider {
     private final @NonNull Injector injector;
 
     /**
-     * Constructs {@code WarpInterfaceProvider}.
+     * Constructs {@code CreditsProvider}.
      *
      * @param injector the injector
      */
     @Inject
-    public CreditsProvider(final @NonNull Injector injector) {
+    public CreditsProvider(final @NonNull Injector injector,
+                           final @NonNull ReadmeInterface readmeInterface) {
         this.injector = injector;
 
         this.chestInterface = ChestInterface.builder()
@@ -50,7 +51,7 @@ public class CreditsProvider {
                 .updates(false, 0)
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(this::addPluginsIcon)
-                .addTransform(MenuUtils.backButton(0, 3, this.injector.getInstance(ReadmeInterface.class)))
+                .addTransform(MenuUtils.backButton(0, 3, readmeInterface))
                 .build();
 
     }

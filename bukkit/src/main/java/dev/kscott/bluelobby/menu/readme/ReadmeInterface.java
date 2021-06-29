@@ -29,8 +29,11 @@ public class ReadmeInterface extends ChestInterface {
 
     private final @NonNull Injector injector;
 
+    private final @NonNull CreditsProvider creditsProvider;
+
     @Inject
-    public ReadmeInterface(final @NonNull Injector injector) {
+    public ReadmeInterface(final @NonNull Injector injector,
+                           final @NonNull CreditsProvider creditsProvider) {
         super(
                 1,
                 Component.text("README.md"),
@@ -40,6 +43,7 @@ public class ReadmeInterface extends ChestInterface {
                 ClickHandler.cancel()
         );
 
+        this.creditsProvider = creditsProvider;
         this.injector = injector;
     }
 
@@ -47,7 +51,7 @@ public class ReadmeInterface extends ChestInterface {
     public @NonNull List<Transform<ChestPane>> transformations() {
         return List.of(
                 PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())),
-                MenuUtils.backButton(0, 3, this.injector.getInstance(MenuInterface.class)),
+                MenuUtils.backButton(0, 3, this.creditsProvider.get()),
                 this::addCommandsIcon,
                 this::addAboutIcon,
                 this::addCreditsIcon
