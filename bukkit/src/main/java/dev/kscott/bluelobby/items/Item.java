@@ -6,9 +6,11 @@ import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
@@ -20,11 +22,23 @@ import java.util.List;
 public interface Item {
 
     /**
+     * The NamespacedKey of "item:id".
+     */
+    @NonNull NamespacedKey KEY_ITEM_ID = NamespacedKey.fromString("item:id", null);
+
+    /**
      * Returns the title.
      *
      * @return the title
      */
     @NonNull Component title();
+
+    /**
+     * Returns the string id of this item.
+     *
+     * @return the id
+     */
+    @NonNull String id();
 
     /**
      * Returns the description.
@@ -74,6 +88,7 @@ public interface Item {
                 .name(this.title())
                 .loreComponents(lore)
                 .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
+                .data(KEY_ITEM_ID, PersistentDataType.STRING, this.id())
                 .build();
 
         if (itemStack.hasItemMeta()) {

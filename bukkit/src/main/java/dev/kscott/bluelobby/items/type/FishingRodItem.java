@@ -52,4 +52,10 @@ public class FishingRodItem implements Item {
     public @NonNull Material material() {
         return Material.FISHING_ROD;
     }
+
+    @Override
+    public @NonNull String id() {
+        return "fishing_rod";
+    }
+
 }

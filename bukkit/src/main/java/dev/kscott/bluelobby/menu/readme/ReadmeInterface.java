@@ -3,6 +3,7 @@ package dev.kscott.bluelobby.menu.readme;
 import broccolai.corn.paper.PaperItemBuilder;
 import com.google.inject.Injector;
 import dev.kscott.bluelobby.menu.MenuInterface;
+import dev.kscott.bluelobby.menu.readme.credits.CreditsProvider;
 import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.interfaces.core.transform.Transform;
 import dev.kscott.interfaces.core.view.InterfaceView;
@@ -47,7 +48,8 @@ public class ReadmeInterface extends ChestInterface {
                 PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())),
                 this::addBackIcon,
                 this::addCommandsIcon,
-                this::addAboutIcon
+                this::addAboutIcon,
+                this::addCreditsIcon
         );
     }
 
@@ -126,6 +128,34 @@ public class ReadmeInterface extends ChestInterface {
                         .loreComponents(lore)
                         .build(),
                 (clickEvent, clickView) -> injector.getInstance(AboutInterface.class).open((PlayerViewer) clickView.viewer())), x, y);
+    }
+
+    /**
+     * Adds the credits icon to the pane.
+     *
+     * @param pane the pane
+     * @param view the view
+     * @return the pane
+     */
+    private @NonNull ChestPane addCreditsIcon(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
+        // Coords of back icon
+        final int x = 5;
+        final int y = 0;
+
+        final @NonNull Component title = Component.text("Credits")
+                .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                .decoration(TextDecoration.ITALIC, false);
+
+            final @NonNull List<Component> lore = List.of(
+                    Component.text("Click to view the people and").style(Constants.Chat.STYLE_DEFAULT),
+                    Component.text("software powering this server.").style(Constants.Chat.STYLE_DEFAULT)
+            );
+
+        return pane.element(ItemStackElement.of(PaperItemBuilder.paper(Material.REPEATING_COMMAND_BLOCK)
+                        .name(title)
+                        .loreComponents(lore)
+                        .build(),
+                (clickEvent, clickView) -> injector.getInstance(CreditsProvider.class).get().open((PlayerViewer) clickView.viewer())), x, y);
     }
 
 }

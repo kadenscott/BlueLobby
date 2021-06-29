@@ -1,14 +1,19 @@
 package dev.kscott.bluelobby.warp;
 
+import com.destroystokyo.paper.ParticleBuilder;
 import dev.kscott.bluelobby.location.LocationRegistry;
 import dev.kscott.bluelobby.location.ServerLocation;
 import dev.kscott.bluelobby.utils.Constants;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.common.value.qual.IntRangeFromGTENegativeOne;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,6 +31,8 @@ public class WarpService {
 
     private final @NonNull LocationRegistry locationRegistry;
 
+    private final @NonNull JavaPlugin plugin;
+
     /**
      * Constructs {@code WarpService}.
      *
@@ -33,7 +40,8 @@ public class WarpService {
      */
     @Inject
     public WarpService(
-            final @NonNull LocationRegistry locationRegistry
+            final @NonNull LocationRegistry locationRegistry,
+            final @NonNull JavaPlugin plugin
     ) {
         this.locationRegistry = locationRegistry;
 
@@ -61,6 +69,8 @@ public class WarpService {
                         this.locationRegistry.pond().getWorld().getName()
                 )
         );
+
+        this.plugin = plugin;
     }
 
     public boolean warp(final @NonNull Player player, final @NonNull ServerLocation warp) {
@@ -70,6 +80,29 @@ public class WarpService {
                 .append(Component.text(warp.name()).color(Constants.Chat.COLOUR_LIGHT_BLUE))
                 .append(Component.text("."))
                 .style(Constants.Chat.STYLE_DEFAULT));
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                new ParticleBuilder(Particle.REDSTONE)
+                        .data(new Particle.DustOptions(Color.fromRGB(225, 42, 235), 3))
+                        .extra(1)
+                        .offset(1.3, 1, 1.3)
+                        .count(10)
+                        .location(player.getLocation()
+                                .clone()
+                                .add(0, 1.8, 0))
+                        .receivers(player)
+                        .spawn();
+
+                player.playSound(Sound.sound(
+                        Key.key("entity.enderman.teleport"),
+                        Sound.Source.PLAYER,
+                        1,
+                        1
+                ));
+            }
+        }.runTaskLater(this.plugin, 3);
 
         player.teleportAsync(warp.location());
 

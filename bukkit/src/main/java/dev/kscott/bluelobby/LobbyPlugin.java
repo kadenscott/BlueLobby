@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import dev.kscott.bluelobby.command.CommandService;
 import dev.kscott.bluelobby.inject.CommandModule;
 import dev.kscott.bluelobby.inject.PluginModule;
+import dev.kscott.bluelobby.listeners.FishingListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
@@ -41,6 +42,7 @@ public final class LobbyPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerJoinListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(PlayerOpenGuiListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingListener.class), this);
         this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
 
         this.injector.getInstance(CommandService.class);

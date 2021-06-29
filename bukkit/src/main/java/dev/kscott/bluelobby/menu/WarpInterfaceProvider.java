@@ -67,7 +67,6 @@ public class WarpInterfaceProvider {
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(this::addWarpIcons)
                 .addTransform(this::addBackIcon)
-                .topClickHandler(ClickHandler.cancel())
                 .build();
 
     }
@@ -98,7 +97,7 @@ public class WarpInterfaceProvider {
                                 .decoration(TextDecoration.ITALIC, false)
                                 .color(Constants.Chat.COLOUR_LIGHT_GREEN))
                         .loreComponents(
-                                Component.text("Click to visit!")
+                                Component.text("Click to visit")
                                         .style(Constants.Chat.STYLE_DEFAULT)
                         )
                         .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
