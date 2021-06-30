@@ -10,6 +10,7 @@ import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.PlayerOpenGuiListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.holograms.HologramManager;
+import dev.kscott.bluelobby.menu.MenuListener;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
 import dev.kscott.interfaces.paper.PaperInterfaceListeners;
 import org.bukkit.Bukkit;
@@ -45,6 +46,7 @@ public final class LobbyPlugin extends JavaPlugin {
             this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
             this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingListener.class), this);
             this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
+            this.getServer().getPluginManager().registerEvents(this.injector.getInstance(MenuListener.class), this);
 
             this.injector.getInstance(CommandService.class);
 

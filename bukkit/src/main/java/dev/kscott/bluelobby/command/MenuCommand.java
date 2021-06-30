@@ -1,31 +1,17 @@
 package dev.kscott.bluelobby.command;
 
-import broccolai.corn.paper.PaperItemBuilder;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import com.google.inject.Injector;
-import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
-import dev.kscott.interfaces.core.arguments.InterfaceArgument;
-import dev.kscott.interfaces.paper.PlayerViewer;
-import dev.kscott.interfaces.paper.element.ClickHandler;
-import dev.kscott.interfaces.paper.element.ItemStackElement;
-import dev.kscott.interfaces.paper.transform.PaperTransform;
-import dev.kscott.interfaces.paper.type.ChestInterface;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Material;
+import dev.kscott.bluelobby.menu.MenuService;
+import dev.kscott.bluelobby.menu.server.GamesMenu;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * The /menu command class.
@@ -38,14 +24,21 @@ public class MenuCommand implements BaseCommand {
     private final @NonNull JavaPlugin plugin;
 
     /**
+     * The menu service.
+     */
+    private final @NonNull MenuService menuService;
+
+    /**
      * Constructs {@code MenuCommand}.
      *
-     * @param plugin the plugin reference
+     * @param plugin      the plugin reference
+     * @param menuService the menu service
      */
     @Inject
     public MenuCommand(final @NonNull JavaPlugin plugin,
-                       final @NonNull Injector injector) {
+                       final @NonNull MenuService menuService) {
         this.plugin = plugin;
+        this.menuService = menuService;
     }
 
     /**
@@ -72,6 +65,7 @@ public class MenuCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
+                    menuService.get(GamesMenu.class).open(player);
                 }
             }
         }.runTask(this.plugin);

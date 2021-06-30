@@ -35,15 +35,6 @@ public class MenuService {
     }
 
     /**
-     * Registers a menu.
-     *
-     * @param clazz the menu's class
-     */
-    public void register(final @NonNull Class<? extends Menu> clazz) {
-        this.menuMap.put(clazz, this.injector.getInstance(clazz));
-    }
-
-    /**
      * Returns a menu.
      *
      * @param clazz the class
@@ -51,7 +42,7 @@ public class MenuService {
      * @return the menu
      */
     public @NonNull <T extends Menu> T get(final @NonNull Class<? extends Menu> clazz) {
-        return Objects.requireNonNull((T) this.menuMap.get(clazz));
+        return (T) this.injector.getInstance(clazz);
     }
 
 }

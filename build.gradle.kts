@@ -21,15 +21,15 @@ subprojects {
         // Paper repo
         maven("https://papermc.io/repo/repository/maven-public/")
 
-        // Corn
-        maven("https://repo.broccol.ai/snapshots")
-
         // PLaceholderAPI
         maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
 
         // TAB
         maven("https://repo.codemc.io/repository/maven-public/")
         mavenLocal()
+
+        // Corn
+        maven("https://repo.broccol.ai/snapshots")
 
     }
 
