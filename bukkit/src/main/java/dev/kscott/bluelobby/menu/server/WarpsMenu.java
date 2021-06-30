@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,15 +96,28 @@ public class WarpsMenu implements Menu<ChestInterface> {
 
                 final @NonNull ServerLocation warp = warps.get(index);
 
+                final @NonNull List<Component> lore = new ArrayList<>();
+
+                if (warp.description().size() != 0) {
+                    lore.add(Component.empty());
+
+                    for (final @NonNull Component component : warp.description()) {
+                        lore.add(component
+                                .color(Constants.Chat.COLOUR_ORANGE)
+                                .decoration(TextDecoration.ITALIC, true)
+                        );
+                    }
+                }
+
+                lore.add(Component.empty());
+                lore.add(Component.text("Click to visit")
+                        .style(Constants.Chat.STYLE_DEFAULT));
+
                 final @NonNull ItemStack warpItem = PaperItemBuilder.paper(warp.icon())
                         .name(Component.text(warp.name())
                                 .decoration(TextDecoration.ITALIC, false)
                                 .color(Constants.Chat.COLOUR_LIGHT_GREEN))
-                        .loreComponents(List.of(
-                                Component.empty(),
-                                Component.text("Click to visit")
-                                        .style(Constants.Chat.STYLE_DEFAULT)
-                        ))
+                        .loreComponents(lore)
                         .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                         .build();
 

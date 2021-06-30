@@ -49,7 +49,7 @@ public class WarpService {
                 new ServerLocation(
                         "Spawn",
                         this.locationRegistry.pond().getWorld().getName(),
-                        List.of(""),
+                        List.of(),
                         Material.GRASS_BLOCK,
                         this.locationRegistry.spawn().getX(),
                         this.locationRegistry.spawn().getY(),
@@ -60,7 +60,7 @@ public class WarpService {
                 new ServerLocation(
                         "The Pond",
                         this.locationRegistry.pond().getWorld().getName(),
-                        List.of("A beautiful pond full of fish."),
+                        List.of(Component.text("A beautiful pond full of fish.")),
                         Material.LARGE_FERN,
                         this.locationRegistry.pond().getX(),
                         this.locationRegistry.pond().getY(),
@@ -71,7 +71,7 @@ public class WarpService {
                 new ServerLocation(
                         "The Crystal",
                         this.locationRegistry.spawn().getWorld().getName(),
-                        List.of("A beautiful pond full of fish."),
+                        List.of(Component.text("The source of all power"), Component.text("for the island.")),
                         Material.END_CRYSTAL,
                         -22.5,
                         197,

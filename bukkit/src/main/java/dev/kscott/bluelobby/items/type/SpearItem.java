@@ -14,13 +14,13 @@ import java.util.List;
 public class SpearItem implements Item {
 
     private final @NonNull Component title = Component.text()
-            .append(Component.text("The Spear")
+            .append(Component.text("Spear")
                     .color(Constants.Chat.COLOUR_RED)
                     .decoration(TextDecoration.ITALIC, false))
             .asComponent();
 
     private final @NonNull List<Component> description = List.of(
-            Component.text("From far away.")
+            Component.text("From far away")
     );
 
     private final @NonNull List<Effect> effects = List.of(

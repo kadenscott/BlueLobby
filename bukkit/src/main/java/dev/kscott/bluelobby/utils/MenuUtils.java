@@ -116,12 +116,15 @@ public class MenuUtils {
             return tempPane
                     .element(ItemStackElement.of(readmePageIcon, (clickEvent, clickView) -> {
                         menuService.get(ReadmeMenu.class).open((Player) clickEvent.getWhoClicked());
+                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "readme");
                     }), 3, y)
                     .element(ItemStackElement.of(gamesPageIcon, (clickEvent, clickView) -> {
                         menuService.get(GamesMenu.class).open((Player) clickEvent.getWhoClicked());
+                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "games");
                     }), 4, y)
                     .element(ItemStackElement.of(warpPageIcon, (clickEvent, clickView) -> {
                         menuService.get(WarpsMenu.class).open((Player) clickEvent.getWhoClicked());
+                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "warps");
                     }), 5, y);
         };
     }

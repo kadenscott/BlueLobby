@@ -2,11 +2,14 @@ package dev.kscott.bluelobby.menu;
 
 import com.google.inject.Inject;
 import dev.kscott.bluelobby.menu.server.GamesMenu;
+import dev.kscott.bluelobby.menu.server.ReadmeMenu;
+import dev.kscott.bluelobby.menu.server.WarpsMenu;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Events for menu functionality.
@@ -40,7 +43,19 @@ public class MenuListener implements Listener {
         final boolean crouching = player.isSneaking();
 
         if (crouching) {
-            this.menuService.get(GamesMenu.class).open(player);
+            final @NonNull String lastOpenMenu = this.menuService.lastOpenMenu(player);
+
+            switch (lastOpenMenu) {
+                case "readme" -> {
+                    this.menuService.get(ReadmeMenu.class).open(player);
+                }
+                case "warps" -> {
+                    this.menuService.get(WarpsMenu.class).open(player);
+                }
+                default -> {
+                    this.menuService.get(GamesMenu.class).open(player);
+                }
+            }
         }
     }
 

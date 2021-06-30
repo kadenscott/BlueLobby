@@ -20,7 +20,7 @@ public class FishingRodItem implements Item {
             .asComponent();
 
     private final @NonNull List<Component> description = List.of(
-            Component.text("A standard rod.")
+            Component.text("A standard rod")
     );
 
     private final @NonNull List<Effect> effects = List.of(
@@ -28,7 +28,7 @@ public class FishingRodItem implements Item {
                     .append(Component.text("Press "))
                     .append(Component.keybind().keybind("key.use")
                             .color(Constants.Chat.COLOUR_LIGHT_BLUE))
-                    .append(Component.text(" to cast a bobber."))
+                    .append(Component.text(" to cast a bobber"))
                     .asComponent()
             )
     );

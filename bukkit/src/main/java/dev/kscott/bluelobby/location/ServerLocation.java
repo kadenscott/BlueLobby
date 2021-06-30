@@ -1,11 +1,13 @@
 package dev.kscott.bluelobby.location;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ import java.util.Objects;
 public record ServerLocation(
         @NonNull String name,
         @NonNull String worldName,
-        @NonNull List<String> description,
+        @NonNull List<Component> description,
         @NonNull Material icon,
         double x,
         double y,
