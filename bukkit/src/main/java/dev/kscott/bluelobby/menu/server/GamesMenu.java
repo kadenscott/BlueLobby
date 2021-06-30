@@ -75,20 +75,22 @@ public class GamesMenu implements Menu<ChestInterface> {
                         .color(Constants.Chat.COLOUR_YELLOW)
                 )
                 .loreComponents(List.of(
-                        Component.text("Click to play").style(Constants.Chat.STYLE_DEFAULT)
+                        Component.empty(),
+                        Component.text("Click to play")
+                                .style(Constants.Chat.STYLE_DEFAULT)
                 ))
                 .build();
 
         final @NonNull ItemStack unk1Icon = PaperItemBuilder.paper(Material.PAINTING)
                 .name(Component.text("????????")
                         .decoration(TextDecoration.ITALIC, false)
-                        .color(Constants.Chat.COLOUR_YELLOW)
+                        .color(Constants.Chat.COLOUR_LIGHT_GREEN)
                 )
-                .loreComponents(
-                        List.of(Component.text("Coming soon")
+                .loreComponents(List.of(
+                        Component.empty(),
+                        Component.text("Coming soon")
                                 .style(Constants.Chat.STYLE_DEFAULT)
-                                .color(Constants.Chat.COLOUR_RED)
-                        ))
+                ))
                 .build();
 
 
@@ -103,11 +105,13 @@ public class GamesMenu implements Menu<ChestInterface> {
                 )
                 .name(Component.text("????? ???")
                         .decoration(TextDecoration.ITALIC, false)
-                        .color(Constants.Chat.COLOUR_YELLOW)
+                        .color(Constants.Chat.COLOUR_RED)
                 )
-                .loreComponents(List.of(Component.text("Coming soon")
-                        .style(Constants.Chat.STYLE_DEFAULT)
-                        .color(Constants.Chat.COLOUR_RED)))
+                .loreComponents(List.of(
+                        Component.empty(),
+                        Component.text("Coming soon")
+                                .style(Constants.Chat.STYLE_DEFAULT)
+                ))
                 .build();
 
         return tempPane.element(ItemStackElement.of(bonkIcon), 3, y)
