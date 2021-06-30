@@ -2,6 +2,7 @@ package dev.kscott.bluelobby.items;
 
 import com.google.inject.Inject;
 import dev.kscott.bluelobby.items.type.FishingRodItem;
+import dev.kscott.bluelobby.items.type.PortableFireworkItem;
 import dev.kscott.bluelobby.items.type.SpearItem;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +32,7 @@ public class ItemService {
 
         this.register(new FishingRodItem());
         this.register(new SpearItem());
+        this.register(new PortableFireworkItem());
     }
 
     /**

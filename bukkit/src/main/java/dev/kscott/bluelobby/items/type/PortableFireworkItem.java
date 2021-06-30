@@ -34,7 +34,7 @@ public class PortableFireworkItem implements Item {
 
     @Override
     public @NonNull String id() {
-        return "spear";
+        return "portable_firework";
     }
 
     @Override
@@ -49,6 +49,6 @@ public class PortableFireworkItem implements Item {
 
     @Override
     public @NonNull Material material() {
-        return Material.TRIDENT;
+        return Material.FIREWORK_ROCKET;
     }
 }
