@@ -81,4 +81,13 @@ public class ItemService {
         this.itemMap.put(id, item);
     }
 
+    /**
+     * Returns a random item.
+     *
+     * @return item
+     */
+    public @NonNull Item random() {
+        return this.item("spear");
+    }
+
 }
