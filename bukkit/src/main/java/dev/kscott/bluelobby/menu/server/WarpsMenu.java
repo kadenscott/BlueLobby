@@ -95,7 +95,7 @@ public class WarpsMenu implements Menu<ChestInterface> {
 
                 final @NonNull ServerLocation warp = warps.get(index);
 
-                final @NonNull ItemStack warpItem = PaperItemBuilder.paper(warp.material())
+                final @NonNull ItemStack warpItem = PaperItemBuilder.paper(warp.icon())
                         .name(Component.text(warp.name())
                                 .decoration(TextDecoration.ITALIC, false)
                                 .color(Constants.Chat.COLOUR_LIGHT_GREEN))
