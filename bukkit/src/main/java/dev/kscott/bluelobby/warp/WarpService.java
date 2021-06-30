@@ -27,7 +27,7 @@ import java.util.Map;
 @Singleton
 public class WarpService {
 
-    private final @NonNull Map<String, ServerLocation> warps;
+    private final @NonNull List<ServerLocation> warps;
 
     private final @NonNull LocationRegistry locationRegistry;
 
@@ -45,28 +45,39 @@ public class WarpService {
     ) {
         this.locationRegistry = locationRegistry;
 
-        this.warps = Map.of(
-                "spawn",
+        this.warps = List.of(
                 new ServerLocation(
                         "Spawn",
-                        Material.GRASS_BLOCK,
+                        this.locationRegistry.pond().getWorld().getName(),
+                        List.of(""),
+                        Material.STONE,
                         this.locationRegistry.spawn().getX(),
                         this.locationRegistry.spawn().getY(),
                         this.locationRegistry.spawn().getZ(),
                         this.locationRegistry.spawn().getYaw(),
-                        this.locationRegistry.spawn().getPitch(),
-                        this.locationRegistry.pond().getWorld().getName()
+                        this.locationRegistry.spawn().getPitch()
                 ),
-                "pond",
                 new ServerLocation(
                         "The Pond",
+                        this.locationRegistry.pond().getWorld().getName(),
+                        List.of("A beautiful pond full of fish."),
                         Material.LARGE_FERN,
                         this.locationRegistry.pond().getX(),
                         this.locationRegistry.pond().getY(),
                         this.locationRegistry.pond().getZ(),
                         this.locationRegistry.pond().getYaw(),
-                        this.locationRegistry.pond().getPitch(),
-                        this.locationRegistry.pond().getWorld().getName()
+                        this.locationRegistry.pond().getPitch()
+                ),
+                new ServerLocation(
+                        "The Crystal",
+                        this.locationRegistry.spawn().getWorld().getName(),
+                        List.of("A beautiful pond full of fish."),
+                        Material.END_CRYSTAL,
+                        -22.5,
+                        197,
+                        79.5,
+                        -180,
+                        0
                 )
         );
 
@@ -115,7 +126,7 @@ public class WarpService {
      * @return the list of warps
      */
     public @NonNull List<ServerLocation> warps() {
-        return new ArrayList<>(this.warps.values());
+        return new ArrayList<>(this.warps);
     }
 
 }
