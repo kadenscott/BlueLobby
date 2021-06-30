@@ -33,6 +33,11 @@ public class FishingListener implements Listener {
         this.itemService = itemService;
     }
 
+    /**
+     * Handles the fish event.
+     *
+     * @param event the event
+     */
     @EventHandler
     public void onFishEvent(final @NonNull PlayerFishEvent event) {
         if (event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
