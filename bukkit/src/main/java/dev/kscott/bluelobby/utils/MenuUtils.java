@@ -1,7 +1,6 @@
 package dev.kscott.bluelobby.utils;
 
 import broccolai.corn.paper.PaperItemBuilder;
-import dev.kscott.bluelobby.menu.MenuInterface;
 import dev.kscott.interfaces.core.transform.Transform;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.element.ItemStackElement;

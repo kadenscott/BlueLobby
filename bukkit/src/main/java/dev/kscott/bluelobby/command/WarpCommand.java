@@ -3,7 +3,6 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.bluelobby.menu.WarpInterfaceProvider;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -23,10 +22,6 @@ public class WarpCommand implements BaseCommand {
      */
     private final @NonNull JavaPlugin plugin;
 
-    /**
-     * The warp interface provider.
-     */
-    private final @NonNull WarpInterfaceProvider warpInterfaceProvider;
 
     /**
      * Constructs {@code WarpCommand}.
@@ -34,11 +29,8 @@ public class WarpCommand implements BaseCommand {
      * @param plugin the plugin reference
      */
     @Inject
-    public WarpCommand(final @NonNull JavaPlugin plugin,
-                       final @NonNull WarpInterfaceProvider warpInterfaceProvider) {
+    public WarpCommand(final @NonNull JavaPlugin plugin) {
         this.plugin = plugin;
-        this.warpInterfaceProvider = warpInterfaceProvider;
-
     }
 
     /**
@@ -65,7 +57,6 @@ public class WarpCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    warpInterfaceProvider.get().open(PlayerViewer.of(player));
                 }
             }
         }.runTask(this.plugin);

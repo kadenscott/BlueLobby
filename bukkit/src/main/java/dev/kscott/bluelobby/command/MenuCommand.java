@@ -5,7 +5,6 @@ import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
 import com.google.inject.Injector;
-import dev.kscott.bluelobby.menu.MenuInterface;
 import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
 import dev.kscott.interfaces.core.arguments.InterfaceArgument;
 import dev.kscott.interfaces.paper.PlayerViewer;
@@ -39,11 +38,6 @@ public class MenuCommand implements BaseCommand {
     private final @NonNull JavaPlugin plugin;
 
     /**
-     * The menu interface.
-     */
-    private final @NonNull ChestInterface menuInterface;
-
-    /**
      * Constructs {@code MenuCommand}.
      *
      * @param plugin the plugin reference
@@ -52,8 +46,6 @@ public class MenuCommand implements BaseCommand {
     public MenuCommand(final @NonNull JavaPlugin plugin,
                        final @NonNull Injector injector) {
         this.plugin = plugin;
-        this.menuInterface = injector.getInstance(MenuInterface.class);
-
     }
 
     /**
@@ -80,7 +72,6 @@ public class MenuCommand implements BaseCommand {
                 final @NonNull CommandSender sender = context.getSender();
 
                 if (sender instanceof Player player) {
-                    menuInterface.open(PlayerViewer.of(player));
                 }
             }
         }.runTask(this.plugin);
