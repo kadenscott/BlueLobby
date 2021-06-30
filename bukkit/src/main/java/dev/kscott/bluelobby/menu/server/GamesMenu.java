@@ -50,7 +50,7 @@ public class GamesMenu implements Menu<ChestInterface> {
     public @NonNull ChestInterface get() {
         return ChestInterface.builder()
                 .rows(4)
-                .title(Component.text("Server Menu"))
+                .title(Component.text("Games"))
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "games"))
                 .addTransform(this::transformAddGameIcons)
