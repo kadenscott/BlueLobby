@@ -14,6 +14,7 @@ import dev.kscott.interfaces.paper.transform.PaperTransform;
 import dev.kscott.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -50,9 +51,11 @@ public class GamesMenu implements Menu<ChestInterface> {
     public @NonNull ChestInterface get() {
         return ChestInterface.builder()
                 .rows(4)
-                .title(Component.text("GAMES.md")
-                        .color(Constants.Chat.COLOUR_LIGHT_BLUE)
-                        .decorate(TextDecoration.BOLD))
+                .title(Component.text()
+                        .append(Component.text("● ")
+                                .color(Constants.Chat.COLOUR_DARK_GRAY))
+                        .append(MiniMessage.get().parse("<gradient:#651c80:#9e1967>Games</gradient>"))
+                        .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "games"))
                 .addTransform(this::transformAddGameIcons)

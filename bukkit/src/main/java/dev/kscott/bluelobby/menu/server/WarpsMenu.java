@@ -16,6 +16,7 @@ import dev.kscott.interfaces.paper.transform.PaperTransform;
 import dev.kscott.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -60,9 +61,11 @@ public class WarpsMenu implements Menu<ChestInterface> {
     public @NonNull ChestInterface get() {
         return ChestInterface.builder()
                 .rows(4)
-                .title(Component.text("WARPS.md")
-                        .color(Constants.Chat.COLOUR_LIGHT_BLUE)
-                        .decorate(TextDecoration.BOLD))
+                .title(Component.text()
+                        .append(Component.text("● ")
+                                .color(Constants.Chat.COLOUR_DARK_GRAY))
+                        .append(MiniMessage.get().parse("<gradient:#0a5c24:#2f4d99>Warps</gradient>"))
+                        .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "warps"))
                 .addTransform(this::addWarpIcons)

@@ -14,8 +14,8 @@ import dev.kscott.interfaces.paper.transform.PaperTransform;
 import dev.kscott.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -50,9 +50,11 @@ public class ReadmeMenu implements Menu<ChestInterface> {
     public @NonNull ChestInterface get() {
         return ChestInterface.builder()
                 .rows(4)
-                .title(Component.text("README.md")
-                        .color(Constants.Chat.COLOUR_LIGHT_BLUE)
-                        .decorate(TextDecoration.BOLD))
+                .title(Component.text()
+                        .append(Component.text("● ")
+                                .color(Constants.Chat.COLOUR_DARK_GRAY))
+                        .append(MiniMessage.get().parse("<gradient:#2454a6:#2b91a1>README.md</gradient>"))
+                        .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "readme"))
                 .addTransform(this::transformAddIcons)
