@@ -11,6 +11,7 @@ import dev.kscott.interfaces.paper.element.ItemStackElement;
 import dev.kscott.interfaces.paper.pane.ChestPane;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -56,8 +57,7 @@ public class MenuUtils {
                                     Component.text("● ")
                                             .style(Constants.Chat.STYLE_DEFAULT):
                                     Component.empty())
-                            .append(Component.text("GAMES.md")
-                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                            .append(MiniMessage.get().parse("<gradient:#f28a8a:#f5c38e>Games</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
                             .asComponent())
                     .loreComponents(List.of(
@@ -78,8 +78,7 @@ public class MenuUtils {
                                     Component.text("● ")
                                             .style(Constants.Chat.STYLE_DEFAULT):
                                     Component.empty())
-                            .append(Component.text("README.md")
-                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                            .append(MiniMessage.get().parse("<gradient:#73b8e6:#66dea6>README.md</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
                             .asComponent())
                     .loreComponents(List.of(
@@ -102,8 +101,7 @@ public class MenuUtils {
                                     Component.text("● ")
                                             .style(Constants.Chat.STYLE_DEFAULT):
                                     Component.empty())
-                            .append(Component.text("WARPS.md")
-                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                            .append(MiniMessage.get().parse("<gradient:#c587f5:#efa0fa>Warps</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
                             .asComponent())
                     .loreComponents(List.of(

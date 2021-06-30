@@ -64,7 +64,7 @@ public class WarpsMenu implements Menu<ChestInterface> {
                 .title(Component.text()
                         .append(Component.text("● ")
                                 .color(Constants.Chat.COLOUR_DARK_GRAY))
-                        .append(MiniMessage.get().parse("<gradient:#0a5c24:#2f4d99>Warps</gradient>"))
+                        .append(MiniMessage.get().parse("<gradient:#740bbf:#bd28b5>Warps</gradient>"))
                         .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "warps"))

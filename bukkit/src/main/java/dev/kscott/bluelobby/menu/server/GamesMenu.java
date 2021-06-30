@@ -54,7 +54,7 @@ public class GamesMenu implements Menu<ChestInterface> {
                 .title(Component.text()
                         .append(Component.text("● ")
                                 .color(Constants.Chat.COLOUR_DARK_GRAY))
-                        .append(MiniMessage.get().parse("<gradient:#651c80:#9e1967>Games</gradient>"))
+                        .append(MiniMessage.get().parse("<gradient:#c41d1d:#d66311>Games</gradient>"))
                         .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "games"))

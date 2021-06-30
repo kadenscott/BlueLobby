@@ -53,7 +53,7 @@ public class ReadmeMenu implements Menu<ChestInterface> {
                 .title(Component.text()
                         .append(Component.text("● ")
                                 .color(Constants.Chat.COLOUR_DARK_GRAY))
-                        .append(MiniMessage.get().parse("<gradient:#2454a6:#2b91a1>README.md</gradient>"))
+                        .append(MiniMessage.get().parse("<gradient:#305eb3:#17804f>README.md</gradient>"))
                         .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "readme"))
