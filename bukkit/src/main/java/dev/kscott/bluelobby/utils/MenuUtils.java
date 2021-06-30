@@ -4,6 +4,7 @@ import broccolai.corn.paper.PaperItemBuilder;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.menu.server.GamesMenu;
 import dev.kscott.bluelobby.menu.server.ReadmeMenu;
+import dev.kscott.bluelobby.menu.server.WarpsMenu;
 import dev.kscott.interfaces.core.transform.Transform;
 import dev.kscott.interfaces.paper.element.ClickHandler;
 import dev.kscott.interfaces.paper.element.ItemStackElement;
@@ -50,37 +51,80 @@ public class MenuUtils {
 
             // Games icon
             final @NonNull ItemStack gamesPageIcon = PaperItemBuilder.paper(Material.MUSIC_DISC_MALL)
-                    .name(Component.text("Games")
-                            .color(Constants.Chat.COLOUR_LIGHT_BLUE)
-                            .decoration(TextDecoration.ITALIC, false))
-                    .loreComponents(
-                            List.of(Component.text("Click to view")
-                                    .style(Constants.Chat.STYLE_DEFAULT))
-                    )
+                    .name(Component.text()
+                            .append(menuId.equals("games") ?
+                                    Component.text("● ")
+                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                    Component.empty())
+                            .append(Component.text("GAMES.md")
+                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                                    .decoration(TextDecoration.ITALIC, false))
+                            .asComponent())
+                    .loreComponents(List.of(
+                            Component.empty(),
+                            Component.text("Click to see all")
+                                    .style(Constants.Chat.STYLE_DEFAULT),
+                            Component.text("of the playable games.")
+                                    .style(Constants.Chat.STYLE_DEFAULT)
+                    ))
                     .flags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_POTION_EFFECTS)
                     .enchant(Enchantment.DAMAGE_ALL, menuId.equals("games") ? 1 : -1)
                     .build();
 
             // Readme icon
             final @NonNull ItemStack readmePageIcon = PaperItemBuilder.paper(Material.BOOK)
-                    .name(Component.text("README.md")
-                            .color(Constants.Chat.COLOUR_LIGHT_BLUE)
-                            .decoration(TextDecoration.ITALIC, false))
-                    .loreComponents(
-                            List.of(Component.text("Click to view")
-                                    .style(Constants.Chat.STYLE_DEFAULT))
-                    )
+                    .name(Component.text()
+                            .append(menuId.equals("readme") ?
+                                    Component.text("● ")
+                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                    Component.empty())
+                            .append(Component.text("README.md")
+                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                                    .decoration(TextDecoration.ITALIC, false))
+                            .asComponent())
+                    .loreComponents(List.of(
+                            Component.empty(),
+                            Component.text("Click to see help")
+                                    .style(Constants.Chat.STYLE_DEFAULT),
+                            Component.text("information, commands,")
+                                    .style(Constants.Chat.STYLE_DEFAULT),
+                            Component.text("and more.")
+                                    .style(Constants.Chat.STYLE_DEFAULT)
+                    ))
                     .flags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_POTION_EFFECTS)
                     .enchant(Enchantment.DAMAGE_ALL, menuId.equals("readme") ? 1 : -1)
                     .build();
 
+            // Warp icon
+            final @NonNull ItemStack warpPageIcon = PaperItemBuilder.paper(Material.ENDER_EYE)
+                    .name(Component.text()
+                            .append(menuId.equals("warps") ?
+                                    Component.text("● ")
+                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                    Component.empty())
+                            .append(Component.text("WARPS.md")
+                                    .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                                    .decoration(TextDecoration.ITALIC, false))
+                            .asComponent())
+                    .loreComponents(List.of(
+                            Component.empty(),
+                            Component.text("Click to see the warps.")
+                                    .style(Constants.Chat.STYLE_DEFAULT)
+                    ))
+                    .flags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_POTION_EFFECTS)
+                    .enchant(Enchantment.DAMAGE_ALL, menuId.equals("warps") ? 1 : -1)
+                    .build();
+
             return tempPane
+                    .element(ItemStackElement.of(readmePageIcon, (clickEvent, clickView) -> {
+                        menuService.get(ReadmeMenu.class).open((Player) clickEvent.getWhoClicked());
+                    }), 3, y)
                     .element(ItemStackElement.of(gamesPageIcon, (clickEvent, clickView) -> {
                         menuService.get(GamesMenu.class).open((Player) clickEvent.getWhoClicked());
                     }), 4, y)
-                    .element(ItemStackElement.of(readmePageIcon, (clickEvent, clickView) -> {
-                        menuService.get(ReadmeMenu.class).open((Player) clickEvent.getWhoClicked());
-                    }), 3, y);
+                    .element(ItemStackElement.of(warpPageIcon, (clickEvent, clickView) -> {
+                        menuService.get(WarpsMenu.class).open((Player) clickEvent.getWhoClicked());
+                    }), 5, y);
         };
     }
 
