@@ -50,7 +50,7 @@ public class WarpService {
                         "Spawn",
                         this.locationRegistry.pond().getWorld().getName(),
                         List.of(""),
-                        Material.STONE,
+                        Material.GRASS_BLOCK,
                         this.locationRegistry.spawn().getX(),
                         this.locationRegistry.spawn().getY(),
                         this.locationRegistry.spawn().getZ(),
