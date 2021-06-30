@@ -60,7 +60,9 @@ public class WarpsMenu implements Menu<ChestInterface> {
     public @NonNull ChestInterface get() {
         return ChestInterface.builder()
                 .rows(4)
-                .title(Component.text("WARPS.md"))
+                .title(Component.text("WARPS.md")
+                        .color(Constants.Chat.COLOUR_LIGHT_BLUE)
+                        .decorate(TextDecoration.BOLD))
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(MenuUtils.bottomBar(3, this.menuService, "warps"))
                 .addTransform(this::addWarpIcons)
