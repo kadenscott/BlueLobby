@@ -1,5 +1,6 @@
 package dev.kscott.bluelobby.games.rps;
 
+import dev.kscott.bluelobby.menu.rps.RPSMenu;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,17 +20,17 @@ public class RPSGame {
     /**
      * The player who started this game.
      */
-    private final @NonNull Player challenger;
+    private final @NonNull RPSPlayer challenger;
 
     /**
      * The challenger's opponent.
      */
-    private final @NonNull Player opponent;
+    private final @NonNull RPSPlayer opponent;
 
     /**
-     * The menu provider.
+     * The game menu.
      */
-    private final @NonNull RPSGameMenuProvider menuProvider;
+    private final @NonNull RPSMenu menu;
 
     /**
      * The game tick runnable.
@@ -38,7 +39,8 @@ public class RPSGame {
 
     /**
      * The current state of the game.
-     * See: {@link RPSGame.State}.
+     *
+     * @see RPSGame.State
      */
     private @NonNull State state;
 
@@ -55,10 +57,10 @@ public class RPSGame {
             final @NonNull Player opponent
     ) {
         this.plugin = plugin;
-        this.challenger = challenger;
-        this.opponent = opponent;
-        this.state = State.WAITING_FOR_OPPONENT;
-        this.menuProvider = new RPSGameMenuProvider(this);
+        this.state = State.INITIALIZE;
+        this.menu = new RPSMenu(this);
+        this.challenger = new RPSPlayer(challenger, RPSPlayer.Type.CHALLENGER, this);
+        this.opponent = new RPSPlayer(opponent, RPSPlayer.Type.OPPONENT, this);
     }
 
     /**
@@ -75,8 +77,23 @@ public class RPSGame {
         this.tickRunnable.runTaskTimer(this.plugin, 0, 1);
     }
 
+    /**
+     * Runs the game tick.
+     */
     public void tick() {
+        if (this.state == State.INITIALIZE) {
+            this.state = State.WAITING_FOR_OPPONENT;
+            return;
+        }
 
+        if (this.state == State.WAITING_FOR_OPPONENT) {
+            return;
+        }
+
+        if (this.state == State.GAME_OVER) {
+            this.tickRunnable.cancel();
+            return;
+        }
     }
 
     /**
@@ -84,7 +101,7 @@ public class RPSGame {
      *
      * @return the challenger
      */
-    public @NonNull Player challenger() {
+    public @NonNull RPSPlayer challenger() {
         return this.challenger;
     }
 
@@ -93,7 +110,7 @@ public class RPSGame {
      *
      * @return the opponent
      */
-    public @NonNull Player opponent() {
+    public @NonNull RPSPlayer opponent() {
         return this.opponent;
     }
 
@@ -107,9 +124,24 @@ public class RPSGame {
     }
 
     /**
+     * Returns true if the provided player is in this game, false if not.
+     *
+     * @param player the player
+     * @return true if the provided player is in this game, false if not.
+     */
+    public boolean hasPlayer(final @NonNull Player player) {
+        return challenger.player() == player || opponent.player() == player;
+    }
+
+    /**
      * Represents the state of the game.
      */
     public enum State {
+        /**
+         * The state of the game during the game's first tick.
+         */
+        INITIALIZE,
+
         /**
          * When the game is waiting for the opponent to accept the invitation.
          */
@@ -126,7 +158,7 @@ public class RPSGame {
         RUNNING_COUNTDOWN,
 
         /**
-         *
+         * When the game has ended.
          */
         GAME_OVER
     }
