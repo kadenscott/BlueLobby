@@ -1,10 +1,10 @@
 package dev.kscott.bluelobby.games.rps;
 
+import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.menu.rps.RPSMenu;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +21,11 @@ public class RPSGame {
      * The plugin.
      */
     private final @NonNull JavaPlugin plugin;
+
+    /**
+     * The menu service.
+     */
+    private final @NonNull MenuService menuService;
 
     /**
      * The player who started this game.
@@ -52,18 +57,21 @@ public class RPSGame {
     /**
      * Constructs RPSGame.
      *
-     * @param plugin     the plugin
-     * @param challenger the challenger
-     * @param opponent   the opponent
+     * @param plugin      the plugin
+     * @param menuService the menu service
+     * @param challenger  the challenger
+     * @param opponent    the opponent
      */
     public RPSGame(
             final @NonNull JavaPlugin plugin,
+            final @NonNull MenuService menuService,
             final @NonNull Player challenger,
             final @NonNull Player opponent
     ) {
         this.plugin = plugin;
         this.state = State.INITIALIZE;
-        this.menu = new RPSMenu(this);
+        this.menuService = menuService;
+        this.menu = new RPSMenu(this, this.menuService);
         this.challenger = new RPSPlayer(challenger, RPSPlayer.Type.CHALLENGER, this);
         this.opponent = new RPSPlayer(opponent, RPSPlayer.Type.OPPONENT, this);
     }
@@ -201,7 +209,7 @@ public class RPSGame {
          * Constructs {@code Choice}.
          *
          * @param title the title
-         * @param icon the icon
+         * @param icon  the icon
          */
         Choice(final @NonNull Component title,
                final @NonNull Material icon) {

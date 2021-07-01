@@ -1,7 +1,9 @@
 package dev.kscott.bluelobby.games.rps;
 
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import dev.kscott.bluelobby.menu.MenuService;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -27,11 +29,19 @@ public class RPSService {
     private final @NonNull JavaPlugin plugin;
 
     /**
+     * The menu service.
+     */
+    private final @NonNull MenuService menuService;
+
+    /**
      * Constructs {@code RPSService}.
      */
-    public RPSService(final @NonNull JavaPlugin plugin) {
+    @Inject
+    public RPSService(final @NonNull JavaPlugin plugin,
+                      final @NonNull MenuService menuService) {
         this.games = new ArrayList<>();
         this.plugin = plugin;
+        this.menuService = menuService;
     }
 
     /**
@@ -51,7 +61,7 @@ public class RPSService {
             throw new IllegalArgumentException("Player '"+opponent.getName()+"' (opponent) is already playing a game.");
         }
 
-        final @NonNull RPSGame game = new RPSGame(this.plugin, challenger, opponent);
+        final @NonNull RPSGame game = new RPSGame(this.plugin, this.menuService, challenger, opponent);
 
         return game;
     }
