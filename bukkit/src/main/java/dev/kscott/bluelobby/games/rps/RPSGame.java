@@ -1,6 +1,11 @@
 package dev.kscott.bluelobby.games.rps;
 
 import dev.kscott.bluelobby.menu.rps.RPSMenu;
+import dev.kscott.bluelobby.utils.Constants;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -161,6 +166,66 @@ public class RPSGame {
          * When the game has ended.
          */
         GAME_OVER
+    }
+
+    /**
+     * Represents a choice the player could make.
+     */
+    public enum Choice {
+        /**
+         * The choice of rock.
+         */
+        ROCK(Component.text("Rock").color(Constants.Chat.COLOUR_LIGHT_GRAY), Material.STONE),
+
+        /**
+         * The choice of paper.
+         */
+        PAPER(Component.text("Rock").color(NamedTextColor.WHITE), Material.PAPER),
+
+        /**
+         * The choice of scissors.
+         */
+        SCISSORS(Component.text("Scissors").color(Constants.Chat.COLOUR_LIGHT_GRAY), Material.SHEARS);
+
+        /**
+         * The title.
+         */
+        private final @NonNull Component title;
+
+        /**
+         * The choice's icon.
+         */
+        private @NonNull Material icon;
+
+        /**
+         * Constructs {@code Choice}.
+         *
+         * @param title the title
+         * @param icon the icon
+         */
+        Choice(final @NonNull Component title,
+               final @NonNull Material icon) {
+            this.title = title;
+            this.icon = icon;
+        }
+
+        /**
+         * Returns the icon.
+         *
+         * @return the icon
+         */
+        public @NonNull Material icon() {
+            return this.icon;
+        }
+
+        /**
+         * Returns the title.
+         *
+         * @return the title
+         */
+        public @NonNull Component title() {
+            return this.title;
+        }
     }
 
 }
