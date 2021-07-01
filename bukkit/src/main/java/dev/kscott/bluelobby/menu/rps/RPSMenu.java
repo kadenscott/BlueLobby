@@ -40,6 +40,9 @@ public class RPSMenu implements Menu<ChestInterface> {
         return ChestInterface.builder()
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
                 .addTransform(this::transformWaitingForOpponent)
+                .addTransform(this::transformWaitingForChoices)
+                .addTransform(this::transformRunningCountdown)
+                .addTransform(this::transformGameOver)
                 .build();
     }
 
@@ -54,6 +57,40 @@ public class RPSMenu implements Menu<ChestInterface> {
 
     private @NonNull ChestPane transformWaitingForOpponent(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
         final @NonNull RPSPlayer player = view.argument().get("player");
+
+        if (player.game().state() != RPSGame.State.WAITING_FOR_OPPONENT) {
+            return pane;
+        }
+
+        return pane;
+    }
+
+    private @NonNull ChestPane transformWaitingForChoices(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
+        final @NonNull RPSPlayer player = view.argument().get("player");
+
+        if (player.game().state() != RPSGame.State.WAITING_FOR_CHOICES) {
+            return pane;
+        }
+
+        return pane;
+    }
+
+    private @NonNull ChestPane transformRunningCountdown(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
+        final @NonNull RPSPlayer player = view.argument().get("player");
+
+        if (player.game().state() != RPSGame.State.RUNNING_COUNTDOWN) {
+            return pane;
+        }
+
+        return pane;
+    }
+
+    private @NonNull ChestPane transformGameOver(final @NonNull ChestPane pane, final @NonNull InterfaceView view) {
+        final @NonNull RPSPlayer player = view.argument().get("player");
+
+        if (player.game().state() != RPSGame.State.GAME_OVER) {
+            return pane;
+        }
 
         return pane;
     }
