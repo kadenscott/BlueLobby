@@ -55,7 +55,7 @@ public class MenuUtils {
                     .name(Component.text()
                             .append(menuId.equals("games") ?
                                     Component.text("● ")
-                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                            .style(Constants.Chat.STYLE_DEFAULT) :
                                     Component.empty())
                             .append(MiniMessage.get().parse("<gradient:#f28a8a:#f5c38e>Games</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
@@ -76,7 +76,7 @@ public class MenuUtils {
                     .name(Component.text()
                             .append(menuId.equals("readme") ?
                                     Component.text("● ")
-                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                            .style(Constants.Chat.STYLE_DEFAULT) :
                                     Component.empty())
                             .append(MiniMessage.get().parse("<gradient:#73b8e6:#66dea6>README.md</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
@@ -99,7 +99,7 @@ public class MenuUtils {
                     .name(Component.text()
                             .append(menuId.equals("warps") ?
                                     Component.text("● ")
-                                            .style(Constants.Chat.STYLE_DEFAULT):
+                                            .style(Constants.Chat.STYLE_DEFAULT) :
                                     Component.empty())
                             .append(MiniMessage.get().parse("<gradient:#c587f5:#efa0fa>Warps</gradient>")
                                     .decoration(TextDecoration.ITALIC, false))
@@ -126,6 +126,29 @@ public class MenuUtils {
                         menuService.get(WarpsMenu.class).open((Player) clickEvent.getWhoClicked());
                         menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "warps");
                     }), 5, y);
+        };
+    }
+
+    /**
+     * Returns a transformation that adds a black bar at the given y height.
+     *
+     * @param y the y coordinate
+     * @return the transform
+     */
+    public static @NonNull Transform<ChestPane> blackBar(final int y) {
+        return (pane, view) -> {
+            @NonNull ChestPane tempPane = pane;
+
+            // Add the black background.
+            for (int x = 0; x < ChestPane.MINECRAFT_CHEST_WIDTH; x++) {
+                tempPane = tempPane.element(ItemStackElement.of(
+                        PaperItemBuilder.paper(Material.BLACK_STAINED_GLASS_PANE)
+                                .name(Component.empty())
+                                .build()
+                ), x, y);
+            }
+
+            return tempPane;
         };
     }
 
