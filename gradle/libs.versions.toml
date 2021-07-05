@@ -32,6 +32,8 @@ placeholderapi = "2.10.9"
 
 interfaces = "1.0.0-SNAPSHOT"
 
+luckperms = "5.3"
+
 [libraries]
 # Tooling
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checker-qual" }
@@ -73,6 +75,9 @@ holodisplays = { group = "com.gmail.filoghost.holographicdisplays", name = "holo
 
 # PlaceholderAPI
 placeholderapi = { group = "me.clip", name = "placeholderapi", version.ref = "placeholderapi"}
+
+luckperms = { group = "net.luckperms", name = "api", version.ref = "luckperms" }
+
 [bundles]
 guice = ["guice-core", "guice-assisted"]
 corn = ["corn-core", "corn-paper", "corn-adventure"]

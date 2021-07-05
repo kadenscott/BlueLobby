@@ -1,5 +1,7 @@
 package dev.kscott.bluelobby.games.rps;
 
+import dev.kscott.interfaces.paper.type.ChestInterface;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -69,6 +71,15 @@ public class RPSPlayer {
      */
     public @NonNull RPSGame game() {
         return this.game;
+    }
+
+    /**
+     * Returns the type of this player.
+     *
+     * @return the type
+     */
+    public @NonNull Type type() {
+        return this.type;
     }
 
     /**

@@ -22,7 +22,7 @@ public class PortableFireworkItem implements Item {
 
     private final @NonNull List<Component> description = List.of(
             Component.text("Summons a high-powered rocket to"),
-            Component.text("fly you through the air")
+            Component.text("fly you through the air.")
     );
 
     private final @NonNull List<Effect> effects = List.of();

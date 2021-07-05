@@ -20,7 +20,7 @@ public class SpearItem implements Item {
             .asComponent();
 
     private final @NonNull List<Component> description = List.of(
-            Component.text("From far away")
+            Component.text("From far away.")
     );
 
     private final @NonNull List<Effect> effects = List.of(

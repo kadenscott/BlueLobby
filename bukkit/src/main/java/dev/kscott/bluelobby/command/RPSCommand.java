@@ -22,20 +22,21 @@ public class RPSCommand implements BaseCommand {
     /**
      * The RPSManager.
      */
-    private final @NonNull RPSService rpsManager;
+    private final @NonNull RPSService rpsService;
 
     /**
      * Constructs {@code RPSCommand}.
      *
      * @param plugin the plugin reference
+     * @param rpsService the rps service
      */
     @Inject
     public RPSCommand(
             final @NonNull JavaPlugin plugin,
-            final @NonNull RPSService rpsManager
+            final @NonNull RPSService rpsService
     ) {
         this.plugin = plugin;
-        this.rpsManager = rpsManager;
+        this.rpsService = rpsService;
     }
 
     /**
@@ -47,9 +48,13 @@ public class RPSCommand implements BaseCommand {
     public void register(final @NonNull CommandManager<@NonNull CommandSender> manager) {
         final Command.Builder<CommandSender> builder = manager.commandBuilder("rps");
 
-        manager.command(builder
+        manager.command(builder.literal("invite")
                 .argument(PlayerArgument.of("opponent"))
-                .handler(this::handleMainCommand));
+                .handler(this::handleInvite));
+
+        manager.command(builder.literal("accept")
+                .argument(PlayerArgument.of("challenger"))
+                .handler(this::handleAccept));
     }
 
     /**
@@ -57,7 +62,7 @@ public class RPSCommand implements BaseCommand {
      *
      * @param context command context
      */
-    private void handleMainCommand(final @NonNull CommandContext<CommandSender> context) {
+    private void handleInvite(final @NonNull CommandContext<CommandSender> context) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -65,9 +70,29 @@ public class RPSCommand implements BaseCommand {
 
                 if (sender instanceof Player player) {
                     final @NonNull Player opponent = context.get("opponent");
-                    player.sendMessage("Invited "+opponent.getName()+" to play rock paper scissors.");
+                    rpsService.invite(player, opponent);
                 }
             }
         }.runTask(this.plugin);
+    }
+
+    /**
+     * Handles /rps accept command.
+     *
+     * @param context command context
+     */
+    private void handleAccept(final @NonNull CommandContext<CommandSender> context) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                final @NonNull CommandSender sender = context.getSender();
+
+                if (sender instanceof Player player) {
+                    final @NonNull Player opponent = context.get("challenger");
+                    rpsService.accept(player, opponent);
+                }
+            }
+        }.runTask(this.plugin);
+
     }
 }

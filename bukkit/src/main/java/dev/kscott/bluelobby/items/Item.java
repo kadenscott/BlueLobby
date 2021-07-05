@@ -63,18 +63,15 @@ public interface Item {
             // TODO sort effects by type (in order: positive, negative, special)
 
             for (final @NonNull Effect effect : effects) {
-                lore.add(Component.text()
-                        .append(effect.text())
-                        .decoration(TextDecoration.ITALIC, false)
-                        .asComponent());
+                lore.addAll(effect.text());
             }
         }
-
-        lore.add(Component.empty());
 
         final @NonNull List<Component> description = this.description();
 
         if (description.size() != 0) {
+            lore.add(Component.empty());
+
             for (final @NonNull Component text : description) {
                 lore.add(Component.text()
                         .append(text)
@@ -84,12 +81,24 @@ public interface Item {
             }
         }
 
+        if (this instanceof Tiered tiered) {
+            lore.add(Component.empty());
+
+            lore.add(Component.text()
+                    .append(Component.text("› ")
+                            .color(Constants.Chat.COLOUR_LIGHT_GRAY))
+                    .append(tiered.tier().title())
+                    .asComponent()
+                    .decoration(TextDecoration.ITALIC, false));
+        }
+
         final @NonNull ItemStack itemStack = PaperItemBuilder.paper(this.material())
                 .name(this.title())
                 .loreComponents(lore)
                 .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                 .data(KEY_ITEM_ID, PersistentDataType.STRING, this.id())
                 .build();
+
 
         if (itemStack.hasItemMeta()) {
             final @NonNull ItemMeta meta = itemStack.getItemMeta();

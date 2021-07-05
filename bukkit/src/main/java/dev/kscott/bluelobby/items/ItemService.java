@@ -1,10 +1,9 @@
 package dev.kscott.bluelobby.items;
 
 import com.google.inject.Inject;
-import dev.kscott.bluelobby.items.type.FishingRodItem;
-import dev.kscott.bluelobby.items.type.PortableFireworkItem;
-import dev.kscott.bluelobby.items.type.SpearItem;
-import org.bukkit.event.Listener;
+import dev.kscott.bluelobby.items.type.*;
+import dev.kscott.bluelobby.items.type.fish.*;
+import dev.kscott.bluelobby.items.type.test.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -31,8 +30,24 @@ public class ItemService {
         this.plugin = plugin;
 
         this.register(new FishingRodItem());
+        this.register(new TheWavyEffectItem());
+
         this.register(new SpearItem());
         this.register(new PortableFireworkItem());
+
+        this.register(new TestCommonItem());
+        this.register(new TestUncommonItem());
+        this.register(new TestRareItem());
+        this.register(new TestEpicItem());
+        this.register(new TestLegendaryItem());
+
+        this.register(new StingrayFishItem());
+        this.register(new SalmonFishItem());
+        this.register(new TroutFishItem());
+
+        this.register(new GrapplingBowItem());
+        this.register(new ArrowItem());
+        this.register(new TrackingArrowItem());
     }
 
     /**
@@ -81,15 +96,6 @@ public class ItemService {
         final @NonNull String id = item.id();
 
         this.itemMap.put(id, item);
-    }
-
-    /**
-     * Returns a random item.
-     *
-     * @return item
-     */
-    public @NonNull Item random() {
-        return this.item("spear");
     }
 
 }

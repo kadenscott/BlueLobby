@@ -59,6 +59,11 @@ public class Constants {
         public static final @NonNull TextColor COLOUR_PURPLE = TextColor.color(150, 70, 174);
 
         /**
+         * The pink text colour.
+         */
+        public static final @NonNull TextColor COLOUR_PINK = TextColor.color(245, 144, 226);
+
+        /**
          * The orange text colour.
          */
         public static final @NonNull TextColor COLOUR_ORANGE = TextColor.color(213, 124, 45);

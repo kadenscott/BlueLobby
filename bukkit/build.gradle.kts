@@ -12,8 +12,10 @@ dependencies {
     api(libs.bundles.corn)
     api(libs.adventurebungee)
     api(libs.ifgui)
+
     compileOnly(libs.holodisplays)
     compileOnly(libs.placeholderapi)
+    compileOnly(libs.luckperms)
 }
 
 tasks {

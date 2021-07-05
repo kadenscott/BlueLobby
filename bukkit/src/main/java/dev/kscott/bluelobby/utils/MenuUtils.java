@@ -3,7 +3,7 @@ package dev.kscott.bluelobby.utils;
 import broccolai.corn.paper.PaperItemBuilder;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.menu.server.GamesMenu;
-import dev.kscott.bluelobby.menu.server.ReadmeMenu;
+import dev.kscott.bluelobby.menu.server.readme.ReadmeMenu;
 import dev.kscott.bluelobby.menu.server.WarpsMenu;
 import dev.kscott.interfaces.core.transform.Transform;
 import dev.kscott.interfaces.paper.element.ClickHandler;
