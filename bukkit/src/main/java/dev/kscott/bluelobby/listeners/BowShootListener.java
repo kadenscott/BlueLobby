@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import dev.kscott.bluelobby.items.Item;
 import dev.kscott.bluelobby.items.ItemService;
 import dev.kscott.bluelobby.items.type.GrapplingBowItem;
+import dev.kscott.bluelobby.items.type.SpearItem;
 import dev.kscott.bluelobby.items.type.TrackingArrowItem;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -62,6 +63,10 @@ public class BowShootListener implements Listener {
             }
 
             if (item instanceof GrapplingBowItem) {
+                projectile.addPassenger(player);
+            }
+
+            if (item instanceof SpearItem) {
                 projectile.addPassenger(player);
             }
 
