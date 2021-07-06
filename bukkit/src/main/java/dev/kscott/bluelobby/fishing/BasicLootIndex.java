@@ -3,6 +3,7 @@ package dev.kscott.bluelobby.fishing;
 import dev.kscott.bluelobby.items.Item;
 import dev.kscott.bluelobby.items.type.ArrowItem;
 import dev.kscott.bluelobby.items.type.GrapplingBowItem;
+import dev.kscott.bluelobby.items.type.SpearItem;
 import dev.kscott.bluelobby.items.type.fish.TheWavyEffectItem;
 import dev.kscott.bluelobby.items.type.fish.SalmonFishItem;
 import dev.kscott.bluelobby.items.type.fish.StingrayFishItem;
@@ -39,6 +40,8 @@ public class BasicLootIndex implements LootIndex {
 
         this.lootSet.add(new LootItem(new ArrowItem(), 5, 3, 6));
         this.lootSet.add(new LootItem(new GrapplingBowItem(), 3, 1));
+
+        this.lootSet.add(new LootItem(new SpearItem(), 0.1, 1));
     }
 
     @Override
