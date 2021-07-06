@@ -16,6 +16,7 @@ dependencies {
     compileOnly(libs.holodisplays)
     compileOnly(libs.placeholderapi)
     compileOnly(libs.luckperms)
+    compileOnly(libs.worldguard)
 }
 
 tasks {

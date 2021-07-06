@@ -1,8 +1,8 @@
 package dev.kscott.bluelobby.warp;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import dev.kscott.bluelobby.location.LocationRegistry;
-import dev.kscott.bluelobby.location.ServerLocation;
+import dev.kscott.bluelobby.area.LocationRegistry;
+import dev.kscott.bluelobby.area.ServerLocation;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
@@ -19,7 +19,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A class providing methods for interacting with warps.

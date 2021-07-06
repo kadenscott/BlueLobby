@@ -1,6 +1,6 @@
 package dev.kscott.bluelobby.listeners;
 
-import dev.kscott.bluelobby.location.LocationRegistry;
+import dev.kscott.bluelobby.area.LocationRegistry;
 import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.interfaces.paper.PlayerViewer;
 import dev.kscott.interfaces.paper.transform.PaperTransform;

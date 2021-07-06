@@ -9,6 +9,8 @@ guava = "21.0"
 gson = "2.8.0"
 guice = "5.0.1"
 
+worldguard = "7.0.5"
+
 # Incendo
 cloud = "1.4.0"
 
@@ -66,6 +68,8 @@ paper = { group = "com.destroystokyo.paper", name = "paper-api", version.ref = "
 corn-core = { group = "broccolai.corn", name = "corn-core", version.ref = "corn" }
 corn-paper = { group = "broccolai.corn", name = "corn-paper", version.ref = "corn" }
 corn-adventure = { group = "broccolai.corn", name = "corn-adventure", version.ref = "corn" }
+
+worldguard = { group = "com.sk89q.worldguard", name = "worldguard-bukkit", version.ref = "worldguard" }
 
 # IF
 ifgui = { group = "com.github.stefvanschie.inventoryframework", name = "IF", version.ref = "if" }

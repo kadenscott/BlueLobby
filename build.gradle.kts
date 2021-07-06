@@ -31,6 +31,9 @@ subprojects {
         // Corn
         maven("https://repo.broccol.ai/snapshots")
 
+        // WorldGuard
+        maven("https://maven.enginehub.org/repo/")
+
     }
 
     tasks {

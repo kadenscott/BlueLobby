@@ -1,4 +1,4 @@
-package dev.kscott.bluelobby.location;
+package dev.kscott.bluelobby.area;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 

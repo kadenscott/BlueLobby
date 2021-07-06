@@ -2,7 +2,7 @@ package dev.kscott.bluelobby.menu.server;
 
 import broccolai.corn.paper.PaperItemBuilder;
 import com.google.inject.Inject;
-import dev.kscott.bluelobby.location.ServerLocation;
+import dev.kscott.bluelobby.area.ServerLocation;
 import dev.kscott.bluelobby.menu.Menu;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.utils.Constants;

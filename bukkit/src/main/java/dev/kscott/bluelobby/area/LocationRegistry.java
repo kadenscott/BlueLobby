@@ -1,7 +1,6 @@
-package dev.kscott.bluelobby.location;
+package dev.kscott.bluelobby.area;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
