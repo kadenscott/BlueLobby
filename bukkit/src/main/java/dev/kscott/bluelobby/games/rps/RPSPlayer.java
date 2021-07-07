@@ -1,6 +1,6 @@
 package dev.kscott.bluelobby.games.rps;
 
-import dev.kscott.interfaces.paper.type.ChestInterface;
+import org.incendo.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;

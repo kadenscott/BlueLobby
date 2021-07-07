@@ -3,7 +3,7 @@ package dev.kscott.bluelobby.games.rps;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.menu.rps.RPSMenu;
 import dev.kscott.bluelobby.utils.Constants;
-import dev.kscott.interfaces.paper.view.ChestView;
+import org.incendo.interfaces.paper.view.ChestView;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;

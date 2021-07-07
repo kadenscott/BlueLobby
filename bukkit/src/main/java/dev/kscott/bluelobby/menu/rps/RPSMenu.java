@@ -5,16 +5,7 @@ import dev.kscott.bluelobby.games.rps.RPSGame;
 import dev.kscott.bluelobby.games.rps.RPSPlayer;
 import dev.kscott.bluelobby.menu.Menu;
 import dev.kscott.bluelobby.menu.MenuService;
-import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.bluelobby.utils.SkullCreator;
-import dev.kscott.interfaces.core.arguments.HashMapInterfaceArgument;
-import dev.kscott.interfaces.core.view.InterfaceView;
-import dev.kscott.interfaces.paper.PlayerViewer;
-import dev.kscott.interfaces.paper.element.ItemStackElement;
-import dev.kscott.interfaces.paper.pane.ChestPane;
-import dev.kscott.interfaces.paper.transform.PaperTransform;
-import dev.kscott.interfaces.paper.type.ChestInterface;
-import dev.kscott.interfaces.paper.view.ChestView;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -23,6 +14,14 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.incendo.interfaces.core.arguments.HashMapInterfaceArgument;
+import org.incendo.interfaces.core.view.InterfaceView;
+import org.incendo.interfaces.paper.PlayerViewer;
+import org.incendo.interfaces.paper.element.ItemStackElement;
+import org.incendo.interfaces.paper.pane.ChestPane;
+import org.incendo.interfaces.paper.transform.PaperTransform;
+import org.incendo.interfaces.paper.type.ChestInterface;
+import org.incendo.interfaces.paper.view.ChestView;
 
 /**
  * The menu for a rock-paper-scissors game.
@@ -173,6 +172,7 @@ public class RPSMenu implements Menu<ChestInterface> {
 
     /**
      * Adds the player's choice stuff to the pane.
+     *
      * @param game the game
      * @param type the player type
      * @param view the view
@@ -255,7 +255,7 @@ public class RPSMenu implements Menu<ChestInterface> {
 
             @NonNull ChestPane tempPane = pane;
 
-            tempPane = PaperTransform.chestRect(bgElement, x, 0, 3, 3).apply(pane, view);
+//            tempPane = PaperTransform.chestRect(bgElement, x, 0, 3, 3).apply(pane, view);
 
             return tempPane
                     .element(headElement, x + 1, 1);

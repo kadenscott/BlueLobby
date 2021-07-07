@@ -3,12 +3,8 @@ package dev.kscott.bluelobby.utils;
 import broccolai.corn.paper.PaperItemBuilder;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.menu.server.GamesMenu;
-import dev.kscott.bluelobby.menu.server.readme.ReadmeMenu;
 import dev.kscott.bluelobby.menu.server.WarpsMenu;
-import dev.kscott.interfaces.core.transform.Transform;
-import dev.kscott.interfaces.paper.element.ClickHandler;
-import dev.kscott.interfaces.paper.element.ItemStackElement;
-import dev.kscott.interfaces.paper.pane.ChestPane;
+import dev.kscott.bluelobby.menu.server.readme.ReadmeMenu;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -19,6 +15,12 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.incendo.interfaces.core.transform.Transform;
+import org.incendo.interfaces.paper.element.ClickHandler;
+import org.incendo.interfaces.paper.element.ItemStackElement;
+import org.incendo.interfaces.paper.pane.ChestPane;
+import org.incendo.interfaces.paper.view.ChestView;
+import org.incendo.interfaces.paper.view.ChildView;
 
 import java.util.List;
 
@@ -116,15 +118,12 @@ public class MenuUtils {
             return tempPane
                     .element(ItemStackElement.of(readmePageIcon, (clickEvent, clickView) -> {
                         menuService.get(ReadmeMenu.class).open((Player) clickEvent.getWhoClicked());
-                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "readme");
                     }), 3, y)
                     .element(ItemStackElement.of(gamesPageIcon, (clickEvent, clickView) -> {
                         menuService.get(GamesMenu.class).open((Player) clickEvent.getWhoClicked());
-                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "games");
                     }), 4, y)
                     .element(ItemStackElement.of(warpPageIcon, (clickEvent, clickView) -> {
                         menuService.get(WarpsMenu.class).open((Player) clickEvent.getWhoClicked());
-                        menuService.lastOpenMenu((Player) clickEvent.getWhoClicked(), "warps");
                     }), 5, y);
         };
     }
@@ -163,7 +162,7 @@ public class MenuUtils {
      */
     public static @NonNull Transform<ChestPane> backButton(final int x,
                                                            final int y,
-                                                           final @NonNull ClickHandler handler) {
+                                                           final @NonNull ClickHandler<ChestPane> handler) {
         return (pane, view) -> {
             final @NonNull Component backIconTitle = Component.text("Back").color(Constants.Chat.COLOUR_RED)
                     .decoration(TextDecoration.ITALIC, false);
@@ -191,6 +190,15 @@ public class MenuUtils {
             return pane.element(ItemStackElement.of(PaperItemBuilder.paper(Material.RED_STAINED_GLASS_PANE)
                     .name(backIconTitle)
                     .build(), (clickEvent, clickView) -> {
+                if (clickView instanceof ChildView child) {
+                    System.out.println("ChildView");
+                    if (child.hasParent()) {
+                        System.out.println("Has child");
+                        child.back();
+                        return;
+                    }
+                }
+
                 clickEvent.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
             }), x, y);
         };

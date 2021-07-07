@@ -18,15 +18,13 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.incendo.interfaces.paper.view.ChestView;
-import org.incendo.interfaces.paper.view.ChildView;
 
 import java.util.List;
 
 /**
- * The readme menu for the server.
+ * The command menu for the server.
  */
-public class ReadmeMenu implements Menu<ChestInterface> {
+public class CommandMenu implements Menu<ChestInterface> {
 
     /**
      * The menu service.
@@ -34,12 +32,12 @@ public class ReadmeMenu implements Menu<ChestInterface> {
     private final @NonNull MenuService menuService;
 
     /**
-     * Constructs {@code MainMenu}.
+     * Constructs {@code CommandMenu}.
      *
      * @param menuService the menu service
      */
     @Inject
-    public ReadmeMenu(final @NonNull MenuService menuService) {
+    public CommandMenu(final @NonNull MenuService menuService) {
         this.menuService = menuService;
     }
 
@@ -55,11 +53,10 @@ public class ReadmeMenu implements Menu<ChestInterface> {
                 .title(Component.text()
                         .append(Component.text("● ")
                                 .color(Constants.Chat.COLOUR_DARK_GRAY))
-                        .append(MiniMessage.get().parse("<gradient:#305eb3:#17804f>README.md</gradient>"))
+                        .append(MiniMessage.get().parse("<gradient:#305eb3:#17804f>Commands</gradient>"))
                         .asComponent())
                 .addTransform(PaperTransform.chestFill(ItemStackElement.of(Constants.Items.MENU_BACKGROUND.build())))
-                .addTransform(MenuUtils.bottomBar(3, this.menuService, "readme"))
-                .addTransform(this::transformAddIcons)
+                .addTransform(MenuUtils.blackBar(3))
                 .addTransform(MenuUtils.closeButton(0, 3))
                 .clickHandler(ClickHandler.cancel())
                 .build();
@@ -71,7 +68,7 @@ public class ReadmeMenu implements Menu<ChestInterface> {
         @NonNull ChestPane tempPane = pane;
 
         final @NonNull ItemStack commandsIcon = PaperItemBuilder.paper(Material.COMMAND_BLOCK)
-                .name(Component.text("Commands")
+                .name(Component.text("")
                         .decoration(TextDecoration.ITALIC, false)
                         .color(Constants.Chat.COLOUR_YELLOW)
                 )
@@ -80,12 +77,7 @@ public class ReadmeMenu implements Menu<ChestInterface> {
                 )
                 .build();
 
-        return tempPane.element(ItemStackElement.of(commandsIcon, (clickEvent, clickView) -> {
-            if (clickView instanceof ChestView chestView) {
-                System.out.println("Child opened");
-                chestView.openChild(this.menuService.get(CommandMenu.class).get());
-            }
-        }), 4, y);
+        return tempPane.element(ItemStackElement.of(commandsIcon), 4, y);
 //                .element(ItemStackElement.of(unk1Icon), 4, y)
 //                .element(ItemStackElement.of(unk2Icon), 5, y);
     }

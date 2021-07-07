@@ -12,7 +12,7 @@ import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.holograms.HologramManager;
 import dev.kscott.bluelobby.menu.MenuListener;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
-import dev.kscott.interfaces.paper.PaperInterfaceListeners;
+import org.incendo.interfaces.paper.PaperInterfaceListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;

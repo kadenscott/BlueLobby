@@ -2,9 +2,9 @@ package dev.kscott.bluelobby.listeners;
 
 import dev.kscott.bluelobby.area.LocationRegistry;
 import dev.kscott.bluelobby.utils.Constants;
-import dev.kscott.interfaces.paper.PlayerViewer;
-import dev.kscott.interfaces.paper.transform.PaperTransform;
-import dev.kscott.interfaces.paper.type.BookInterface;
+import org.incendo.interfaces.paper.PlayerViewer;
+import org.incendo.interfaces.paper.transform.PaperTransform;
+import org.incendo.interfaces.paper.type.BookInterface;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

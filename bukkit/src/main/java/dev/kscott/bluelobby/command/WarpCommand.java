@@ -3,7 +3,7 @@ package dev.kscott.bluelobby.command;
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandManager;
 import cloud.commandframework.context.CommandContext;
-import dev.kscott.interfaces.paper.PlayerViewer;
+import org.incendo.interfaces.paper.PlayerViewer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

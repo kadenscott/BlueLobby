@@ -1,9 +1,7 @@
 package dev.kscott.bluelobby.menu;
 
-import dev.kscott.interfaces.core.Interface;
-import dev.kscott.interfaces.core.view.InterfaceView;
-import dev.kscott.interfaces.core.view.InterfaceViewer;
-import dev.kscott.interfaces.paper.PlayerViewer;
+import org.incendo.interfaces.core.Interface;
+import org.incendo.interfaces.paper.PlayerViewer;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 

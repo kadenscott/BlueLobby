@@ -8,12 +8,13 @@ import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.bluelobby.utils.MenuUtils;
 import dev.kscott.bluelobby.warp.WarpService;
-import dev.kscott.interfaces.core.view.InterfaceView;
-import dev.kscott.interfaces.paper.element.ClickHandler;
-import dev.kscott.interfaces.paper.element.ItemStackElement;
-import dev.kscott.interfaces.paper.pane.ChestPane;
-import dev.kscott.interfaces.paper.transform.PaperTransform;
-import dev.kscott.interfaces.paper.type.ChestInterface;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.incendo.interfaces.core.view.InterfaceView;
+import org.incendo.interfaces.paper.element.ClickHandler;
+import org.incendo.interfaces.paper.element.ItemStackElement;
+import org.incendo.interfaces.paper.pane.ChestPane;
+import org.incendo.interfaces.paper.transform.PaperTransform;
+import org.incendo.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -122,7 +123,9 @@ public class WarpsMenu implements Menu<ChestInterface> {
                         .build();
 
                 tempPane = tempPane.element(ItemStackElement.of(warpItem, (clickEvent, clickView) -> {
-                    this.warpService.warp((Player) clickEvent.getWhoClicked(), warp);
+                    final @NonNull Player player = (Player) clickEvent.getWhoClicked();
+
+                    this.warpService.warp(player, warp);
                 }), x, y);
             }
         }
