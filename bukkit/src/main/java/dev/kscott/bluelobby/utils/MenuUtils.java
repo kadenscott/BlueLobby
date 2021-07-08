@@ -10,16 +10,14 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.incendo.interfaces.core.click.ClickHandler;
 import org.incendo.interfaces.core.transform.Transform;
-import org.incendo.interfaces.paper.element.ClickHandler;
+import org.incendo.interfaces.paper.PlayerViewer;
 import org.incendo.interfaces.paper.element.ItemStackElement;
 import org.incendo.interfaces.paper.pane.ChestPane;
-import org.incendo.interfaces.paper.view.ChestView;
 import org.incendo.interfaces.paper.view.ChildView;
 
 import java.util.List;
@@ -116,14 +114,14 @@ public class MenuUtils {
                     .build();
 
             return tempPane
-                    .element(ItemStackElement.of(readmePageIcon, (clickEvent, clickView) -> {
-                        menuService.get(ReadmeMenu.class).open((Player) clickEvent.getWhoClicked());
+                    .element(ItemStackElement.of(readmePageIcon, (ctx) -> {
+                        menuService.get(ReadmeMenu.class).open(((PlayerViewer) ctx.viewer()).player());
                     }), 3, y)
-                    .element(ItemStackElement.of(gamesPageIcon, (clickEvent, clickView) -> {
-                        menuService.get(GamesMenu.class).open((Player) clickEvent.getWhoClicked());
+                    .element(ItemStackElement.of(gamesPageIcon, (ctx) -> {
+                        menuService.get(GamesMenu.class).open(((PlayerViewer) ctx.viewer()).player());
                     }), 4, y)
-                    .element(ItemStackElement.of(warpPageIcon, (clickEvent, clickView) -> {
-                        menuService.get(WarpsMenu.class).open((Player) clickEvent.getWhoClicked());
+                    .element(ItemStackElement.of(warpPageIcon, (ctx) -> {
+                        menuService.get(WarpsMenu.class).open(((PlayerViewer) ctx.viewer()).player());
                     }), 5, y);
         };
     }
@@ -189,17 +187,15 @@ public class MenuUtils {
 
             return pane.element(ItemStackElement.of(PaperItemBuilder.paper(Material.RED_STAINED_GLASS_PANE)
                     .name(backIconTitle)
-                    .build(), (clickEvent, clickView) -> {
-                if (clickView instanceof ChildView child) {
-                    System.out.println("ChildView");
+                    .build(), (context) -> {
+                if (context.view() instanceof ChildView child) {
                     if (child.hasParent()) {
-                        System.out.println("Has child");
                         child.back();
                         return;
                     }
                 }
 
-                clickEvent.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                context.viewer().close();
             }), x, y);
         };
 

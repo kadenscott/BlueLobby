@@ -8,9 +8,9 @@ import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.bluelobby.utils.MenuUtils;
 import dev.kscott.bluelobby.warp.WarpService;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import org.incendo.interfaces.core.click.ClickHandler;
 import org.incendo.interfaces.core.view.InterfaceView;
-import org.incendo.interfaces.paper.element.ClickHandler;
+import org.incendo.interfaces.paper.PlayerViewer;
 import org.incendo.interfaces.paper.element.ItemStackElement;
 import org.incendo.interfaces.paper.pane.ChestPane;
 import org.incendo.interfaces.paper.transform.PaperTransform;
@@ -122,8 +122,8 @@ public class WarpsMenu implements Menu<ChestInterface> {
                         .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                         .build();
 
-                tempPane = tempPane.element(ItemStackElement.of(warpItem, (clickEvent, clickView) -> {
-                    final @NonNull Player player = (Player) clickEvent.getWhoClicked();
+                tempPane = tempPane.element(ItemStackElement.of(warpItem, ctx -> {
+                    final @NonNull Player player = ((PlayerViewer) ctx.viewer()).player();
 
                     this.warpService.warp(player, warp);
                 }), x, y);

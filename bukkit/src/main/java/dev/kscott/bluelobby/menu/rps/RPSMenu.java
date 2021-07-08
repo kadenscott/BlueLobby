@@ -12,6 +12,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.incendo.interfaces.core.arguments.HashMapInterfaceArgument;
@@ -195,7 +196,7 @@ public class RPSMenu implements Menu<ChestInterface> {
                             .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                             .enchant(Enchantment.DAMAGE_ALL, rpsGame.choice(player) == RPSGame.Choice.ROCK ? 1 : -1)
                             .build(),
-                    (clickEvent, clickView) -> {
+                    (ctx) -> {
                         if (rpsGame.chosen(player)) return;
 
                         rpsGame.choice(player.type(), RPSGame.Choice.ROCK);
@@ -208,7 +209,7 @@ public class RPSMenu implements Menu<ChestInterface> {
                             .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                             .enchant(Enchantment.DAMAGE_ALL, rpsGame.choice(player) == RPSGame.Choice.PAPER ? 1 : -1)
                             .build(),
-                    (clickEvent, clickView) -> {
+                    (ctx) -> {
                         if (rpsGame.chosen(player)) return;
 
                         rpsGame.choice(player.type(), RPSGame.Choice.PAPER);
@@ -221,7 +222,7 @@ public class RPSMenu implements Menu<ChestInterface> {
                             .flags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE)
                             .enchant(Enchantment.DAMAGE_ALL, rpsGame.choice(player) == RPSGame.Choice.SCISSORS ? 1 : -1)
                             .build(),
-                    (clickEvent, clickView) -> {
+                    (ctx) -> {
                         if (rpsGame.chosen(player)) return;
 
                         rpsGame.choice(player.type(), RPSGame.Choice.SCISSORS);

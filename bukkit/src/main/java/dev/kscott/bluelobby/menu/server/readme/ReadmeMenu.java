@@ -6,20 +6,19 @@ import dev.kscott.bluelobby.menu.Menu;
 import dev.kscott.bluelobby.menu.MenuService;
 import dev.kscott.bluelobby.utils.Constants;
 import dev.kscott.bluelobby.utils.MenuUtils;
-import org.incendo.interfaces.core.view.InterfaceView;
-import org.incendo.interfaces.paper.element.ClickHandler;
-import org.incendo.interfaces.paper.element.ItemStackElement;
-import org.incendo.interfaces.paper.pane.ChestPane;
-import org.incendo.interfaces.paper.transform.PaperTransform;
-import org.incendo.interfaces.paper.type.ChestInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.incendo.interfaces.core.click.ClickHandler;
+import org.incendo.interfaces.core.view.InterfaceView;
+import org.incendo.interfaces.paper.element.ItemStackElement;
+import org.incendo.interfaces.paper.pane.ChestPane;
+import org.incendo.interfaces.paper.transform.PaperTransform;
+import org.incendo.interfaces.paper.type.ChestInterface;
 import org.incendo.interfaces.paper.view.ChestView;
-import org.incendo.interfaces.paper.view.ChildView;
 
 import java.util.List;
 
@@ -80,8 +79,8 @@ public class ReadmeMenu implements Menu<ChestInterface> {
                 )
                 .build();
 
-        return tempPane.element(ItemStackElement.of(commandsIcon, (clickEvent, clickView) -> {
-            if (clickView instanceof ChestView chestView) {
+        return tempPane.element(ItemStackElement.of(commandsIcon, (ctx) -> {
+            if (ctx.view() instanceof ChestView chestView) {
                 System.out.println("Child opened");
                 chestView.openChild(this.menuService.get(CommandMenu.class).get());
             }
