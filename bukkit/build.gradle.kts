@@ -18,6 +18,7 @@ dependencies {
     compileOnly(libs.placeholderapi)
     compileOnly(libs.luckperms)
     compileOnly(libs.worldguard)
+    compileOnly(libs.citizens)
 }
 
 tasks {
