@@ -3,11 +3,7 @@ package dev.kscott.bluelobby.lobby;
 import com.destroystokyo.paper.ParticleBuilder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.math.BlockVector2;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
-import dev.kscott.bluelobby.area.LocationRegistry;
+import dev.kscott.bluelobby.area.LocationService;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -16,15 +12,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Singleton
 public class CrystalService {
 
-    private final @NonNull LocationRegistry locationRegistry;
+    private final @NonNull LocationService locationService;
 
     private final @NonNull JavaPlugin plugin;
 
@@ -34,8 +28,8 @@ public class CrystalService {
 
     @Inject
     public CrystalService(final @NonNull JavaPlugin plugin,
-                          final @NonNull LocationRegistry locationRegistry) {
-        this.locationRegistry = locationRegistry;
+                          final @NonNull LocationService locationService) {
+        this.locationService = locationService;
         this.plugin = plugin;
 
         this.crystalOrigin = new Location(Bukkit.getWorld("world"), -22.5, 205, 58.5);

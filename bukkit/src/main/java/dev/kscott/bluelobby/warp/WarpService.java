@@ -1,7 +1,7 @@
 package dev.kscott.bluelobby.warp;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import dev.kscott.bluelobby.area.LocationRegistry;
+import dev.kscott.bluelobby.area.LocationService;
 import dev.kscott.bluelobby.area.ServerLocation;
 import dev.kscott.bluelobby.utils.Constants;
 import net.kyori.adventure.key.Key;
@@ -28,48 +28,48 @@ public class WarpService {
 
     private final @NonNull List<ServerLocation> warps;
 
-    private final @NonNull LocationRegistry locationRegistry;
+    private final @NonNull LocationService locationService;
 
     private final @NonNull JavaPlugin plugin;
 
     /**
      * Constructs {@code WarpService}.
      *
-     * @param locationRegistry the location registry
+     * @param locationService the location registry
      */
     @Inject
     public WarpService(
-            final @NonNull LocationRegistry locationRegistry,
+            final @NonNull LocationService locationService,
             final @NonNull JavaPlugin plugin
     ) {
-        this.locationRegistry = locationRegistry;
+        this.locationService = locationService;
 
         this.warps = List.of(
                 new ServerLocation(
                         "Spawn",
-                        this.locationRegistry.pond().getWorld().getName(),
+                        this.locationService.pond().getWorld().getName(),
                         List.of(),
                         Material.GRASS_BLOCK,
-                        this.locationRegistry.spawn().getX(),
-                        this.locationRegistry.spawn().getY(),
-                        this.locationRegistry.spawn().getZ(),
-                        this.locationRegistry.spawn().getYaw(),
-                        this.locationRegistry.spawn().getPitch()
+                        this.locationService.spawn().getX(),
+                        this.locationService.spawn().getY(),
+                        this.locationService.spawn().getZ(),
+                        this.locationService.spawn().getYaw(),
+                        this.locationService.spawn().getPitch()
                 ),
                 new ServerLocation(
                         "The Pond",
-                        this.locationRegistry.pond().getWorld().getName(),
+                        this.locationService.pond().getWorld().getName(),
                         List.of(Component.text("A beautiful pond full of fish.")),
                         Material.LARGE_FERN,
-                        this.locationRegistry.pond().getX(),
-                        this.locationRegistry.pond().getY(),
-                        this.locationRegistry.pond().getZ(),
-                        this.locationRegistry.pond().getYaw(),
-                        this.locationRegistry.pond().getPitch()
+                        this.locationService.pond().getX(),
+                        this.locationService.pond().getY(),
+                        this.locationService.pond().getZ(),
+                        this.locationService.pond().getYaw(),
+                        this.locationService.pond().getPitch()
                 ),
                 new ServerLocation(
                         "The Crystal",
-                        this.locationRegistry.spawn().getWorld().getName(),
+                        this.locationService.spawn().getWorld().getName(),
                         List.of(Component.text("The source of all power"), Component.text("for the island.")),
                         Material.END_CRYSTAL,
                         -22.5,

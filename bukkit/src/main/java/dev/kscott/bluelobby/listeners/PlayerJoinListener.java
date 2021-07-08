@@ -1,6 +1,6 @@
 package dev.kscott.bluelobby.listeners;
 
-import dev.kscott.bluelobby.area.LocationRegistry;
+import dev.kscott.bluelobby.area.LocationService;
 import dev.kscott.bluelobby.utils.Constants;
 import org.incendo.interfaces.paper.PlayerViewer;
 import org.incendo.interfaces.paper.transform.PaperTransform;
@@ -33,7 +33,7 @@ public class PlayerJoinListener implements Listener {
     /**
      * The location registry.
      */
-    private final @NonNull LocationRegistry locationRegistry;
+    private final @NonNull LocationService locationService;
 
     /**
      * Constructs {@code PlayerJoinListener}.
@@ -42,9 +42,9 @@ public class PlayerJoinListener implements Listener {
      */
     @Inject
     public PlayerJoinListener(final @NonNull JavaPlugin plugin,
-                              final @NonNull LocationRegistry locationRegistry) {
+                              final @NonNull LocationService locationService) {
         this.plugin = plugin;
-        this.locationRegistry = locationRegistry;
+        this.locationService = locationService;
         this.welcomeInterface = BookInterface.builder()
                 .addTransform(PaperTransform.bookText(Constants.Chat.MOTD_BOOK))
                 .build();
@@ -59,7 +59,7 @@ public class PlayerJoinListener implements Listener {
     public void handlePlayerJoin(final @NonNull PlayerJoinEvent event) {
         final @NonNull Player player = event.getPlayer();
 
-        player.teleportAsync(this.locationRegistry.spawn());
+        player.teleportAsync(this.locationService.spawn());
 
         this.welcomeInterface.open(PlayerViewer.of(player));
 

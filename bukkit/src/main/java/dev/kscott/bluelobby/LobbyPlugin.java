@@ -2,8 +2,7 @@ package dev.kscott.bluelobby;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
-import dev.kscott.bluelobby.area.LocationRegistry;
+import dev.kscott.bluelobby.area.LocationService;
 import dev.kscott.bluelobby.command.CommandService;
 import dev.kscott.bluelobby.inject.CommandModule;
 import dev.kscott.bluelobby.inject.PluginModule;
@@ -15,7 +14,6 @@ import dev.kscott.bluelobby.holograms.HologramManager;
 import dev.kscott.bluelobby.lobby.CrystalService;
 import dev.kscott.bluelobby.menu.MenuListener;
 import dev.kscott.bluelobby.utils.LobbyPlaceholderExpansion;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -64,7 +62,7 @@ public final class LobbyPlugin extends JavaPlugin {
             this.injector.getInstance(HologramManager.class).loadHolograms();
             this.injector.getInstance(CrystalService.class);
 
-            final @NonNull LocationRegistry locationRegistry = this.injector.getInstance(LocationRegistry.class);
+            final @NonNull LocationService locationService = this.injector.getInstance(LocationService.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

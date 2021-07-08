@@ -22,7 +22,7 @@ import java.util.List;
  * Holds locations for various parts of the plugin.
  */
 @Singleton
-public class LocationRegistry {
+public class LocationService {
 
     /**
      * The spawn location.
@@ -46,7 +46,7 @@ public class LocationRegistry {
      * @param lobbyWorld the lobby world
      */
     @Inject
-    public LocationRegistry(
+    public LocationService(
             final @NonNull @Named("lobbyWorld") World lobbyWorld
     ) {
         this.regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
