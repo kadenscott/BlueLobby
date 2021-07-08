@@ -14,11 +14,11 @@ dependencies {
     api(libs.adventurebungee)
     api(libs.ifgui)
 
+    compileOnly(libs.citizens)
     compileOnly(libs.holodisplays)
     compileOnly(libs.placeholderapi)
     compileOnly(libs.luckperms)
     compileOnly(libs.worldguard)
-    compileOnly(libs.citizens)
 }
 
 tasks {
