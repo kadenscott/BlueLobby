@@ -26,6 +26,11 @@ subprojects {
 
         // TAB
         maven("https://repo.codemc.io/repository/maven-public/")
+
+        // Citizens
+        maven("https://repo.citizensnpcs.co/")
+
+        // Interfaces, sometimes
         mavenLocal()
 
         // Corn
