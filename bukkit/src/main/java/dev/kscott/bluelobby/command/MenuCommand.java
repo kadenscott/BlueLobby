@@ -55,8 +55,8 @@ public class MenuCommand implements BaseCommand {
 
         this.motdInterface = ChatInterface.builder()
                 .addTransform((p, v) -> p
-                        .element(ChatLineElement.empty())
-                        .element(ChatLineElement.empty())
+                        .element(ChatLineElement.blank())
+                        .element(ChatLineElement.blank())
                         .element(ChatLineElement.of(TextElement.of(
                                 Component.text()
                                         .append(Component.text("Welcome to "))
@@ -64,7 +64,7 @@ public class MenuCommand implements BaseCommand {
                                         .append(Component.text("!"))
                                         .style(Constants.Chat.STYLE_DEFAULT)
                                         .asComponent())))
-                        .element(ChatLineElement.empty())
+                        .element(ChatLineElement.blank())
                         .element(ChatLineElement.of(
                                 ClickableTextElement.of(
                                         Component.text()
@@ -76,8 +76,7 @@ public class MenuCommand implements BaseCommand {
                                                 .style(Constants.Chat.STYLE_DEFAULT)
                                                 .asComponent(),
                                         Component.text()
-                                                .append(Component.text("You will be prompted to visit "))
-                                                .append(Component.text("chat.ksc.sh").style(Constants.Chat.STYLE_LINK))
+                                                .append(Component.text("Click to spawn particles").style(Constants.Chat.STYLE_LINK))
                                                 .append(Component.text("."))
                                                 .style(Constants.Chat.STYLE_DEFAULT)
                                                 .asComponent(),
@@ -91,8 +90,8 @@ public class MenuCommand implements BaseCommand {
                                                     .spawn();
                                         }
                                 )))
-                        .element(ChatLineElement.empty())
-                        .element(ChatLineElement.empty()))
+                        .element(ChatLineElement.blank())
+                        .element(ChatLineElement.blank()))
                 .build();
 
     }
