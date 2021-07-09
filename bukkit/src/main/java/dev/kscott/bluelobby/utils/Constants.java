@@ -119,7 +119,7 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#5c9ae6:#4845d3><bold>kadenscott</bold></gradient>");
+        public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#00C9FF:#92FE9D><bold>bluely</bold></gradient>");
 
         /**
          * The first line of the ping motd.

@@ -112,8 +112,6 @@ public class FishingService implements Listener {
 
         int index = sortedPlayers.size() > 5 ? 5 : sortedPlayers.size();
 
-        System.out.println(index);
-
         for (int i = 0; i < index; i++) {
             final @NonNull Player player = sortedPlayers.get(i);
             this.fishingHologram.appendTextLine(player.getName()+" has caught "+this.getTotalFishCaught(this.spiritService.spirit(player.getUniqueId())));
@@ -128,7 +126,6 @@ public class FishingService implements Listener {
         final var meta = user.getCachedData().getMetaData().getMeta();
 
         for (final @NonNull String key : meta.keySet()) {
-            System.out.println("Parsing key "+key);
             if (!key.startsWith("fishing.catch")) continue;
 
             final @NonNull String[] nodes = key.split("\\.");

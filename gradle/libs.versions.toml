@@ -38,6 +38,8 @@ luckperms = "5.3"
 
 citizens = "2.0.28-SNAPSHOT"
 
+tab = "2.9.0"
+
 [libraries]
 # Tooling
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checker-qual" }
@@ -67,6 +69,7 @@ adventure-bukkit = { group = "net.kyori", name = "adventure-platform-bukkit", ve
 minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "minimessage" }
 adventurebungee = { group = "net.kyori", name = "adventure-platform-bungeecord", version.ref = "adventure-platform"}
 
+tab = { group = "com.github.NEZNAMY", name = "TAB", version.ref = "tab" }
 # Bukkit
 paper = { group = "com.destroystokyo.paper", name = "paper-api", version.ref = "paper" }
 

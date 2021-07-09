@@ -10,6 +10,7 @@ import dev.kscott.bluelobby.holograms.HologramManager;
 import dev.kscott.bluelobby.inject.CommandModule;
 import dev.kscott.bluelobby.inject.PluginModule;
 import dev.kscott.bluelobby.listeners.BowShootListener;
+import dev.kscott.bluelobby.listeners.EntityDeathListener;
 import dev.kscott.bluelobby.listeners.PlayerJoinListener;
 import dev.kscott.bluelobby.listeners.ServerListPingListener;
 import dev.kscott.bluelobby.lobby.CrystalService;
@@ -47,6 +48,7 @@ public final class LobbyPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(ServerListPingListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingService.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(BowShootListener.class), this);
+        this.getServer().getPluginManager().registerEvents(this.injector.getInstance(EntityDeathListener.class), this);
         this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(MenuListener.class), this);
 

@@ -59,8 +59,6 @@ public class HologramManager {
 
         hologram.appendTextLine(TextComponent.toLegacyText(BungeeComponentSerializer.legacy().serialize(Constants.Chat.SERVER_NAME)));
         hologram.appendTextLine(TextComponent.toLegacyText(BungeeComponentSerializer.legacy().serialize(Component.text().append(Component.text("by ")).append(Constants.Chat.OWNER_NAME).asComponent())));
-
-        System.out.println("Pog");
     }
 
 }

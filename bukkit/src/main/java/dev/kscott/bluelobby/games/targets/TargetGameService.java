@@ -10,13 +10,14 @@ import net.citizensnpcs.api.npc.MetadataStore;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -116,6 +117,16 @@ public class TargetGameService implements Listener {
         return this.players.contains(player.getUniqueId());
     }
 
+    public @NonNull List<Player> players() {
+       final @NonNull List<Player> playerList = new ArrayList<>();
+
+       for (final @NonNull UUID uuid : this.players) {
+           playerList.add(Bukkit.getPlayer(uuid));
+       }
+
+       return playerList;
+    }
+
     public boolean hasTarget(final @NonNull Location location) {
         for (final @NonNull TargetInstance target : this.targets) {
             if (target.location().equals(location)) {
@@ -207,16 +218,11 @@ public class TargetGameService implements Listener {
             if (gameUuid.equals(this.gameUuid.toString())) {
                 final @NonNull TargetInstance target = this.target(event.getEntity().getUniqueId());
 
-                final @NonNull Entity targetEntity = target.npc().getEntity();
-
                 this.targets.removeIf(t -> t.npc().getEntity().getUniqueId().equals(event.getEntity().getUniqueId()));
 
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        target.remove();
-                    }
-                }.runTask(this.plugin);
+                this.lastTargetSpawnTimestamp = System.currentTimeMillis();
+
+                target.remove();
             }
         }
     }

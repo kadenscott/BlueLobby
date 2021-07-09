@@ -81,7 +81,6 @@ public class ReadmeMenu implements Menu<ChestInterface> {
 
         return tempPane.element(ItemStackElement.of(commandsIcon, (ctx) -> {
             if (ctx.view() instanceof ChestView chestView) {
-                System.out.println("Child opened");
                 chestView.openChild(this.menuService.get(CommandMenu.class).get());
             }
         }), 4, y);

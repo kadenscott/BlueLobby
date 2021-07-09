@@ -78,11 +78,6 @@ public class BowShootListener implements Listener {
         final @NonNull Entity projectile = event.getProjectile();
 
         if (projectile instanceof Arrow arrow) {
-            System.out.println("is arrow");
-
-            System.out.println("arrow shot location: "+arrow.getLocation());
-            System.out.println("arrow shot velocity: "+arrow.getVelocity());
-            System.out.println("arrow shot direciton: "+arrow.getLocation().getDirection());
 
             final @NonNull ItemStack consumedStack = event.getConsumable();
 

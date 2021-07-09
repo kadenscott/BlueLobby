@@ -30,6 +30,8 @@ subprojects {
         // Citizens
         maven("https://repo.citizensnpcs.co/")
 
+        maven("https://jitpack.io")
+
         // Interfaces, sometimes
         mavenLocal()
 

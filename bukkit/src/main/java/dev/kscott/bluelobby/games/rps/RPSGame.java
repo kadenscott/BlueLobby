@@ -131,8 +131,6 @@ public class RPSGame {
 
                 tick();
 
-                System.out.println(state);
-
                 updateMenus();
 
                 // Increment the tick counter.
