@@ -42,7 +42,7 @@ public class Constants {
         /**
          * The light blue text colour.
          */
-        public static final @NonNull TextColor COLOUR_LIGHT_BLUE = TextColor.color(31, 197, 242);
+        public static final @NonNull TextColor COLOUR_LIGHT_BLUE = TextColor.color(66, 170, 236);
 
         public static final @NonNull TextColor COLOUR_LIGHT_GREEN = TextColor.color(126, 242, 126);
 
@@ -103,7 +103,7 @@ public class Constants {
         /**
          * The text style for links.
          */
-        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_PURPLE).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false);
+        public static final @NonNull Style STYLE_LINK = Style.style(COLOUR_LIGHT_BLUE).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, false);
 
         public static final @NonNull Style STYLE_HOVER = Style.style(COLOUR_LIGHT_GRAY).decorate(TextDecoration.ITALIC);
 
@@ -114,12 +114,12 @@ public class Constants {
         /**
          * The name of the server.
          */
-        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<gradient:#db6060:#e37474:#db6060><bold>mc.ksc.sh</bold></gradient>");
+        public static final @NonNull Component SERVER_NAME = miniMessage.parse("<gradient:#FF512F:#DD2476:#fc6767><bold>mc.ksc.sh</bold></gradient>");
 
         /**
          * The name of the server.
          */
-        public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#00C9FF:#92FE9D><bold>bluely</bold></gradient>");
+        public static final @NonNull Component OWNER_NAME = miniMessage.parse("<gradient:#00d2ff:#3a7bd5><bold>Bluely</bold></gradient>");
 
         /**
          * The first line of the ping motd.
@@ -135,7 +135,7 @@ public class Constants {
          * The second line of the ping motd.
          */
         public static final @NonNull Component PING_MOTD_LINE_2 = Component.text()
-                .append(Component.text("                    "))
+                .append(Component.text("                        "))
                 .append(Component.text("- ").style(Chat.STYLE_DARK))
                 .append(Component.text("by ").style(Chat.STYLE_DEFAULT))
                 .append(OWNER_NAME)
@@ -153,10 +153,10 @@ public class Constants {
                 .append(BAR_MEDIUM)
                 .append(Component.newline())
                 .append(Component.text()
-                        .append(Component.text("       "))
+                        .append(Component.text("        "))
                         .append(SERVER_NAME)
                         .append(Component.newline())
-                        .append(Component.text("    by "))
+                        .append(Component.text("        by "))
                         .append(OWNER_NAME)
                         .style(STYLE_DARK)
                 )

@@ -49,8 +49,9 @@ public final class LobbyPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(FishingService.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(BowShootListener.class), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(EntityDeathListener.class), this);
-        this.getServer().getPluginManager().registerEvents(new PaperInterfaceListeners(this), this);
         this.getServer().getPluginManager().registerEvents(this.injector.getInstance(MenuListener.class), this);
+
+        PaperInterfaceListeners.install(this);
 
         this.injector.getInstance(CommandService.class);
 

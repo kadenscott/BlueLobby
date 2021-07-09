@@ -16,6 +16,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.incendo.interfaces.core.click.ClickHandler;
 import org.incendo.interfaces.core.transform.Transform;
 import org.incendo.interfaces.paper.PlayerViewer;
+import org.incendo.interfaces.paper.click.ChestClickContext;
 import org.incendo.interfaces.paper.element.ItemStackElement;
 import org.incendo.interfaces.paper.pane.ChestPane;
 import org.incendo.interfaces.paper.view.ChildView;
@@ -147,29 +148,6 @@ public class MenuUtils {
 
             return tempPane;
         };
-    }
-
-
-    /**
-     * Returns a transformation that adds a back button with the provided click handler.
-     *
-     * @param x       the x coordinate
-     * @param y       the y coordinate
-     * @param handler the click handler
-     * @return the back button transformation
-     */
-    public static @NonNull Transform<ChestPane> backButton(final int x,
-                                                           final int y,
-                                                           final @NonNull ClickHandler<ChestPane> handler) {
-        return (pane, view) -> {
-            final @NonNull Component backIconTitle = Component.text("Back").color(Constants.Chat.COLOUR_RED)
-                    .decoration(TextDecoration.ITALIC, false);
-
-            return pane.element(ItemStackElement.of(PaperItemBuilder.paper(Material.RED_STAINED_GLASS_PANE)
-                    .name(backIconTitle)
-                    .build(), handler), x, y);
-        };
-
     }
 
     /**
