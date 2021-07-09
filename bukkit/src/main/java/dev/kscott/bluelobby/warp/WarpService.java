@@ -77,7 +77,19 @@ public class WarpService {
                         79.5,
                         -180,
                         0
+                ),
+                new ServerLocation(
+                        "Target Practice",
+                        this.locationService.spawn().getWorld().getName(),
+                        List.of(Component.text("Practice your aim in a"), Component.text("simulated archery environment")),
+                        Material.CROSSBOW,
+                        49,
+                        183,
+                        148,
+                        -119,
+                        0
                 )
+
         );
 
         this.plugin = plugin;

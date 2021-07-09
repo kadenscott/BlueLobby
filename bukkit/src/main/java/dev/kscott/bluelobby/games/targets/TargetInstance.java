@@ -35,7 +35,9 @@ public class TargetInstance {
         this.npc.spawn(location);
 
         for (final @NonNull Player player : Bukkit.getOnlinePlayers()) {
-            player.hidePlayer(game.plugin(), (Player) this.npc.getEntity());
+            if (!this.game.isPlaying(player)) {
+                player.hidePlayer(game.plugin(), (Player) this.npc.getEntity());
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -65,7 +66,7 @@ public class TargetGameService implements Listener {
         this.world = world;
         this.gameUuid = UUID.randomUUID();
         this.players = new HashSet<>();
-        this.targetCount = 5;
+        this.targetCount = 2;
 
         this.npcRegistry = CitizensAPI.createAnonymousNPCRegistry(new MemoryNPCDataStore());
 
@@ -104,11 +105,11 @@ public class TargetGameService implements Listener {
     public void tick() {
         final long spawnDelta = System.currentTimeMillis() - this.lastTargetSpawnTimestamp;
 
-        if (spawnDelta >= 1000) {
-            loadTarget();
+        if (spawnDelta >= 2000) {
+            if (this.targetCount > this.targets.size()) {
+                loadTarget();
+            }
         }
-
-        System.out.println(this.targets.size());
     }
 
     public boolean isPlaying(final @NonNull Player player) {
@@ -123,6 +124,16 @@ public class TargetGameService implements Listener {
         }
 
         return false;
+    }
+
+    public @NonNull TargetInstance target(final @NonNull UUID uuid) {
+        for (final @NonNull TargetInstance target : this.targets) {
+            if (target.npc().getEntity().getUniqueId().equals(uuid)) {
+                return target;
+            }
+        }
+
+        throw new NullPointerException("No target with uuid found.");
     }
 
     public void handlePlayerJoin(final @NonNull Player player) {
@@ -148,7 +159,10 @@ public class TargetGameService implements Listener {
     }
 
     private void loadTarget() {
-        for (final @NonNull Location location : this.targetLocations) {
+        final @NonNull List<Location> shuffledList = new ArrayList<>(this.targetLocations);
+        Collections.shuffle(shuffledList);
+
+        for (final @NonNull Location location : shuffledList) {
             if (!hasTarget(location)) {
                 final @NonNull TargetInstance target = new TargetInstance(location, this);
                 this.targets.add(target);
@@ -191,22 +205,18 @@ public class TargetGameService implements Listener {
             }
 
             if (gameUuid.equals(this.gameUuid.toString())) {
+                final @NonNull TargetInstance target = this.target(event.getEntity().getUniqueId());
 
-                final @NonNull Iterator<TargetInstance> iterator = this.targets.iterator();
+                final @NonNull Entity targetEntity = target.npc().getEntity();
 
-                while (iterator.hasNext()) {
-                    final @NonNull TargetInstance target = iterator.next();
+                this.targets.removeIf(t -> t.npc().getEntity().getUniqueId().equals(event.getEntity().getUniqueId()));
 
-                    if (target.npc().getUniqueId().equals(npc.getUniqueId())) {
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                target.remove();
-                            }
-                        }.runTaskLater(this.plugin, 1);
-                        iterator.remove();
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        target.remove();
                     }
-                }
+                }.runTask(this.plugin);
             }
         }
     }
