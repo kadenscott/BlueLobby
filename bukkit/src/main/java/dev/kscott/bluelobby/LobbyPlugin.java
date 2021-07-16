@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import dev.kscott.bluelobby.area.LocationService;
 import dev.kscott.bluelobby.command.CommandService;
 import dev.kscott.bluelobby.fishing.FishingService;
+import dev.kscott.bluelobby.games.cannon.CannonService;
 import dev.kscott.bluelobby.games.targets.TargetGameService;
 import dev.kscott.bluelobby.holograms.HologramManager;
 import dev.kscott.bluelobby.inject.CommandModule;
@@ -64,6 +65,7 @@ public final class LobbyPlugin extends JavaPlugin {
 
         this.injector.getInstance(HologramManager.class).loadHolograms();
         this.injector.getInstance(CrystalService.class);
+        this.injector.getInstance(CannonService.class);
 
         final @NonNull LocationService locationService = this.injector.getInstance(LocationService.class);
 

@@ -29,16 +29,8 @@ import javax.inject.Inject;
  */
 public class MenuCommand implements BaseCommand {
 
-    /**
-     * JavaPlugin reference.
-     */
     private final @NonNull JavaPlugin plugin;
-
-    /**
-     * The menu service.
-     */
     private final @NonNull MenuService menuService;
-
     private final @NonNull ChatInterface motdInterface;
 
     /**
@@ -96,11 +88,6 @@ public class MenuCommand implements BaseCommand {
 
     }
 
-    /**
-     * Registers the /menu command.
-     *
-     * @param manager CommandManager to register with
-     */
     @Override
     public void register(final @NonNull CommandManager<@NonNull CommandSender> manager) {
         final Command.Builder<CommandSender> builder = manager.commandBuilder("menu", "play");

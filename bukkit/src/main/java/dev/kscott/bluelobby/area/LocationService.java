@@ -6,6 +6,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -16,7 +17,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Holds locations for various parts of the plugin.
@@ -24,21 +28,12 @@ import java.util.List;
 @Singleton
 public class LocationService {
 
-    /**
-     * The spawn location.
-     */
     private final @NonNull Location spawn;
-
-    /**
-     * The pond location.
-     */
     private final @NonNull Location pond;
-
     private final @NonNull Area targets;
-
     private final @NonNull RegionContainer regionContainer;
-
     private final @NonNull World lobbyWorld;
+    private final @NonNull Map<String, Area> areaMap;
 
     /**
      * Constructs LocationRegistry.
@@ -55,6 +50,7 @@ public class LocationService {
         this.spawn = new Location(lobbyWorld, -22.5, 199, 16.5, 0, 0);
         this.pond = new Location(lobbyWorld, -107.5, 184, 164.5, -50, 0);
         this.targets = new Area("area_targets");
+        this.areaMap = new HashMap<>();
     }
 
     public boolean inArea(final @NonNull Player player, final @NonNull String id) {
@@ -67,6 +63,24 @@ public class LocationService {
         }
 
         return false;
+    }
+
+    public @NonNull Area area(final @NonNull Player player) {
+        final @NonNull RegionQuery query = this.regionContainer.createQuery();
+
+        for (final @NonNull ProtectedRegion region : query.getApplicableRegions(BukkitAdapter.adapt(player.getLocation()))) {
+            try {
+                return this.area(region.getId());
+            } catch (final Exception ignored) {}
+        }
+
+        throw new NullPointerException("The player was not in an area.");
+    }
+
+    public @NonNull Area area(final @NonNull String id) {
+        final @Nullable Area area = this.areaMap.get(id);
+
+        return Objects.requireNonNull(area);
     }
 
     /**
