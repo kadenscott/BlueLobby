@@ -82,6 +82,8 @@ public class LobbyPlaceholderExpansion extends PlaceholderExpansion {
                 final @NonNull String str = TextComponent.toLegacyText(this.serializer.serialize(Constants.Chat.SERVER_NAME));
                 yield str;
             }
+            case "instance_name" -> this.plugin.name();
+            case "instance_version" -> this.plugin.version();
             case "owner_name" -> TextComponent.toLegacyText(this.serializer.serialize(Constants.Chat.OWNER_NAME));
             default -> null;
         };

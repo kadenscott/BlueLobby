@@ -25,15 +25,40 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * The main entrypoint for the BlueLobby.
  */
 public final class LobbyPlugin extends JavaPlugin {
 
-    /**
-     * The plugin's injector.
-     */
     private @MonotonicNonNull Injector injector;
+    private final @NonNull String version;
+    private final @NonNull String name;
+
+    public LobbyPlugin() {
+        @NonNull String version = "1.3.3.7";
+        @NonNull String name = "Unidentified Server";
+        try (InputStream input = new FileInputStream("game.properties")) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            version = prop.getProperty("server.version", "1.3.3.7");
+            name = prop.getProperty("server.name", "Unidentified Server");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        this.version = version;
+        this.name = name;
+    }
 
     /**
      * Enables the plugin.
@@ -77,6 +102,14 @@ public final class LobbyPlugin extends JavaPlugin {
         final @NonNull TargetGameService targets = this.injector.getInstance(TargetGameService.class);
         targets.start();
         this.getServer().getPluginManager().registerEvents(targets, this);
+    }
+
+    public @NonNull String name() {
+        return this.name;
+    }
+
+    public @NonNull String version() {
+        return this.version;
     }
 
 }
